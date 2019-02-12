@@ -5,7 +5,9 @@ import * as actions from './actions';
 
 import Header from './components/Header';
 import Landing from './components/Landing';
-import Layout from './components/Layout';
+import Projects from './components/Projects';
+import Cloud from './components/Projects/Cloud';
+import PDF from './components/Projects/PDFs/Pdf';
 
 const Dashboard = () => <h1>Dashboard</h1>;
 
@@ -17,10 +19,11 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <Header />
-                    <Layout />
-                    <Route exact path="/dashboard" component={Dashboard} />
-                    <Route exact={true} path="/" component={Landing} />
-
+                    <Route path="/dashboard" exact component={Dashboard} />
+                    <Route path="/" exact component={Landing} />
+                    <Route path="/projects/cloud" exact component={Cloud} />
+                    <Route path="/projects" exact component={Projects} />
+                    <Route path="/pdf" exact component={PDF} />
                 </div>
             </BrowserRouter>
         )

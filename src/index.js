@@ -10,10 +10,7 @@ import promise from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
 import App from './App';
 import reducers from './reducers';
-//import { library } from '@fortawesome/fontawesome-svg-core'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faIgloo } from '@fortawesome/free-solid-svg-icons'
-//import { faG } from '@fortawesome/free-solid-svg-icons'
+
 
 
 //library.add(faIgloo)

@@ -32,13 +32,13 @@ class Landing extends Component {
                         AWS S3 and here is a link the the
                         <a href="https://github.com/Scabandari/Resume"> Github repository</a>.
                     <br/> I'm an aspiring Software Engineer with interests in the areas of machine <br/> learning & A.I,
-                        data science, blockchain and of course app development. <br/> <br/>
+                        data science, blockchain and of both backend and front end development. <br/> <br/>
                         My soft skills include being able to get along with a wide range of <br/> personality types as
                         as well as taking on leadership roles naturally. If you <br/> want to learn more about my
-                        school projects, pet projects and accomplishments then you can ...
+                        school projects, pet projects and accomplishments<br/>  then you can ...
                     </Typography>
                     <Typography variant="subtitle1" >
-                        Continue as <Button component={Link} to="/home">Guest</Button>
+                        Continue as <Button component={Link} to="/pdf">Guest</Button>
                     </Typography>
                 </Grid >
             </Grid>
