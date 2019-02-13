@@ -4,19 +4,19 @@ import { SIGN_OUT, SIGN_IN, CHANGE_PROJECT, CHANGE_DOCUMENT } from "./types";
 //   dispatch({ type: FETCH_USER, payload: {greeting: "Hello"}});
 // };
 
-export const changeProject = project => {
+export const changeProject = project_key => {
   return {
     type: CHANGE_PROJECT,
-    payload: project
+    payload: project_key
   };
 };
-
-export const changeDocument = document => {
-  return {
-    type: CHANGE_DOCUMENT,
-      payload: document
-  };
-};
+//
+// export const changeDocument = document => {
+//   return {
+//     type: CHANGE_DOCUMENT,
+//       payload: document
+//   };
+// };
 
 export const signIn = googleId => {
     return {

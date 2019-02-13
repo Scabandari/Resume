@@ -1,8 +1,7 @@
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, Link } from "react-router-dom";
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import * as actions from './actions';
-
 import Header from './components/Header';
 import Landing from './components/Landing';
 import Projects from './components/Projects';
@@ -16,7 +15,7 @@ const Dashboard = () => <h1>Dashboard</h1>;
 class App extends Component {
     render(){
         return(
-            <BrowserRouter>
+            <BrowserRouter >
                 <div>
                     <Header />
                     <Route path="/dashboard" exact component={Dashboard} />

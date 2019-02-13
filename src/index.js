@@ -20,13 +20,13 @@ import reducers from './reducers';
 
 //const middleware = applyMiddleware(promise(), ReduxThunk , createLogger());
 const middleware = applyMiddleware(promise(), ReduxThunk , createLogger());
-// const allStoreEnhancers = compose(
-//   middleware,
-//   window.devToolsExtension && window.devToolsExtension()
-// );
+const allStoreEnhancers = compose(
+  middleware,
+  window.devToolsExtension && window.devToolsExtension()
+);
 
-const store = createStore(reducers, {}, middleware);
-//const store = createStore( reducers, applyMiddleware( middleware ));
+//const store = createStore(reducers, {}, middleware);
+const store = createStore(reducers, {}, allStoreEnhancers);
 
 ReactDOM.render(
     <Provider store={store}>

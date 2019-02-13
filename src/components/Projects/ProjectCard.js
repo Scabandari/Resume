@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 import { Card, CardActions, CardContent, Button, Typography, Chip } from '@material-ui/core'
 //import {Link} from "react-router-dom";
-import { changeProject, changeDocument } from '../../actions'
+//import { changeProject, changeDocument } from '../../actions'
 
 const styles = {
     card: {
@@ -32,54 +32,57 @@ const styles = {
     },
 };
 
+// function ProjectCard(props) {
 function ProjectCard(props) {
-    const { classes,
-        title,
-        course,
-        courseName,
-        description,
-        chips,
-        link,
-        tag
-    } = props;
+     const {title,
+            course,
+            courseName,
+            description,
+            chips,
+            link,
+            tag
+        } = props.project;
 
-    return (
-        <Card className={classes.card}>
-            <CardContent>
-                <Typography variant="h6" component="h2">
-                    {title}
-                </Typography>
-                <Typography variant="subtitle1" component="h2">
-                    {courseName} ({course})
-                </Typography>
-                <Typography component="p">
-                    {description}
-                </Typography>
-                {chips.map(data => {
-                    return (
-                      <Chip
-                      key={data.key}
-                      label={data.label}
-                      style={{margin: 4}}
-                      />
-                    );
-                })}
-            </CardContent>
-            <CardActions>
-                <Button href={link}
-                        size="small"
+    const { classes, projectAction } = props;
 
-                >Github</Button>
-                <Button href="/pdf" onClick={() => {console.log('onClick');}} >DOCS</Button>
+        return (
+            <Card className={classes.card}>
+                <CardContent>
+                    <Typography variant="h6" component="h2">
+                        {title}
+                    </Typography>
+                    <Typography variant="subtitle1" component="h2">
+                        {courseName} ({course})
+                    </Typography>
+                    <Typography component="p">
+                        {description}
+                    </Typography>
+                    {chips.map(data => {
+                        return (
+                            <Chip
+                                key={data.key}
+                                label={data.label}
+                                style={{margin: 4}}
+                            />
+                        );
+                    })}
+                </CardContent>
+                <CardActions>
+                    <Button href={link}
+                            size="small"
 
-            </CardActions>
-        </Card>
-    );
+                    >Github</Button>
+                    <Button onClick={() => {projectAction(tag)}}>DOCS</Button>
+
+                </CardActions>
+            </Card>
+        );
 }
+
 
 ProjectCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-// export default withStyles(styles)(ProjectCard);
-export default connect(null, { changeProject })(ProjectCard);
+export default withStyles(styles)(ProjectCard);
+//export default connect(null, { changeProject })(ProjectCard);

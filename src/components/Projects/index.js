@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ProjectCard from './ProjectCard';
+import ProjectCardContainer from '../../containers/ProjectCardContainer';
 import { Grid } from '@material-ui/core';
 import { SENTIMENT_ANALYSIS,
     CAPSTONE_SERVER,
     AI_MP1,
     AI_MP2,
     AI_MP3,
-    WEDDING_SEATING} from './tags';
+    WEDDING_SEATING} from './project_keys';
 
 
 class Projects extends Component  {
@@ -31,7 +32,17 @@ class Projects extends Component  {
                         {key: 1, label: 'PySpark'},
                         {key: 2, label: 'Jupyter Notebook'}
                         ],
-                    link: "https://github.com/Scabandari/Sentiment_Analysis"
+                    link: "https://github.com/Scabandari/Sentiment_Analysis",
+                    // docs: {
+                    //     problemDescription: {
+                    //         file: "cloud.pdf",
+                    //         pages: 5
+                    //     },
+                    //     report: {
+                    //         file: "cloud_report.pdf",
+                    //         pages: 7
+                    //     }
+                    // }
 
                 },
                 {
@@ -47,7 +58,17 @@ class Projects extends Component  {
                         {key: 0, label: 'AWS EC2'},
                         {key: 1, label: 'NodeJs'}
                     ],
-                    link: "https://github.com/Scabandari/Capstone-server"
+                    link: "https://github.com/Scabandari/Capstone-server",
+                    // docs: {
+                    //     problemDescription: {
+                    //         file: "capstone_server.pdf",
+                    //         pages: 3
+                    //     },
+                    //     report: {
+                    //         file: "capstone_server_erdiagram.pdf",
+                    //         pages: 1
+                    //     }
+                    // }
                 },
                 ]
         }
@@ -62,20 +83,12 @@ class Projects extends Component  {
                         projects.map(project => {
                             return (
                                 <Grid item>
-                                    <ProjectCard title={project.title}
-                                                 course={project.course}
-                                                 courseName={project.courseName}
-                                                 description={project.description}
-                                                 chips={project.chips}
-                                                 link={project.link}
-                                                 tag={project.tag}
-                                    ></ProjectCard>
+                                    <ProjectCardContainer project = {project} />
                                 </Grid>
                             );
                         })
                     }
                 </Grid>
-
             </div>
         );
     }
