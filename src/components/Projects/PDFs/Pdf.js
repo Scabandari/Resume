@@ -1,0 +1,76 @@
+import React, { Component } from "react";
+import {connect} from "react-redux";
+import { PROBLEM_STATEMENT, REPORT } from '../constants';
+import { Document, Page, pdfjs } from "react-pdf";
+import DocumentNavigationContainer from '../../../containers/DocumentNavigationContainer';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+
+class PDF extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { numPages: 4, pageNumber: 1 };
+    }
+
+    onDocumentLoadSuccess = ({ numPages }) => {
+        this.setState({ numPages });
+    };
+
+    goToPrevPage = () =>
+        this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
+    goToNextPage = () =>
+        this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
+
+    render() {
+        const { pageNumber } = this.state;
+        const { project } = this.props.currentProject;
+        const { doc } = this.props.currentDoc;
+        //console.log(`doc: ${doc}`);
+        let document, pages;
+        switch(doc) {
+            case PROBLEM_STATEMENT:
+                //console.log("switch working");
+                document = project.problemStatement.file;
+                pages = project.problemStatement.pages;
+                break;
+            case REPORT:
+                document = project.report.file;
+                pages = project.report.pages;
+                break;
+            default:
+                document = project.problemStatement.file;
+                pages = project.problemStatement.pages;
+                break;
+
+        }
+        //console.log(`project: ${project.problemDescription.pages}`);
+
+        return (
+            <div style={{textAlign: 'center'}}>
+                <div style={{ display: 'inline-block' }}>
+                    <DocumentNavigationContainer />
+                    <Document
+                        file={document}
+
+                        onLoadSuccess={this.onDocumentLoadSuccess}
+                    >
+                        <Page pageNumber={pageNumber} width={600} />
+                    </Document>
+                    <button onClick={this.goToPrevPage} style={{marginLeft: 25}}>Prev</button>
+                    <button onClick={this.goToNextPage}>Next</button>
+                </div>
+
+
+                <p>
+                    Page {pageNumber} of {pages}
+                </p>
+            </div>
+        );
+    }
+}
+
+function mapStateToProps({ currentProject, currentDoc }) {
+    return { currentProject, currentDoc };
+}
+
+export default connect(mapStateToProps)(PDF);

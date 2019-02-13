@@ -10,10 +10,7 @@ import promise from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
 import App from './App';
 import reducers from './reducers';
-//import { library } from '@fortawesome/fontawesome-svg-core'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faIgloo } from '@fortawesome/free-solid-svg-icons'
-//import { faG } from '@fortawesome/free-solid-svg-icons'
+
 
 
 //library.add(faIgloo)
@@ -23,13 +20,13 @@ import reducers from './reducers';
 
 //const middleware = applyMiddleware(promise(), ReduxThunk , createLogger());
 const middleware = applyMiddleware(promise(), ReduxThunk , createLogger());
-// const allStoreEnhancers = compose(
-//   middleware,
-//   window.devToolsExtension && window.devToolsExtension()
-// );
+const allStoreEnhancers = compose(
+  middleware,
+  window.devToolsExtension && window.devToolsExtension()
+);
 
-const store = createStore(reducers, {}, middleware);
-//const store = createStore( reducers, applyMiddleware( middleware ));
+//const store = createStore(reducers, {}, middleware);
+const store = createStore(reducers, {}, allStoreEnhancers);
 
 ReactDOM.render(
     <Provider store={store}>
