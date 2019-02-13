@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import ProjectCard from './ProjectCard';
 import ProjectCardContainer from '../../containers/ProjectCardContainer';
 import { Grid } from '@material-ui/core';
-import { SENTIMENT_ANALYSIS,
-    CAPSTONE_SERVER,
-    AI_MP1,
-    AI_MP2,
-    AI_MP3,
-    WEDDING_SEATING} from './project_keys';
+import { SENTIMENT_ANALYSIS, CAPSTONE_SERVER,
+    AI_MP1, AI_MP2, AI_MP3, WEDDING_SEATING, REPORT, PROBLEM_STATEMENT} from './constants';
+import { cloud, cloud_report, capstone_server, server_diagram }  from './PDFs/pdf_files'
 
 
 class Projects extends Component  {
@@ -33,16 +30,16 @@ class Projects extends Component  {
                         {key: 2, label: 'Jupyter Notebook'}
                         ],
                     link: "https://github.com/Scabandari/Sentiment_Analysis",
-                    // docs: {
-                    //     problemDescription: {
-                    //         file: "cloud.pdf",
-                    //         pages: 5
-                    //     },
-                    //     report: {
-                    //         file: "cloud_report.pdf",
-                    //         pages: 7
-                    //     }
-                    // }
+                    docs: {
+                        problemStatement: {
+                            file: cloud,
+                            pages: 5
+                        },
+                        report: {
+                            file: cloud_report,
+                            pages: 7
+                        }
+                    }
 
                 },
                 {
@@ -59,16 +56,16 @@ class Projects extends Component  {
                         {key: 1, label: 'NodeJs'}
                     ],
                     link: "https://github.com/Scabandari/Capstone-server",
-                    // docs: {
-                    //     problemDescription: {
-                    //         file: "capstone_server.pdf",
-                    //         pages: 3
-                    //     },
-                    //     report: {
-                    //         file: "capstone_server_erdiagram.pdf",
-                    //         pages: 1
-                    //     }
-                    // }
+                    docs: {
+                        problemStatement: {
+                            file: capstone_server,
+                            pages: 3
+                        },
+                        report: {
+                            file: server_diagram,
+                            pages: 1
+                        }
+                    }
                 },
                 ]
         }

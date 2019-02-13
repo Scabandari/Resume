@@ -40,7 +40,8 @@ function ProjectCard(props) {
             description,
             chips,
             link,
-            tag
+            tag,
+            docs
         } = props.project;
 
     const { classes, projectAction } = props;
@@ -72,7 +73,7 @@ function ProjectCard(props) {
                             size="small"
 
                     >Github</Button>
-                    <Button onClick={() => {projectAction(tag)}}>DOCS</Button>
+                    <Button onClick={() => {projectAction(docs)}}>DOCS</Button>
 
                 </CardActions>
             </Card>
