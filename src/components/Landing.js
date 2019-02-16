@@ -2,10 +2,22 @@
 import React, { Component } from 'react';
 // import { Grid, Row, Col} from 'react-bootstrap';
 import Image from "react-bootstrap/es/Image";
-import {Grid, Typography, Button } from '@material-ui/core/';
+import {Grid, Typography, Button, Chip, CardContent} from '@material-ui/core/';
 import { Link } from 'react-router-dom';
 
 class Landing extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            chips: [
+                {key: 0, label: 'React'},
+                {key: 1, label: 'react-redux'},
+                {key: 2, label: 'AWS S3'},
+                {key: 3, label: 'Material-UI'}
+            ]
+        }
+    }
 
     render() {
         const styles = {
@@ -28,8 +40,19 @@ class Landing extends Component {
                         <Image src="/me.jpg" circle style={styles.img} />
                     </Grid >
                     <Grid item style={styles.text}>
-                        <Typography variant="subtitle1" gutterBottom>
-                            This is a React app built using my favourite IDE for Js, Webstorm.<br/> It's hosted on
+                        <div>
+                            {this.state.chips.map(data => {
+                                return (
+                                    <Chip
+                                        key={data.key}
+                                        label={data.label}
+                                        style={{margin: 4}}
+                                    />
+                                );
+                            })}
+                        </div>
+                        <Typography variant="subtitle1" gutterBottom style={{paddingTop: 8}}>
+                            This is a React app that manages state with react-redux.<br/> It's hosted on
                             AWS S3 and here is a link the the
                             <a href="https://github.com/Scabandari/Resume"> Github repository</a>.
                             <br/> I'm an aspiring Software Engineer with interests in the areas of machine <br/> learning & A.I,

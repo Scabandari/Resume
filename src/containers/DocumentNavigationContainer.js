@@ -1,6 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from "redux";
-import { changeDocument } from "../actions";
+import { changeDocument, changePage } from "../actions";
 import connect from "react-redux/es/connect/connect";
 import { PROBLEM_STATEMENT, REPORT } from '../components/Projects/constants';
 import DocumentNavigation from '../components/DocumentNavigation';
@@ -18,7 +18,8 @@ class DocumentNavigationContainer extends React.Component {
     }
 
     handleActionCreator(value){
-        this.props.dispatch(changeDocument(this.state[value]));
+        this.props.changeDocument(this.state[value]);
+        this.props.changePage(1);
     }
 
     render() {
@@ -28,8 +29,12 @@ class DocumentNavigationContainer extends React.Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ changeDocument }, dispatch);
-}
 
-export default connect(mapDispatchToProps)(DocumentNavigationContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        changePage: (page) => dispatch(changePage(page)),
+        changeDocument: (doc) => dispatch(changeDocument(doc))
+    }
+};
+
+export default connect(null, mapDispatchToProps)(DocumentNavigationContainer);

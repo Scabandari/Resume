@@ -3,28 +3,34 @@ import {connect} from "react-redux";
 import { PROBLEM_STATEMENT, REPORT } from '../constants';
 import { Document, Page, pdfjs } from "react-pdf";
 import DocumentNavigationContainer from '../../../containers/DocumentNavigationContainer';
+import { changePage } from '../../../actions';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
 class PDF extends Component {
     constructor(props) {
         super(props);
-        this.state = { numPages: 4, pageNumber: 1 };
+        //this.state = { numPages: 4, pageNumber: 1 };
     }
 
     onDocumentLoadSuccess = ({ numPages }) => {
         this.setState({ numPages });
     };
 
-    goToPrevPage = () =>
-        this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
-    goToNextPage = () =>
-        this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
+    goToPrevPage = () => {
+        //this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
+        this.props.changePage(this.props.currentPage.page - 1);
+    };
+    goToNextPage = () => {
+        //this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
+        this.props.changePage(this.props.currentPage.page + 1);
+    };
 
     render() {
-        const { pageNumber } = this.state;
+        //const { pageNumber } = this.state;
         const { project } = this.props.currentProject;
         const { doc } = this.props.currentDoc;
+        const { page } = this.props.currentPage;
         //console.log(`doc: ${doc}`);
         let document, pages;
         switch(doc) {
@@ -54,7 +60,7 @@ class PDF extends Component {
 
                         onLoadSuccess={this.onDocumentLoadSuccess}
                     >
-                        <Page pageNumber={pageNumber} width={600} />
+                        <Page pageNumber={page} width={600} />
                     </Document>
                     <button onClick={this.goToPrevPage} style={{marginLeft: 25}}>Prev</button>
                     <button onClick={this.goToNextPage}>Next</button>
@@ -62,15 +68,26 @@ class PDF extends Component {
 
 
                 <p>
-                    Page {pageNumber} of {pages}
+                    Page {page} of {pages}
                 </p>
             </div>
         );
     }
 }
 
-function mapStateToProps({ currentProject, currentDoc }) {
-    return { currentProject, currentDoc };
-}
+// function mapStateToProps({ currentProject, currentDoc, currentPage }) {
+//     return { currentProject, currentDoc, currentPage };
+// }
 
-export default connect(mapStateToProps)(PDF);
+const mapStateToProps = ({currentProject, currentDoc, currentPage }) => {
+    return { currentProject, currentDoc, currentPage };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        changePage: (page) => dispatch(changePage(page))
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PDF);

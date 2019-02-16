@@ -8,7 +8,7 @@ class Header extends Component {
     render() {
         const styles = {
             banner: {
-                backgroundColor: '#493C55',
+                backgroundColor: '#493C55'
             },
             name: {
                 paddingTop: 8,
