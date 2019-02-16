@@ -8,6 +8,9 @@ import EA_ass1_ from './EA_ass1.pdf';
 import EA_ass1_r_ from './EA_ass1_r.pdf';
 import auction_sytem_ from './networking.pdf';
 import auction_sytem_r_ from './networking_r.pdf';
+import perfectPort_ from './perfectPort.pdf';
+import perfectPort_r_ from './perfectPort_r.pdf';
+
 
 
 export const cloud = cloud_;
@@ -20,3 +23,6 @@ export const EA_ass1 = EA_ass1_;
 export const EA_ass1_r = EA_ass1_r_;
 export const auction_sytem = auction_sytem_;
 export const auction_sytem_r = auction_sytem_r_;
+export const perfectPort = perfectPort_;
+export const perfectPort_r = perfectPort_r_;
+

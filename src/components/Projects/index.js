@@ -5,7 +5,8 @@ import { Grid } from '@material-ui/core';
 // import { SENTIMENT_ANALYSIS, CAPSTONE_SERVER,
 //     AI_MP1, AI_MP2, AI_MP3, WEDDING_SEATING, REPORT, PROBLEM_STATEMENT} from './constants';
 import { cloud, cloud_report, capstone_server, server_diagram, mp1_report,
-    ai_mp1, EA_ass1_r, EA_ass1, auction_sytem, auction_sytem_r }  from './PDFs/pdf_files'
+    ai_mp1, EA_ass1_r, EA_ass1, auction_sytem, auction_sytem_r,
+    perfectPort, perfectPort_r }  from './PDFs/pdf_files'
 
 
 class Projects extends Component  {
@@ -104,6 +105,44 @@ class Projects extends Component  {
 
                 },
                 {
+                    title: "Auction System Client & Server",
+                    course: "COEN 445",
+                    courseName: "Communication Networks and Protocols",
+                    description: "This was my first attempt to use sockets. We were a group of three" +
+                        " and I was responsible for everything UDP and also the very rudimentary GUI. " +
+                        "My teammates had a late start on the TCP parts so we were really rushed to " +
+                        " finish but for the most part it works and was a good introduction to sockets for" +
+                        " me as well as great practice using the producer consumer model and multiple threads.",
+                    chips: [
+                        {key: 0, label: 'Networking'},
+                        {key: 1, label: 'Socket Programming'},
+                        {key: 2, label: 'Python'},
+                        {key: 3, label: 'Multithreading'}
+
+                    ],
+                    github_repos: [
+                        {
+                            link: "https://github.com/Scabandari/CLIENT",
+                            name: "client"
+                        },
+                        {
+                            link: "https://github.com/Scabandari/SERVER",
+                            name: "server"
+                        }
+                    ],
+                    docs: {
+                        problemStatement: {
+                            file: auction_sytem,
+                            pages: 6
+                        },
+                        report: {
+                            file: auction_sytem_r,
+                            pages: 19
+                        }
+                    }
+
+                },
+                {
                     title: "Wedding Seating Plan",
                     course: "COEN 432",
                     courseName: "Evolutionary Algorithms",
@@ -133,38 +172,33 @@ class Projects extends Component  {
 
                 },
                 {
-                    title: "Auction System Client & Server",
-                    course: "COEN 445",
-                    courseName: "Communication Networks and Protocols",
-                    description: "This was my first attempt to use sockets. We were a group of three" +
-                        " and I was responsible for everything UDP and also the very rudimentary GUI. " +
-                        "My teammates had a late start on the TCP parts so we were really rushed to " +
-                        " finish but for the most part it works and was a good introduction to sockets for" +
-                        " me as well as great practice using the producer consumer model and multiple threads.",
+                    title: "Perfect Port",
+                    course: "Side Project",
+                    courseName: "A Portfolio Tracker for Crypto-currencies.",
+                    description: "Last spring I decided to learn web dev. I have never used Javascript " +
+                        "before so this first attempt might be a little rough around the edges. " +
+                        "I took a couple courses on Udemy to learn NodeJs and React and I feel like I learned " +
+                        "a ton in a really short time frame.",
                     chips: [
-                        {key: 0, label: 'Networking'},
-                        {key: 1, label: 'Socket Programming'},
-                        {key: 2, label: 'Python'},
-                        {key: 3, label: 'Multithreading'}
+                        {key: 0, label: 'NodeJs'},
+                        {key: 1, label: 'React'},
+                        {key: 2, label: 'react-redux'},
+                        {key: 3, label: 'Material-UI'}
                     ],
                     github_repos: [
                         {
-                            link: "https://github.com/Scabandari/CLIENT",
-                            name: "client"
-                        },
-                        {
-                            link: "https://github.com/Scabandari/SERVER",
-                            name: "server"
+                            link: "https://github.com/Scabandari/perfectPort",
+                            name: "repo"
                         }
-                        ],
+                    ],
                     docs: {
                         problemStatement: {
-                            file: auction_sytem,
-                            pages: 6
+                            file: perfectPort,
+                            pages: 1
                         },
                         report: {
-                            file: auction_sytem_r,
-                            pages: 19
+                            file: perfectPort_r,
+                            pages: 2
                         }
                     }
 

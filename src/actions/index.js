@@ -1,4 +1,11 @@
-import { SIGN_OUT, SIGN_IN, CHANGE_PROJECT, CHANGE_DOCUMENT } from "./types";
+import { SIGN_OUT, SIGN_IN, CHANGE_PROJECT, CHANGE_DOCUMENT, CHANGE_PAGE } from "./types";
+
+export const changePage = page => {
+    return {
+        type: CHANGE_PAGE,
+        payload: page
+    }
+};
 
 export const changeDocument = document => {
   return {
