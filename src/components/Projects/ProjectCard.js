@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 // import Button from '@material-ui/core/Button';
 // import Typography from '@material-ui/core/Typography';
 import { Card, CardActions, CardContent, Button, Typography, Chip } from '@material-ui/core'
+import { FaGithub } from 'react-icons/fa';
 //import {Link} from "react-router-dom";
 //import { changeProject, changeDocument } from '../../actions'
 
@@ -39,8 +40,7 @@ function ProjectCard(props) {
             courseName,
             description,
             chips,
-            link,
-            tag,
+            github_repos,
             docs
         } = props.project;
 
@@ -69,10 +69,16 @@ function ProjectCard(props) {
                     })}
                 </CardContent>
                 <CardActions>
-                    <Button href={link}
-                            size="small"
+                    <Fragment>
+                        {github_repos.map(repo =>{
+                            return (
+                                <Button href={repo.link}
+                                        size="small"
 
-                    >Github</Button>
+                                ><FaGithub style={{paddingRight: 3}}/> {repo.name} </Button>
+                            )
+                        })}
+                    </Fragment>
                     <Button onClick={() => {projectAction(docs)}}>DOCS</Button>
 
                 </CardActions>

@@ -11,6 +11,8 @@ import { createLogger } from 'redux-logger';
 import App from './App';
 import reducers from './reducers';
 
+const PRODUCTION = true;
+let store_dev;
 
 
 //library.add(faIgloo)
@@ -20,13 +22,19 @@ import reducers from './reducers';
 
 //const middleware = applyMiddleware(promise(), ReduxThunk , createLogger());
 const middleware = applyMiddleware(promise(), ReduxThunk , createLogger());
-const allStoreEnhancers = compose(
-  middleware,
-  window.devToolsExtension && window.devToolsExtension()
-);
+if (!PRODUCTION) {
+    const allStoreEnhancers = compose(
+        middleware,
+        window.devToolsExtension && window.devToolsExtension()
+    );
+    store_dev = createStore(reducers, {}, allStoreEnhancers)
+}
 
-//const store = createStore(reducers, {}, middleware);
-const store = createStore(reducers, {}, allStoreEnhancers);
+const store_production = createStore(reducers, {}, middleware);
+
+
+const store = PRODUCTION ? store_production : store_dev;
+
 
 ReactDOM.render(
     <Provider store={store}>
