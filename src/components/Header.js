@@ -7,18 +7,36 @@ import HeaderButton from './HeaderButton';
 class Header extends Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            headerButtons: [
+                {
+                    name: "Projects",
+                    link: "/projects"
+                },
+                {
+                    name: "Technologies",
+                    link: "/techs"
+                },
+                {
+                    name: "Skills",
+                    link: "/skills"
+                }
+            ]
+        }
        // this.showNavButtons = this.showNavButtons.bind(this);
     }
 
     showNavButtons() {
         const { showing } = this.props.showingNav;
+        const { headerButtons } = this.state;
         if (showing) {
             return(
                 <Fragment>
-                    <HeaderButton />
-                    <HeaderButton />
-                    <HeaderButton />
+                    {headerButtons.map(button => {
+                        return (
+                            <HeaderButton name={button.name} link={button.link}/>
+                        )
+                    })}
                 </Fragment>
 
             );
