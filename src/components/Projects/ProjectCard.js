@@ -18,6 +18,7 @@ const styles = {
         maxWidth: 400,
         marginTop: 25,
         marginLeft: 25,
+        marginBottom: 25
         //minHeight: 350
     },
     bullet: {

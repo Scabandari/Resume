@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // import { Grid, Row, Col} from 'react-bootstrap';
 import Image from "react-bootstrap/es/Image";
 import {Grid, Typography, Button, Chip, CardContent} from '@material-ui/core/';
 import { Link } from 'react-router-dom';
+import { showNavButtons }  from '../actions';
 
 class Landing extends Component {
     constructor(props) {
@@ -14,9 +16,14 @@ class Landing extends Component {
                 {key: 0, label: 'React'},
                 {key: 1, label: 'react-redux'},
                 {key: 2, label: 'AWS S3'},
-                {key: 3, label: 'Material-UI'}
+                {key: 3, label: 'AWS Route 53'},
+                {key: 4, label: 'Material-UI'}
             ]
         }
+    }
+
+    componentDidMount() {
+        this.props.showNavButtons(false);
     }
 
     render() {
@@ -61,7 +68,10 @@ class Landing extends Component {
                             school projects, pet projects and accomplishments<br/>  then you can ...
                         </Typography>
                         <Typography variant="subtitle1" >
-                            Continue as <Button component={Link} to="/projects">Guest</Button>
+                            Continue as <Button
+                                            component={Link}
+                                            to="/projects"
+                                            >Guest</Button>
                         </Typography>
                     </Grid >
                 </Grid>
@@ -70,5 +80,10 @@ class Landing extends Component {
     }
 }
 
-export default Landing;
+const mapDispatchToProps = dispatch => {
+    return { showNavButtons: truthy => dispatch(showNavButtons(truthy)) };
+};
+
+export default connect(null, mapDispatchToProps)(Landing) ;
+//export default Landing;
 
