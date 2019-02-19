@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ProjectCard from './ProjectCard';
 import ProjectCardContainer from '../../containers/ProjectCardContainer';
 import { Grid } from '@material-ui/core';
@@ -7,6 +8,8 @@ import { Grid } from '@material-ui/core';
 import { cloud, cloud_report, capstone_server, server_diagram, mp1_report,
     ai_mp1, EA_ass1_r, EA_ass1, auction_sytem, auction_sytem_r,
     perfectPort, perfectPort_r }  from './PDFs/pdf_files'
+import { showNavButtons }  from '../../actions';
+
 
 
 class Projects extends Component  {
@@ -49,7 +52,7 @@ class Projects extends Component  {
                 },
                 {
                     //tag: CAPSTONE_SERVER,
-                    title: "IOT Smart Parking Solution",
+                    title: "IOT Smart Parking Solution (ONGOING)",
                     course: "COEN 490",
                     courseName: "Capstone Project",
                     description: "This is our final year group project that uses many different technologies but I'm primarily in charge " +
@@ -207,6 +210,11 @@ class Projects extends Component  {
         }
     }
 
+    componentDidMount() {
+        console.log("componentDidMount()");
+        this.props.showNavButtons(true);
+    }
+
     render() {
         const { projects } = this.state;
         return (
@@ -227,6 +235,10 @@ class Projects extends Component  {
     }
 }
 
-export default Projects;
+//export default Projects;
 
+const mapDispatchToProps = dispatch => {
+    return { showNavButtons: truthy => dispatch(showNavButtons(truthy)) };
+};
 
+export default connect(null, mapDispatchToProps)(Projects) ;
