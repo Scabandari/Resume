@@ -11,7 +11,7 @@ import { createLogger } from 'redux-logger';
 import App from './App';
 import reducers from './reducers';
 
-const PRODUCTION = false;
+const PRODUCTION = true;
 let store_dev;
 
 
