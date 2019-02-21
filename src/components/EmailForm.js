@@ -5,12 +5,15 @@ class EmailForm extends Component {
         super(props);
         this.state = {
             formSubmitted: false,
-            feedback: ""
+            feedback: "",
+            name: "",
+            user_email: "",
+            company: ""
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.sendFeedback = this.sendFeedback.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }
 
@@ -28,7 +31,10 @@ class EmailForm extends Component {
             template,
             this.props.senderEmail,
             receiverEmail,
-            this.state.feedback);
+            this.state.feedback,
+            this.state.name,
+            this.state.user_email,
+            this.state.company);
 
 
         this.setState({
@@ -48,7 +54,7 @@ class EmailForm extends Component {
     //     console.log(this.state.feedback);
     // }
 
-    sendFeedback (templateId, senderEmail, receiverEmail, feedback) {
+    sendFeedback (templateId, senderEmail, receiverEmail, feedback, name, user_email, company) {
         console.log(`feedback: ${feedback}`);
         console.log(`this.state.feedback ${this.state.feedback}`);
         window.emailjs.send(
@@ -57,7 +63,10 @@ class EmailForm extends Component {
             {
                 senderEmail,
                 receiverEmail,
-                feedback
+                feedback,
+                name,
+                user_email,
+                company
             })
             .then(res => {
                 this.setState({ formEmailSent: true });
@@ -70,24 +79,52 @@ class EmailForm extends Component {
     render() {
         //let feedback = "";
         return(
-            <form className="feedback-form" onSubmit={this.handleSubmit}>
-                <h1>Your Feedback</h1>
-                <textarea
-                    className="text-input"
-                    id="feedback-entry"
-                    name="feedback-entry"
-                    onChange={e => this.setState({feedback: e.target.value})}
-                    placeholder="Enter your feedback here"
-                    required
-                    value={this.state.feedback}
-                />
-                <div className="btn-group">
-                    <button className="btn btn--cancel" onClick={this.handleClose}>
-                        Cancel
-                    </button>
-                    <input type="submit" value="Submit" className="btn btn--submit" />
-                </div>
-            </form>
+            <div className="ui segment" style={{margin: 8}}>
+                <form className="feedback-form" onSubmit={this.handleSubmit}>
+                    <h4 style={{color: '#493C55'}}>Contact Us</h4>
+                    <div className="field">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            value={this.state.name}
+                            onChange={e => this.setState({name: e.target.value})}
+                        />
+                    </div>
+                    <div className="field">
+                        <label>Contact Email</label>
+                        <input
+                            type="text"
+                            value={this.state.user_email}
+                            onChange={e => this.setState({user_email: e.target.value})}
+                        />
+                    </div>
+                    <div className="field">
+                        <label>Company</label>
+                        <input
+                            type="text"
+                            value={this.state.company}
+                            onChange={e => this.setState({company: e.target.value})}
+                        />
+                    </div>
+                    <textarea
+                        className="text-input"
+                        id="feedback-entry"
+                        name="feedback-entry"
+                        onChange={e => this.setState({feedback: e.target.value})}
+                        placeholder="Enter your email message here"
+                        required
+                        value={this.state.feedback}
+                    />
+                    <div className="btn-group">
+                        <button className="btn btn--cancel" onClick={this.handleClose} style={{
+                            backgroundColor: '#f44336',
+                            marginRight: 3}}>
+                            Cancel
+                        </button>
+                        <input type="submit" value="Submit" className="btn btn--submit" />
+                    </div>
+                </form>
+            </div>
         )
     }
 }
