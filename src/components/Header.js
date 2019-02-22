@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
 //import GoogleAuth from './GoogleAuth';
 import Typography from '@material-ui/core/Typography';
 import HeaderButton from './HeaderButton';
@@ -67,6 +68,8 @@ class Header extends Component {
                         <Typography variant="h3" gutterBottom style={styles.name}>
                             Ryan Nichols
                         </Typography>
+                        <Typography variant="h3" gutterBottom style={styles.name}>
+                            {this.props.location.pathname}                        </Typography>
                         <div className="right" style={{ display: "flex", marginLeft: 'auto' }}>
                             { this.showNavButtons() }
                         </div>
@@ -80,4 +83,5 @@ class Header extends Component {
 const mapStateToProps = ({ showingNav }) => {
     return { showingNav };
 };
-export default connect(mapStateToProps)(Header) ;
+
+export default withRouter(connect(mapStateToProps)(Header));
