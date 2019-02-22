@@ -1,41 +1,47 @@
-import React, { Fragment, Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Fragment, Component} from 'react';
+//import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 //import GoogleAuth from './GoogleAuth';
 import Typography from '@material-ui/core/Typography';
 import HeaderButton from './HeaderButton';
+import {PROJECTS, TECH, SKILLS} from './Projects/constants';
 
 class Header extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            headerButtons: [
-                {
-                    name: "Projects",
-                    link: "/projects"
-                },
-                {
-                    name: "Technologies",
-                    link: "/techs"
-                },
-                {
-                    name: "Skills",
-                    link: "/skills"
-                }
-            ]
-        }
-       // this.showNavButtons = this.showNavButtons.bind(this);
     }
 
     showNavButtons() {
-        const { showing } = this.props.showingNav;
-        const { headerButtons } = this.state;
-        if (showing) {
-            return(
+        const {pathname} = this.props.location;
+        const headerButtons =
+            [
+                {
+                    name: "Projects",
+                    link: PROJECTS,
+                    is_disabled: pathname === PROJECTS
+                },
+                {
+                    name: "Technologies",
+                    link: TECH,
+                    is_disabled: pathname === TECH
+
+                },
+                {
+                    name: "Skills",
+                    link: SKILLS,
+                    is_disabled: pathname === SKILLS
+
+                }
+            ];
+        if (pathname !== "/") {
+            return (
                 <Fragment>
                     {headerButtons.map(button => {
                         return (
-                            <HeaderButton name={button.name} link={button.link}/>
+                            <HeaderButton
+                                name={button.name}
+                                is_disabled={button.is_disabled}
+                                link={button.link}/>
                         )
                     })}
                 </Fragment>
@@ -44,6 +50,7 @@ class Header extends Component {
 
         }
     }
+
 
     render() {
         const styles = {
@@ -60,8 +67,7 @@ class Header extends Component {
             }
         };
 
-        //const { showNavButtons } = this.props;
-        return(
+        return (
             <div>
                 <nav>
                     <div style={styles.banner} className="nav-wrapper">
@@ -70,8 +76,8 @@ class Header extends Component {
                         </Typography>
                         <Typography variant="h3" gutterBottom style={styles.name}>
                             {this.props.location.pathname}                        </Typography>
-                        <div className="right" style={{ display: "flex", marginLeft: 'auto' }}>
-                            { this.showNavButtons() }
+                        <div className="right" style={{display: "flex", marginLeft: 'auto'}}>
+                            {this.showNavButtons()}
                         </div>
                     </div>
                 </nav>
@@ -80,8 +86,4 @@ class Header extends Component {
     }
 }
 
-const mapStateToProps = ({ showingNav }) => {
-    return { showingNav };
-};
-
-export default withRouter(connect(mapStateToProps)(Header));
+export default withRouter(Header);

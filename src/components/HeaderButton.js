@@ -22,7 +22,7 @@ const styles = theme => ({
 });
 
 function HeaderButton(props) {
-    const { classes, name, link } = props;
+    const { classes, name, link, is_disabled } = props;
     // console.log(`ref: ${link}`);
     // console.log(`name: ${name}`);
 
@@ -33,6 +33,7 @@ function HeaderButton(props) {
             to={link}
             variant="contained"
             color="primary"
+            disabled={is_disabled}
             className={classNames(classes.margin, classes.cssRoot)}
         >
             { name }
