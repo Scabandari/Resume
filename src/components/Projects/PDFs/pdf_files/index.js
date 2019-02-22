@@ -10,7 +10,14 @@ import auction_sytem_ from './networking.pdf';
 import auction_sytem_r_ from './networking_r.pdf';
 import perfectPort_ from './perfectPort.pdf';
 import perfectPort_r_ from './perfectPort_r.pdf';
-
+import minicap_ from './minicap.pdf';
+import minicap_r_ from './minicap_r.pdf';
+import eternity_ from './project432.pdf';
+import eternity_r_ from './project432_r.pdf';
+import db_ass1_ from './databasses_ass1.pdf';
+import db_ass1_r_ from './databases_ass1_r.pdf';
+import mp2_ from './mp2.pdf';
+import mp2_r_ from './mp2_report.pdf';
 
 
 export const cloud = cloud_;
@@ -25,4 +32,13 @@ export const auction_sytem = auction_sytem_;
 export const auction_sytem_r = auction_sytem_r_;
 export const perfectPort = perfectPort_;
 export const perfectPort_r = perfectPort_r_;
+export const minicap = minicap_;
+export const minicap_r = minicap_r_;
+export const eternity = eternity_;
+export const eternity_r = eternity_r_;
+export const db_ass1 = db_ass1_;
+export const db_ass1_r = db_ass1_r_;
+export const mp2 = mp2_;
+export const mp2_r = mp2_r_;
+
 
