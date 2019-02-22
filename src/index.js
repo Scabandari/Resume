@@ -11,30 +11,23 @@ import { createLogger } from 'redux-logger';
 import App from './App';
 import reducers from './reducers';
 
-const PRODUCTION = false;
-let store_dev;
+const { REACT_APP_PRODUCTION } = process.env;
+const production = JSON.stringify(REACT_APP_PRODUCTION) === JSON.stringify("true");
+//console.log(`production: ${production}`);
 
-
-//library.add(faIgloo)
-//KEYS:
-// client id: 291285678637-rp8qv6gns8tek7ppas5thqsq76q9q45i.apps.googleusercontent.com
-
-
-//const middleware = applyMiddleware(promise(), ReduxThunk , createLogger());
 const middleware = applyMiddleware(promise(), ReduxThunk , createLogger());
-if (!PRODUCTION) {
+let store_dev;
+if (production !== true) {
+    //console.log("production must be false");
     const allStoreEnhancers = compose(
         middleware,
         window.devToolsExtension && window.devToolsExtension()
     );
     store_dev = createStore(reducers, {}, allStoreEnhancers)
 }
-
 const store_production = createStore(reducers, {}, middleware);
 
-
-const store = PRODUCTION ? store_production : store_dev;
-
+const store = production ? store_production : store_dev;
 
 ReactDOM.render(
     <Provider store={store}>
