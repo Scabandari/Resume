@@ -7,18 +7,14 @@ import { ExpansionPanelSummary, ExpansionPanelDetails, Divider, List,
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { JsChips, PythonChips, GitChips, JavaChips, CppChips } from './chips';
 import { JsTldr, JsLf, PythonTldr, PythonLf, GitTldr, GitLf,
-    CssTldr, CssLf, JavaTldr, JavaLf, CppTldr, CppLf} from './Descriptions';
+    CssTldr, CssLf, JavaTldr, JavaLf, CppTldr, CppLf} from './descriptions';
 // TODO this badly needs a refactor. Way too much repetition
+
 const styles = theme => ({
     root: {
         width: '100%',
         padding: 15
-    },
-    // heading: {
-    //     fontSize: theme.typography.pxToRem(15),
-    //     fontWeight: theme.typography.fontWeightRegular,
-    // },
-    //className={classes.heading}
+    }
 });
 
 function TechsExpansionPanel(props) {

@@ -7,9 +7,10 @@ import Landing from './components/Landing';
 import Projects from './components/Projects';
 import PDF from './components/Projects/PDFs/Pdf';
 import EmailForm from './components/EmailForm';
-import TechsExpansionPanel from './components/Techs/TechsExpansionPanel';
+import TechsExpansionPanel from './components/techs/TechsExpansionPanel';
+import SkillsExpansionPanel from './components/skills/SkillsExpansionPanel';
 
-const Skills = () => <h1>Skills Coming Soon!</h1>;
+//const Skills = () => <h1>Skills Coming Soon!</h1>;
 //const Technologies = () => <h1>Technologies Coming Soon!</h1>;
 //const Contact = () => <h1>Contact Us Coming Soon!</h1>;
 
@@ -37,7 +38,7 @@ class App extends Component {
                         <Route path="/" exact component={Landing} />
                         <Route path="/projects" exact component={Projects} />
                         <Route path="/pdf" exact component={PDF} />
-                        <Route path="/skills" exact component={Skills} />
+                        <Route path="/skills" exact component={SkillsExpansionPanel} />
                         <Route path="/techs" exact component={TechsExpansionPanel} />
                         <Route path="/contact" exact component={EmailForm} />
                     </div>

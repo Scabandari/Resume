@@ -17,7 +17,8 @@ class Landing extends Component {
                 {key: 1, label: 'react-redux'},
                 {key: 2, label: 'AWS S3'},
                 {key: 3, label: 'AWS Route 53'},
-                {key: 4, label: 'Material-UI'}
+                {key: 4, label: 'Material-UI'},
+                {key: 5, label: 'EmailJs'}
             ]
         }
     }
