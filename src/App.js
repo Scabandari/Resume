@@ -15,11 +15,24 @@ const Skills = () => <h1>Skills Coming Soon!</h1>;
 
 
 class App extends Component {
+
     render(){
+        const styles = {
+            body: {
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh'
+            },
+            siteContent: {
+                flex: '1 0 auto',
+                padding: 'var(--space) var(--space) 0',
+                width: '100%'
+            }
+        };
         return(
             <BrowserRouter >
-                <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}} >
-                    <div style={{flex: '1 0 auto', padding: 'var(--space) var(--space) 0', width: '100%'}}>
+                <div style={styles.body} >
+                    <div style={styles.siteContent}>
                         <Header />
                         <Route path="/" exact component={Landing} />
                         <Route path="/projects" exact component={Projects} />
