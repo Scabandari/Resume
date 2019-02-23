@@ -1,16 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-// import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
-// import CardContent from '@material-ui/core/CardContent';
-// import Button from '@material-ui/core/Button';
-// import Typography from '@material-ui/core/Typography';
 import { Card, CardActions, CardContent, Button, Typography, Chip } from '@material-ui/core'
 import { FaGithub } from 'react-icons/fa';
-//import {Link} from "react-router-dom";
-//import { changeProject, changeDocument } from '../../actions'
+
 
 const styles = {
     card: {

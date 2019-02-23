@@ -1,6 +1,8 @@
-import React, {Fragment, Component} from 'react';
+import React, { Fragment, Component } from 'react';
 //import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 //import GoogleAuth from './GoogleAuth';
 import Typography from '@material-ui/core/Typography';
 import HeaderButton from './HeaderButton';
@@ -71,10 +73,11 @@ class Header extends Component {
             <div>
                 <nav>
                     <div style={styles.banner} className="nav-wrapper">
-                        <Typography variant="h3" gutterBottom style={styles.name}>
-                            Ryan Nichols
-                        </Typography>
-
+                        <Link to="/" >
+                            <Typography variant="h3" gutterBottom style={styles.name}>
+                                Ryan Nichols
+                            </Typography>
+                        </Link>
                         <div className="right" style={{display: "flex", marginLeft: 'auto'}}>
                             {this.showNavButtons()}
                         </div>

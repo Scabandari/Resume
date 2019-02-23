@@ -1,12 +1,5 @@
-import { SIGN_OUT, SIGN_IN, CHANGE_PROJECT, CHANGE_DOCUMENT, CHANGE_PAGE,
-    NAVIGATION } from "./types";
-
-export const showNavButtons = truthy => {
-    return {
-        type: NAVIGATION,
-        payload: truthy
-    }
-};
+import { SIGN_OUT, SIGN_IN, CHANGE_PROJECT,
+    CHANGE_DOCUMENT, CHANGE_PAGE } from "./types";
 
 export const changePage = page => {
     return {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Image from "react-bootstrap/es/Image";
 import {Grid, Typography, Button, Chip, CardContent} from '@material-ui/core/';
 import { Link } from 'react-router-dom';
-import { showNavButtons }  from '../actions';
+//import { showNavButtons }  from '../actions';
 
 class Landing extends Component {
     constructor(props) {
@@ -22,9 +22,9 @@ class Landing extends Component {
         }
     }
 
-    componentDidMount() {
-        this.props.showNavButtons(false);
-    }
+    // componentDidMount() {
+    //     this.props.showNavButtons(false);
+    // }
 
     render() {
         const styles = {
@@ -80,10 +80,10 @@ class Landing extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return { showNavButtons: truthy => dispatch(showNavButtons(truthy)) };
-};
-
-export default connect(null, mapDispatchToProps)(Landing) ;
-//export default Landing;
+// const mapDispatchToProps = dispatch => {
+//     return { showNavButtons: truthy => dispatch(showNavButtons(truthy)) };
+// };
+//
+// export default connect(null, mapDispatchToProps)(Landing) ;
+export default Landing;
 

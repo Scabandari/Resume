@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectCardContainer from '../../containers/ProjectCardContainer';
 import { Grid } from '@material-ui/core';
-import { showNavButtons }  from '../../actions';
 import data from './project_data';
 
 
@@ -15,7 +14,7 @@ class Projects extends Component  {
 
     componentDidMount() {
         console.log("componentDidMount()");
-        this.props.showNavButtons(true);
+        //this.props.showNavButtons(true);
     }
 
     render() {
@@ -38,10 +37,10 @@ class Projects extends Component  {
     }
 }
 
-//export default Projects;
+export default Projects;
 
-const mapDispatchToProps = dispatch => {
-    return { showNavButtons: truthy => dispatch(showNavButtons(truthy)) };
-};
-
-export default connect(null, mapDispatchToProps)(Projects) ;
+// const mapDispatchToProps = dispatch => {
+//     return { showNavButtons: truthy => dispatch(showNavButtons(truthy)) };
+// };
+//
+// export default connect(null, mapDispatchToProps)(Projects) ;
