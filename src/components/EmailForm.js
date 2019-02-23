@@ -72,12 +72,10 @@ class EmailForm extends Component {
                 this.setState({ formEmailSent: true });
                 console.log("Email sent!");
             })
-            // Handle errors here however you like, or use a React error boundary
             .catch(err => console.error('Failed to send feedback. Error: ', err))
     }
 
     render() {
-        //let feedback = "";
         return(
             <div className="ui segment" style={{margin: 8}}>
                 <form className="feedback-form" onSubmit={this.handleSubmit}>
