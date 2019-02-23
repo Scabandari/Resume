@@ -74,8 +74,7 @@ class Header extends Component {
                         <Typography variant="h3" gutterBottom style={styles.name}>
                             Ryan Nichols
                         </Typography>
-                        <Typography variant="h3" gutterBottom style={styles.name}>
-                            {this.props.location.pathname}                        </Typography>
+
                         <div className="right" style={{display: "flex", marginLeft: 'auto'}}>
                             {this.showNavButtons()}
                         </div>
