@@ -18,8 +18,16 @@ import db_ass1_ from './databasses_ass1.pdf';
 import db_ass1_r_ from './databases_ass1_r.pdf';
 import mp2_ from './mp2.pdf';
 import mp2_r_ from './mp2_report.pdf';
+import ai_mp3_ from './ai_mp3.pdf';
+import ai_mp3_r_ from './ai_mp3_r.pdf';
+import ann_carr_ from './cars_ann_prob_desc.pdf';
+import ann_carr_r_ from './cars_ann_report.pdf';
 
 
+export const ai_mp3 = ai_mp3_;
+export const ai_mp3_r = ai_mp3_r_;
+export const ann_carr = ann_carr_;
+export const ann_carr_r = ann_carr_r_;
 export const cloud = cloud_;
 export const cloud_report = cloud_report_;
 export const capstone_server = capstone_server_;
