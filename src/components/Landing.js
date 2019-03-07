@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Image from "react-bootstrap/es/Image";
 import {Grid, Typography, Button, Chip, CardContent} from '@material-ui/core/';
 import { Link } from 'react-router-dom';
-//import { showNavButtons }  from '../actions';
+
 
 class Landing extends Component {
     constructor(props) {

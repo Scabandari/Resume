@@ -1,46 +1,28 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import ProjectCardContainer from '../../containers/ProjectCardContainer';
 import { Grid } from '@material-ui/core';
 import data from './project_data';
 
 
+const Projects = () =>  {
 
-class Projects extends Component  {
-
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        console.log("componentDidMount()");
-        //this.props.showNavButtons(true);
-    }
-
-    render() {
-        //const { projects } = this.state;
-        return (
-            <div>
-                <Grid container>
-                    {
-                        data.map(project => {
-                            return (
-                                <Grid item>
-                                    <ProjectCardContainer project = {project} />
-                                </Grid>
-                            );
-                        })
-                    }
-                </Grid>
-            </div>
-        );
-    }
-}
+    //const { projects } = this.state;
+    return (
+        <div>
+            <Grid container>
+                {
+                    data.map(project => {
+                        return (
+                            <Grid item>
+                                <ProjectCardContainer project = {project} />
+                            </Grid>
+                        );
+                    })
+                }
+            </Grid>
+        </div>
+    );
+};
 
 export default Projects;
 
-// const mapDispatchToProps = dispatch => {
-//     return { showNavButtons: truthy => dispatch(showNavButtons(truthy)) };
-// };
-//
-// export default connect(null, mapDispatchToProps)(Projects) ;
