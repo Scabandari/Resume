@@ -6,6 +6,60 @@ import gitDescriptions from './Git';
 import CssDescriptions from './CSS';
 import javaDescriptions from './Java';
 import CppDescriptions from './CPP';
+import machineLearningDescriptions from './MachineLearning';
+import sqlDescriptions from './SQL';
+import blockchainDescriptions from './Blockchain';
+import cloudDescriptions from './Cloud';
+
+
+export const CloudTldr = () => {
+    return (
+        <Typography variant='body1'>{cloudDescriptions.tldr}</Typography>
+    )
+};
+
+export const CloudLf = () => {
+    return (
+        <Typography variant='body1'>{cloudDescriptions.longForm}</Typography>
+    )
+};
+
+export const BlockchainTldr = () => {
+    return (
+        <Typography variant='body1'>{blockchainDescriptions.tldr}</Typography>
+    )
+};
+
+export const BlockchainLf = () => {
+    return (
+        <Typography variant='body1'>{blockchainDescriptions.longForm}</Typography>
+    )
+};
+
+export const SqlTldr = () => {
+    return (
+        <Typography variant='body1'>{sqlDescriptions.tldr}</Typography>
+    )
+};
+
+export const SqlLf = () => {
+    return (
+        <Typography variant='body1'>{sqlDescriptions.longForm}</Typography>
+    )
+};
+
+export const MlTldr = () => {
+    return (
+        <Typography variant='body1'>{machineLearningDescriptions.tldr}</Typography>
+    )
+};
+
+export const MlLf = () => {
+    return (
+        <Typography variant='body1'>{machineLearningDescriptions.longForm}</Typography>
+    )
+};
+
 
 export const JsTldr = () => {
     return (

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Image from "react-bootstrap/es/Image";
 import {Grid, Typography, Button, Chip, CardContent} from '@material-ui/core/';
 import { Link } from 'react-router-dom';
-//import { showNavButtons }  from '../actions';
+
 
 class Landing extends Component {
     constructor(props) {
@@ -17,7 +17,8 @@ class Landing extends Component {
                 {key: 1, label: 'react-redux'},
                 {key: 2, label: 'AWS S3'},
                 {key: 3, label: 'AWS Route 53'},
-                {key: 4, label: 'Material-UI'}
+                {key: 4, label: 'Material-UI'},
+                {key: 5, label: 'EmailJs'}
             ]
         }
     }
