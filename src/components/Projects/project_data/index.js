@@ -13,7 +13,13 @@ import {
     db_ass1,
     db_ass1_r,
     mp2,
-    mp2_r
+    mp2_r,
+    ann_carr,
+    ann_carr_r,
+    ai_mp3,
+    ai_mp3_r,
+    script,
+    script_r
 } from "../PDFs/pdf_files";
 
 const data = [
@@ -45,6 +51,40 @@ const data = [
             report: {
                 file: minicap_r,
                 pages: 40
+            }
+        }
+
+    },
+    {
+        title: "Deep Learning: Exploring Car Value with an ANN",
+        course: "Side Project",
+        courseName: "Udemy: Deep Learning A-Z: Hands-On Artificial Neural Networks",
+        description: "After working through the section on basic ANN's I wanted to try " +
+            "one out for myself so I grabbed a data set from UCI Machine Learning Repository. " +
+            "I found one on the quality of vehicles that wasn't too large. It had 2 numerical " +
+            "features and the rest categorical as well as a categorical label. I was able to " +
+            "classify this data set with an accuracy of over 93%.",
+        chips: [
+            {key: 0, label: 'Machine Learning'},
+            {key: 1, label: 'A.I'},
+            {key: 2, label: 'Tensorflow'},
+            {key: 3, label: 'Keras'},
+            {key: 4, label: 'Python3'},
+            {key: 5, label: 'Pandas'},
+            {key: 6, label: 'Numpy'}
+        ],
+        github_repos: [{
+            link: "https://github.com/Scabandari/ANN_cars",
+            name: "Repo"
+        }],
+        docs: {
+            problemStatement: {
+                file: ann_carr,
+                pages: 1
+            },
+            report: {
+                file: ann_carr_r,
+                pages: 5
             }
         }
 
@@ -105,6 +145,34 @@ const data = [
             report: {
                 file: server_diagram,
                 pages: 1
+            }
+        }
+    },
+    {
+        title: "A.I Mini Project #3: Bigrams & Unigrams",
+        course: "COMP 472",
+        courseName: "Artificial Intelligence",
+        description: "This was our third of three projects for this class that we completed in " +
+            "teams of two. We were given two training corpus' in English and French and told to " +
+            "train our models on those then predict the most likely language for some test sentences.",
+        chips: [
+            {key: 0, label: 'A.I'},
+            {key: 1, label: 'Classification'},
+            {key: 2, label: 'Python'},
+            {key: 3, label: 'NLP'}
+        ],
+        github_repos: [{
+            link: "https://github.com/Scabandari/COMP472_MP3",
+            name: "repo"
+        }],
+        docs: {
+            problemStatement: {
+                file: ai_mp3,
+                pages: 1
+            },
+            report: {
+                file: ai_mp3_r,
+                pages: 8
             }
         }
     },
@@ -324,6 +392,34 @@ const data = [
             report: {
                 file: mp2_r,
                 pages: 9
+            }
+        }
+
+    },
+    {
+        title: "My First Bash Script",
+        course: "Side Project",
+        courseName: "Working with EC2 Instances",
+        description: "I needed to send many files to my EC2 instance from my Ubuntu machine. " +
+            "I didn't want to copy paste the same command over and over again so I automated the " +
+            "process and wrote my first bash script.",
+        chips: [
+            {key: 0, label: 'Shell Scripting'},
+            {key: 1, label: 'Bash'},
+            {key: 2, label: 'EC2'},
+        ],
+        github_repos: [{
+            link: "https://github.com/Scabandari/Send_EC2_Files",
+            name: "repo"
+        }],
+        docs: {
+            problemStatement: {
+                file: script,
+                pages: 1
+            },
+            report: {
+                file: script_r,
+                pages: 1
             }
         }
 

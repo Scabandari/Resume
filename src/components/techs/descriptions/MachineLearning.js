@@ -1,3 +1,5 @@
+import tech_chips from '../chips';
+
 const machineLearningDescriptions = {
     tldr: "I've taken a couple courses where the assignments required us to use Sci-kit-learn " +
         "machine leanring models as well as ANN's. I can pre-process data using Pandas, build the " +
@@ -13,7 +15,8 @@ const machineLearningDescriptions = {
         "manipulating the data for pre-processing which seems like half the battle so far. I'll be finishing that " +
         "udemy course and either starting a new Sentiment Analysis side project based on deep learning when I " +
         "finish or if need be I may take more Udemy courses on " +
-        "deep learning."
+        "deep learning.",
+    chips: tech_chips.machine_learning
 };
 
 export default machineLearningDescriptions;

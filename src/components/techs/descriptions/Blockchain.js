@@ -1,3 +1,5 @@
+import tech_chips from '../chips';
+
 const blockchainDescriptions = {
     tldr: "I've been following the blockchain world closely since 2015 actively buying and selling assets as " +
         "well as staying informed on the major platforms. I'm extremely bullish on EOS and the coming EOSIO ecosystem.",
@@ -8,7 +10,8 @@ const blockchainDescriptions = {
         "their token. I follow the EOS community especially closely as I believe that it is the most robust, scalable " +
         "blockchain solution available today. I am also currently looking into the programming side of the EOSIO " +
         "ecosystem as I believe the number of chains, be they side chains or sister chains, will grow " +
-        "exponentially."
+        "exponentially.",
+    chips: tech_chips.block_chain
 };
 
 export default blockchainDescriptions;

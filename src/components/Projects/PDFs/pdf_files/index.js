@@ -22,8 +22,12 @@ import ai_mp3_ from './ai_mp3.pdf';
 import ai_mp3_r_ from './ai_mp3_r.pdf';
 import ann_carr_ from './cars_ann_prob_desc.pdf';
 import ann_carr_r_ from './cars_ann_report.pdf';
+import script_ from './script.pdf';
+import script_r_ from './script_r.pdf';
 
 
+export const script = script_;
+export const script_r = script_r_;
 export const ai_mp3 = ai_mp3_;
 export const ai_mp3_r = ai_mp3_r_;
 export const ann_carr = ann_carr_;

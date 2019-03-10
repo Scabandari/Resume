@@ -1,3 +1,5 @@
+import tech_chips from '../chips';
+
 const pythonDescriptions = {
     tldr: "I've been coding in Python for almost 2 years now. I'm more than comfortable with the basics " +
         "and have long since branched out to start using data science tools like Pandas and Scikit-Learn " +
@@ -13,7 +15,8 @@ const pythonDescriptions = {
         "enough in math to be at the edge of research for machine learning I'm more than capable " +
         "of finding which algorithms are best suited for a particular problem and applying them as " +
         "necessary. The next phase of learning for me as far as Python goes will be deep learning " +
-        ", NLP and becoming more comfortable using PySpark."
+        ", NLP and becoming more comfortable using PySpark.",
+    chips: tech_chips.python
 };
 
 export default pythonDescriptions;

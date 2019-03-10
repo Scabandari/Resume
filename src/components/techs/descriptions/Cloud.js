@@ -1,3 +1,5 @@
+import tech_chips from '../chips';
+
 const cloudDescriptions = {
     tldr: "I can spin you up an NodeJs server with all the routes running in an EC2 instance in no time. I can also " +
         "quickly create a ReactJs app hosted on AWS S3 with it's own domain.",
@@ -8,7 +10,8 @@ const cloudDescriptions = {
         "S3 bucket and has its own domain through AWS Route 53. I'm a bit new to cloud deployments though " +
         "I think I'd be considered advanced for an Undergrad since I can spin you up a NodeJs + Express server " +
         "with all the routes in no time. Where I need more practice is understanding more the IAM roles and " +
-        "best practices for security."
+        "best practices for security.",
+    chips: tech_chips.cloud
 };
 
 export default cloudDescriptions;

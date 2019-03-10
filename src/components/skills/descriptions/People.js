@@ -6,11 +6,8 @@ const peopleDescriptions = {
         "combination of introvert/extrovert. I socialize easily but also feel at home " +
         "spending long hours working solo. I'm very similar to a friend of mine who also " +
         "studied engineering. He told me he puts on his headphones and pretends to listen " +
-        "to music so that he can get some work done at his office. He's perfectly social but " +
-        "prefers to put his head down and get things done over chatting all day. I'm the " +
-        "same. I have no problem with people skills but you also won't find me hanging " +
-        "around the water cooler killing time being chatty or bothering people who have " +
-        "things to do."
+        "to music so that he can get some work done at his office. Sounds like something I'd " +
+        "do."
 };
 
 export default peopleDescriptions;
