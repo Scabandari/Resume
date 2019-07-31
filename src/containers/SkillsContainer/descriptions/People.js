@@ -8,7 +8,7 @@ const peopleDescriptions = {
         "studied engineering. He told me he puts on his headphones and pretends to listen " +
         "to music so that he can get some work done at his office. Sounds like something I'd " +
         "do.",
-    title: "People"
+    headline: "People"
 };
 
 export default peopleDescriptions;

@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const gitDescriptions = {
+    headline: "Git",
     tldr: "I've been using git for a while now. I feel very comfortable with the basic workflow. I haven't " +
         "needed to use the more advanced features much but when I do I just look up the instructions " +
         "and voila.",

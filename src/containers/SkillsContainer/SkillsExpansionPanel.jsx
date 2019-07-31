@@ -1,33 +1,18 @@
 import React, {Component} from "react";
 import GenericExpansionPanel from '../../components/GenericExpansionPanel';
-import peopleDescriptions from "./descriptions/People";
-import leadershipDescriptions from './descriptions/Leadership';
-import foosballDescriptions from './descriptions/Foosball';
+import skills from './descriptions';
 
 
 class SkillsExpansionPanel extends Component {
-    skills = [
-        {
-            longform: peopleDescriptions.longForm,
-            tldr: peopleDescriptions.tldr,
-            headline: peopleDescriptions.title,
-        },
-        {
-            longform: leadershipDescriptions.longForm,
-            tldr: leadershipDescriptions.tldr,
-            headline: leadershipDescriptions.title,
-
-        },
-        {
-            longform: foosballDescriptions.longForm,
-            tldr: foosballDescriptions.tldr,
-            headline: foosballDescriptions.title,
-        }
+    my_skills = [
+        skills.people,
+        skills.leadership,
+        skills.foosball,
     ];
 
 
     render() {
-        return <GenericExpansionPanel topics={this.skills} />
+        return <GenericExpansionPanel topics={this.my_skills} />
     }
 }
 

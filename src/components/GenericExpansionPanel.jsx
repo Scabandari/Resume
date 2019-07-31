@@ -10,7 +10,8 @@ import {
 //     {
 //         longform: peopleDescriptions.longForm,
 //         tldr: peopleDescriptions.tldr,
-//         headline: 'People'
+//         headline: 'People',
+//          chips: []
 //     },
 //     {
 //         longform: leadershipDescriptions.longForm,
@@ -71,7 +72,7 @@ const GenericExpansionPanel = ({ topics }) => {
                                         <Typography variant='h6' >Long Form</Typography>
                                     </ListItem>
                                     <ListItem>
-                                        <Typography variant='body1'>{topic.longform}</Typography>
+                                        <Typography variant='body1'>{topic.longForm}</Typography>
                                     </ListItem>
                                 </List>
                             </ExpansionPanelDetails>

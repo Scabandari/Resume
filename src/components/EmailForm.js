@@ -69,7 +69,7 @@ class EmailForm extends Component {
 
     render() {
         return(
-            <div className="ui segment" style={{margin: 8}}>
+            <div className="ui segment" style={{margin: 50}}>
                 <form className="feedback-form" onSubmit={this.handleSubmit}>
                     <h4 style={{color: '#493C55'}}>Contact Us</h4>
                     <div className="field">

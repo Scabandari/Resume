@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const pythonDescriptions = {
+    headline: "Python",
     tldr: "I've been coding in Python for almost 2 years now. I'm more than comfortable with the basics " +
         "and have long since branched out to start using data science tools like Pandas and Scikit-Learn " +
         "though only for school assignments so far. I feel there's literally nothing I can't do with " +

@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const sqlDescriptions = {
+    headline: "SQL",
     tldr: "I have some experience using MySql at school. I like SQL and would have no trouble " +
         "learning to perform complex queries as needed.",
     longForm: "I've taken a course on databases, COMP 353, where our assignments and project were "+

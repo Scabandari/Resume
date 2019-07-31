@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const jsDescriptions = {
+    headline: "Javascript",
     tldr: "Started learning Javascript last spring. I've taken a couple Udemy " +
         "courses on ReactJs and Node.js where I learned a ton very quickly. I've recently looked " +
         "into some ES6 tutorials on Youtube which also helped. So my more recent work in Node.js and " +
