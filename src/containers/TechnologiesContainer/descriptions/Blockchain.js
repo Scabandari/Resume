@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const blockchainDescriptions = {
+    headline: 'Blockchain',
     tldr: "I've been following the blockchain world closely since 2015 actively buying and selling assets as " +
         "well as staying informed on the major platforms. I'm extremely bullish on EOS and the coming EOSIO ecosystem.",
     longForm: "I've been following the blockchain space closely since 2015, both trading assets and keeping " +

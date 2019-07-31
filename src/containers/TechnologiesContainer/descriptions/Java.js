@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const javaDescriptions = {
+    headline: "Java",
     tldr: "It's okay but it's no Python nor Javascript. When necessary I can get things done in Java.",
     longForm: "This is the second language that I learned after C++. It was a nice and seemed very intuitive " +
         ". I used it quite a bit during Winter 2017 when building an app for my concussion project. I'm " +

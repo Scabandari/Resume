@@ -8,23 +8,32 @@ import ProjectCard from '../components/Projects/ProjectCard';
 
 
 class ProjectCardContainer extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             toPDF: false
         };
         this.handleClickActionCreator = this.handleClickActionCreator.bind(this);
+
+        this.cardRef = React.createRef();
+
+        this.state = {
+            spans: 25
+        };
     }
 
     handleClickActionCreator (project_key) {
-        //console.log(`container projectDesc: ${this.props.currentProject}`);
-        console.log(".\n.\n.\nhandleClickActionCreator()");
         this.props.dispatch(changeProject(project_key));
         this.props.history.push("/projects");
         this.setState({toPDF: true}
         )
-        //history.push('/');
+    }
+
+
+    componentDidMount() {
+
+        console.log(this.cardRef);
+        this.setState({spans: Math.ceil(this.cardRef.current.clientHeight / 2)})
     }
 
     render() {
@@ -33,9 +42,16 @@ class ProjectCardContainer extends Component {
             return <Redirect to='/pdf' />
         }
         const { project } = this.props;
-        console.log(`this.props.project: ${project}`);
         return (
-            <ProjectCard project={ project } projectAction={this.handleClickActionCreator} />
+            <div  style={{
+                height: 'auto',
+                gridRowEnd: `span ${this.state.spans}`,
+                marginBottom: '12px'
+                }}>
+                <div ref={this.cardRef} >
+                    <ProjectCard project={ project } projectAction={this.handleClickActionCreator} />
+                </div>
+            </div>
         );
     }
 }
@@ -44,6 +60,5 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ changeProject }, dispatch);
 }
 
-//export default connect(mapDispatchToProps)(ProjectCardContainer);
 export default withRouter(connect(mapDispatchToProps)(ProjectCardContainer));
 

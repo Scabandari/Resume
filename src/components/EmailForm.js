@@ -13,7 +13,6 @@ class EmailForm extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.sendFeedback = this.sendFeedback.bind(this);
-        //this.handleChange = this.handleChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }
 
@@ -46,13 +45,6 @@ class EmailForm extends Component {
         console.log("Closing");  // TODO fix this
     }
 
-    // handleChange(event) {
-    //     event.preventDefault();
-    //     this.setState({
-    //         feedback: event.target.value
-    //     });
-    //     console.log(this.state.feedback);
-    // }
 
     sendFeedback (templateId, senderEmail, receiverEmail, feedback, name, user_email, company) {
         console.log(`feedback: ${feedback}`);
@@ -77,7 +69,7 @@ class EmailForm extends Component {
 
     render() {
         return(
-            <div className="ui segment" style={{margin: 8}}>
+            <div className="ui segment" style={{margin: 50}}>
                 <form className="feedback-form" onSubmit={this.handleSubmit}>
                     <h4 style={{color: '#493C55'}}>Contact Us</h4>
                     <div className="field">

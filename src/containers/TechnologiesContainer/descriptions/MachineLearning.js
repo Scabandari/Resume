@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const machineLearningDescriptions = {
+    headline: "Machine Learning",
     tldr: "I've taken a couple courses where the assignments required us to use Sci-kit-learn " +
         "machine leanring models as well as ANN's. I can pre-process data using Pandas, build the " +
         "model, tune parameters and verify its accuracy.",

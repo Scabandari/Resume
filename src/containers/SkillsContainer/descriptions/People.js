@@ -7,7 +7,8 @@ const peopleDescriptions = {
         "spending long hours working solo. I'm very similar to a friend of mine who also " +
         "studied engineering. He told me he puts on his headphones and pretends to listen " +
         "to music so that he can get some work done at his office. Sounds like something I'd " +
-        "do."
+        "do.",
+    headline: "People"
 };
 
 export default peopleDescriptions;

@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const CppDescriptions = {
+    headline: "C++",
     tldr: "My first programming language. It's not my strength but I plan on working more " +
         "with it now that I'm poking around blockchain development using the EOSIO framework.",
     longForm: "This was the first language I learned years ago when I was in Electrical Engineering " +

@@ -1,6 +1,7 @@
 import tech_chips from '../chips';
 
 const cloudDescriptions = {
+    headline: "Cloud Deployment",
     tldr: "I can spin you up an NodeJs server with all the routes running in an EC2 instance in no time. I can also " +
         "quickly create a ReactJs app hosted on AWS S3 with it's own domain.",
     longForm: "During the Fall of 2018 semester while taking 'Programming on the Cloud' (COEN 424), I followed an " +

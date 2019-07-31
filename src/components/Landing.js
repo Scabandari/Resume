@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// import { Grid, Row, Col} from 'react-bootstrap';
 import Image from "react-bootstrap/es/Image";
-import {Grid, Typography, Button, Chip, CardContent} from '@material-ui/core/';
+import {Grid, Typography, Button, Chip} from '@material-ui/core/';
 import { Link } from 'react-router-dom';
 
 
@@ -22,10 +20,6 @@ class Landing extends Component {
             ]
         }
     }
-
-    // componentDidMount() {
-    //     this.props.showNavButtons(false);
-    // }
 
     render() {
         const styles = {
@@ -64,8 +58,12 @@ class Landing extends Component {
                             AWS S3 and here is a link the the
                             <a href="https://github.com/Scabandari/Resume"> Github repository</a>.
                             <br/> I'm an aspiring Software Engineer with interests in the areas of machine <br/> learning & A.I,
-                            data science, blockchain and of course both backend and <br/> front end development. <br/> <br/>
-                            For school projects I take to a leadership role naturally. If you want to <br/> learn more about my
+                            data science, blockchain and of course both backend and <br/> front end development.
+                           <br/>
+                            Check out one of my latest projects <a href="http://ticker-alert.s3-website.us-east-2.amazonaws.com">Ticker Alert </a>
+                            as well as the <a href="https://github.com/Scabandari/TickerAlert-frontend">Front </a>
+                            and <a href="https://github.com/Scabandari/TickerAlert-backend">Back </a> end repos. <br/>
+                            If you want to learn more about my
                             school projects, pet projects and accomplishments<br/>  then you can ...
                         </Typography>
                         <Typography variant="subtitle1" >
@@ -81,10 +79,6 @@ class Landing extends Component {
     }
 }
 
-// const mapDispatchToProps = dispatch => {
-//     return { showNavButtons: truthy => dispatch(showNavButtons(truthy)) };
-// };
-//
-// export default connect(null, mapDispatchToProps)(Landing) ;
+
 export default Landing;
 
