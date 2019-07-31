@@ -7,10 +7,8 @@ import Landing from './components/Landing';
 import Projects from './components/Projects';
 import PDF from './components/Projects/PDFs/Pdf';
 import EmailForm from './components/EmailForm';
-import TechsExpansionPanel from './components/techs/TechsExpansionPanel';
 import DisplayTechnologies from './components/techs/DisplayTechnologies';
-//import SkillsExpansionPanel from './components/skills/SkillsExpansionPanel';
-import DisplaySkills from './components/skills/DisplaySkills';
+import SkillsExpansionPanel from './containers/SkillsContainer/SkillsExpansionPanel';
 
 
 class App extends Component {
@@ -36,7 +34,7 @@ class App extends Component {
                         <Route path="/" exact component={Landing} />
                         <Route path="/projects" exact component={Projects} />
                         <Route path="/pdf" exact component={PDF} />
-                        <Route path="/skills" exact component={DisplaySkills} />
+                        <Route path="/skills" exact component={SkillsExpansionPanel} />
                         <Route path="/techs" exact component={DisplayTechnologies} />
                         <Route path="/contact" exact component={EmailForm} />
                     </div>

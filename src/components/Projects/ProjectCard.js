@@ -9,9 +9,9 @@ const styles = {
     card: {
         minWidth: 275,
         maxWidth: 400,
-        marginTop: 25,
-        marginLeft: 25,
-        marginBottom: 25
+        // marginTop: 25,
+        // marginLeft: 25,
+        // marginBottom: 25
         //minHeight: 350
     },
     bullet: {
@@ -28,31 +28,35 @@ const styles = {
 };
 
 // function ProjectCard(props) {
-function ProjectCard(props) {
-     const {title,
-            course,
-            courseName,
-            description,
-            chips,
-            github_repos,
-            docs
-        } = props.project;
+class ProjectCard extends Component {
 
-    const { classes, projectAction } = props;
+    constructor(props) {
+        super(props);
+
+        const { classes, projectAction, project} = this.props;
+        this.state = {
+            classes,
+            projectAction,
+            project
+        }
+    }
+
+
+    render() {
 
         return (
-            <Card className={classes.card}>
+            <Card className={this.state.classes.card}>
                 <CardContent>
                     <Typography variant="h6" component="h2">
-                        {title}
+                        {this.state.project.title}
                     </Typography>
                     <Typography variant="subtitle1" component="h2">
-                        {courseName} ({course})
+                        {this.state.project.courseName} ({this.state.project.course})
                     </Typography>
                     <Typography component="p">
-                        {description}
+                        {this.state.project.description}
                     </Typography>
-                    {chips.map(data => {
+                    {this.state.project.chips.map(data => {
                         return (
                             <Chip
                                 key={data.key}
@@ -64,7 +68,7 @@ function ProjectCard(props) {
                 </CardContent>
                 <CardActions>
                     <Fragment>
-                        {github_repos.map(repo =>{
+                        {this.state.project.github_repos.map(repo =>{
                             return (
                                 <Button href={repo.link}
                                         size="small"
@@ -73,11 +77,12 @@ function ProjectCard(props) {
                             )
                         })}
                     </Fragment>
-                    <Button onClick={() => {projectAction(docs)}}>DOCS</Button>
+                    <Button onClick={() => {this.state.projectAction(this.state.project.docs)}}>DOCS</Button>
 
                 </CardActions>
             </Card>
         );
+    }
 }
 
 
@@ -86,4 +91,3 @@ ProjectCard.propTypes = {
 };
 
 export default withStyles(styles)(ProjectCard);
-//export default connect(null, { changeProject })(ProjectCard);

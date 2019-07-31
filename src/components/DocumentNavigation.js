@@ -19,11 +19,6 @@ class DocumentNavigation extends React.Component {
         value: 0,
     };
 
-    // handleChange = (event, value) => {
-    //     this.setState({ value });
-    //     changeDoc(value);
-    // };
-
     render() {
         const { classes, changeDoc } = this.props;
         const { value } = this.state;

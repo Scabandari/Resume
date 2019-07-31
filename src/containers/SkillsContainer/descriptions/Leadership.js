@@ -11,7 +11,8 @@ const leadershipDescriptions = {
         "really good at coming up with project ideas which is partly how we won the " +
         "award for Mini Capstone with the concussion app project. I also like to " +
         "go with the best plan, not always my plan but the best one. Praise your group " +
-        "members for their contributions and they'll contribute even more."
+        "members for their contributions and they'll contribute even more.",
+    title: "Leadership"
 };
 
 export default leadershipDescriptions;

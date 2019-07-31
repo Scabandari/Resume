@@ -15,7 +15,7 @@ const jsDescriptions = {
         "I find myself checking work I've previously done to remind myself of correct syntax with React and Node " +
         "but it's not stopping " +
         "me from making things and I learn something new everyday. I'd be happy in a role that incorporated " +
-        "both NodeJs and React into my workweek. Throw in some data science and that's pretty much my dream job.",
+        "both NodeJs and React into my work-week. Throw in some data science and that's pretty much my dream job.",
     chips: tech_chips.javascript
 };
 
