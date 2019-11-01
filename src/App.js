@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Landing from './components/Landing';
+import Landing_ from './components/Landing/Landing_';
 import Projects from './components/Projects';
 import PDF from './components/Projects/PDFs/Pdf';
 import EmailForm from './components/EmailForm';
@@ -39,7 +40,7 @@ class App extends Component {
 
 const LandingContainer = () => (
   <div>
-    <Route path='/' exact component={Landing} />
+    <Route path='/' exact component={Landing_} />
   </div>
 );
 
