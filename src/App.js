@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Landing from './components/Landing';
-import Landing_ from './components/Landing/Landing_';
 import Projects from './components/Projects';
 import PDF from './components/Projects/PDFs/Pdf';
 import EmailForm from './components/EmailForm';
 import SkillsExpansionPanel from './containers/SkillsContainer/SkillsExpansionPanel';
 import TechnologiesExpansionPanel from './containers/TechnologiesContainer/TechnologiesExpansionPanel';
+import Navbar from './components/Navbar';
 
 const styles = {
   body: {
@@ -39,14 +39,14 @@ class App extends Component {
 }
 
 const LandingContainer = () => (
-  <div>
-    <Route path='/' exact component={Landing_} />
-  </div>
+  <>
+    <Route path='/' exact component={Landing} />
+  </>
 );
 
 const DefaultContainer = () => (
   <div>
-    <Header />
+    <Navbar />
     <div style={styles.siteContent}>
       <Route path='/projects' exact component={Projects} />
       <Route path='/pdf' exact component={PDF} />

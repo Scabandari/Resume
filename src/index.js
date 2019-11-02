@@ -11,6 +11,7 @@ import promise from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
 import App from './App';
 import reducers from './reducers';
+import Navbar from './components/Navbar';
 
 const { REACT_APP_PRODUCTION } = process.env;
 const production =
@@ -34,6 +35,9 @@ const store = production ? store_production : store_dev;
 ReactDOM.render(
   <Provider store={store}>
     <App />
+    
   </Provider>,
   document.querySelector('#root')
 );
+
+// <App /> <Navbar />
