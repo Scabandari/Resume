@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux'
 import { changeProject } from '../actions';
-import ProjectCard from '../components/Projects/ProjectCard';
+import ProjectCard from '../components/Projects/ProjectCard/ProjectCard';
 
 
 class ProjectCardContainer extends Component {
@@ -32,7 +32,7 @@ class ProjectCardContainer extends Component {
 
     componentDidMount() {
 
-        console.log(this.cardRef);
+        //console.log(this.cardRef);
         this.setState({spans: Math.ceil(this.cardRef.current.clientHeight / 2)})
     }
 
