@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GenericExpansionPanel from '../../components/GenericExpansionPanel';
+import { connect } from 'react-redux';
 import skills from './descriptions';
 
 class SkillsExpansionPanel extends Component {
@@ -14,4 +15,14 @@ class SkillsExpansionPanel extends Component {
   }
 }
 
-export default SkillsExpansionPanel;
+const mapStateToProps = state => {
+  return {
+    navbarHeight: state.navbar.height,
+    footerHeight: state.footer.height
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(SkillsExpansionPanel);
