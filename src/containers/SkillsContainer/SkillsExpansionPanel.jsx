@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import GenericExpansionPanel from '../../components/GenericExpansionPanel';
 import { connect } from 'react-redux';
 import skills from './descriptions';
 
-class SkillsExpansionPanel extends Component {
-  my_skills = [skills.people, skills.leadership, skills.foosball];
+const my_skills = [skills.people, skills.leadership, skills.foosball];
 
-  render() {
-    return (
-      <div style={{ minHeight: '70vh' }}>
-        <GenericExpansionPanel topics={this.my_skills} />
-      </div>
-    );
-  }
-}
+const SkillsExpansionPanel = ({ navbarHeight, footerHeight }) => {
+  const [windowHeight, setWindowHeight] = useState(650);
+
+  const updateWindowHeight = () => setWindowHeight(window.innerHeight);
+
+  return (
+    <div
+      style={{ minHeight: `${windowHeight - (navbarHeight + footerHeight)}px` }}
+    >
+      <GenericExpansionPanel topics={my_skills} />
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
   return {
