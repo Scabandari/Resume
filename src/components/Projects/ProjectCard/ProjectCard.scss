@@ -1,0 +1,9 @@
+@import '../../../mixins';
+
+.card {
+  min-width: 250px;
+  max-width: 300px;
+  @include min-width-430 {
+    max-width: 350px;
+  }
+}
