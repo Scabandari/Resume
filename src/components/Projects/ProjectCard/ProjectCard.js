@@ -14,7 +14,6 @@ import { FaGithub } from 'react-icons/fa';
 import './ProjectCard.scss';
 
 const styles = {
-
   bullet: {
     display: 'inline-block',
     margin: '0 2px',

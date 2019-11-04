@@ -1,10 +1,17 @@
 import { SIGN_OUT, SIGN_IN, CHANGE_PROJECT,
-    CHANGE_DOCUMENT, CHANGE_PAGE } from "./types";
+    CHANGE_DOCUMENT, CHANGE_PAGE, CHANGE_PROJECTS_FILTER_TERM } from "./types";
 
 export const changePage = page => {
     return {
         type: CHANGE_PAGE,
         payload: page
+    }
+};
+
+export const changeProjectFilterTerm = term => {
+    return {
+        type: CHANGE_PROJECTS_FILTER_TERM,
+        payload: term
     }
 };
 

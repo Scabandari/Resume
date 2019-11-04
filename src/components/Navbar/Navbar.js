@@ -6,8 +6,6 @@ import { withRouter } from 'react-router-dom';
 import { screenSize } from '../hoc';
 import './Navbar.scss';
 
-
-
 class MenuExampleSecondary extends Component {
   state = { activeItem: '' };
 
@@ -21,7 +19,7 @@ class MenuExampleSecondary extends Component {
 
     return (
       <div className='navbar-container'>
-        <Menu icon inverted size='large'>
+        <Menu icon inverted size='massive'>
           <Menu.Item
             header
             name='Ryan Nichols'

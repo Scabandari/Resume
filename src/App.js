@@ -8,6 +8,8 @@ import EmailForm from './components/EmailForm';
 import SkillsExpansionPanel from './containers/SkillsContainer/SkillsExpansionPanel';
 import TechnologiesExpansionPanel from './containers/TechnologiesContainer/TechnologiesExpansionPanel';
 import Navbar from './components/Navbar';
+import BaseCase from './components/BaseCase';
+import ProjectsContainer from './containers/ProjectsContainer';
 
 const styles = {
   body: {
@@ -47,11 +49,13 @@ const DefaultContainer = () => (
   <div>
     <Navbar />
     <div style={styles.siteContent}>
-      <Route path='/projects' exact component={Projects} />
+      <Route path='/projects' exact component={ProjectsContainer} />
       <Route path='/pdf' exact component={PDF} />
       <Route path='/skills' exact component={SkillsExpansionPanel} />
       <Route path='/techs' exact component={TechnologiesExpansionPanel} />
       <Route path='/contact' exact component={EmailForm} />
+
+      <Route path='/BaseCase' exact component={BaseCase} />
     </div>
     <Footer />
   </div>

@@ -1,8 +1,10 @@
-//import React, { useState } from 'react';
-import React from 'react';
-import ProjectCardContainer from '../../containers/ProjectCardContainer';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Menu } from 'semantic-ui-react';
 
-import { Icon, Menu } from 'semantic-ui-react';
+import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from './constants';
+import ProjectCardContainer from '../../containers/ProjectCardContainer';
+import { changeProjectFilterTerm } from '../../actions';
 import data from './project_data';
 import './Projects.scss';
 
@@ -18,79 +20,83 @@ const styles = {
   }
 };
 
-const renderColumn = projectList => {
+// const renderColumn = (projectList, filterTag) => {
+//   let projects = projectList.filter(proj => {
+//     return proj['tags'].includes(filterTag);
+//   });
+
+//   return (
+//     <div style={styles.columns}>
+//       {projects.map(project => {
+//         return <ProjectCardContainer key={project.title} project={project} />;
+//       })}
+//     </div>
+//   );
+// };
+
+const renderColumn = projects => {
   return (
-    <div>
-      <div style={styles.columns}>
-        {projectList.map(project => {
-          return <ProjectCardContainer project={project} />;
-        })}
-      </div>
+    <div style={styles.columns}>
+      {projects.map(project => {
+        return <ProjectCardContainer key={project.title} project={project} />;
+      })}
     </div>
   );
 };
 
-const Projects = () => {
-  const [activeItem, setActiveItem] = useState('All');
+const Projects = ({ data, changeProjectFilterTerm }) => {
+  useEffect(() => {
+    for (let dp of data) {
+      console.log(`title: ${dp.title}`);
+    }
+  }, [data]);
+
+  const [activeItem, setActiveItem] = useState(ALL);
+
   return (
     <div>
       <div className='second-nav-container'>
-        <Menu inverted fluid widths={4}>
+        <Menu inverted stackable fluid widths={4}>
           <Menu.Item
-            name='All'
-            active={activeItem === 'All'}
-            onClick={() => console.log('click')}
+            name={ALL}
+            active={activeItem === ALL}
+            onClick={(e, { name }) => {
+              setActiveItem(name);
+              changeProjectFilterTerm(name);
+            }}
           />
           <Menu.Item
-            name='Web Dev'
-            active={activeItem === 'Web Dev'}
-            onClick={() => console.log('click')}
+            name={WEB_DEV}
+            active={activeItem === WEB_DEV}
+            onClick={(e, { name }) => {
+              setActiveItem(name);
+              changeProjectFilterTerm(name);
+            }}
           />
           <Menu.Item
-            name='Data Science'
-            active={activeItem === 'Data Science'}
-            onClick={() => console.log('click')}
+            name={DATA_SCIENCE}
+            active={activeItem === DATA_SCIENCE}
+            onClick={(e, { name }) => {
+              setActiveItem(name);
+              changeProjectFilterTerm(name);
+            }}
           />
           <Menu.Item
-            name='Bash'
-            active={activeItem === 'Bash'}
-            onClick={() => console.log('click')}
+            name={BASH}
+            active={activeItem === BASH}
+            onClick={(e, { name }) => {
+              setActiveItem(name);
+              changeProjectFilterTerm(name);
+            }}
           />
         </Menu>
       </div>
-      <div style={styles.container}>{renderColumn(data)}</div>
+      <div style={styles.container}>{renderColumn(data, activeItem)}</div>
     </div>
   );
 };
 
-export default Projects;
-
-/////////////
-
-// return (
-//     <div style={styles.container}>
-//       <div>
-//         <div style={styles.columns}>
-//           {data.column1.map(project => {
-//             return <ProjectCardContainer project={project} />;
-//           })}
-//         </div>
-//       </div>
-
-//       <div>
-//         <div style={styles.columns}>
-//           {data.column2.map(project => {
-//             return <ProjectCardContainer project={project} />;
-//           })}
-//         </div>
-//       </div>
-
-//       <div>
-//         <div style={styles.columns}>
-//           {data.column3.map(project => {
-//             return <ProjectCardContainer project={project} />;
-//           })}
-//         </div>
-//       </div>
-//     </div>
-//   );
+export default connect(
+  null,
+  { changeProjectFilterTerm }
+)(Projects);
