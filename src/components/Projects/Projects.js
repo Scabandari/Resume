@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 
@@ -9,10 +9,10 @@ import data from './project_data';
 import './Projects.scss';
 
 const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'space-around'
-  },
+  //   container: {
+  //     display: 'flex',
+  //     justifyContent: 'space-around'
+  //   },
   columns: {
     display: 'flex',
     flexDirection: 'column',
@@ -44,18 +44,28 @@ const renderColumn = projects => {
   );
 };
 
-const Projects = ({ data, changeProjectFilterTerm }) => {
-  useEffect(() => {
-    for (let dp of data) {
-      console.log(`title: ${dp.title}`);
-    }
-  }, [data]);
-
+const Projects = ({
+  data,
+  changeProjectFilterTerm,
+  footerHeight,
+  navbarHeight
+}) => {
   const [activeItem, setActiveItem] = useState(ALL);
+  const [windowHeight, setWindowHeight] = useState(650);
+  const [secondMenuHeight, setSecondMenuHeight] = useState(41.5);
+  const ref = useRef(null);
+
+  const updateHeights = () => {
+    setWindowHeight(window.innerHeight);
+    setSecondMenuHeight(ref.current.clientHeight);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', updateHeights);
+  }, []);
 
   return (
     <div>
-      <div className='second-nav-container'>
+      <div ref={ref} className='second-nav-container'>
         <Menu inverted stackable fluid widths={4}>
           <Menu.Item
             name={ALL}
@@ -91,12 +101,28 @@ const Projects = ({ data, changeProjectFilterTerm }) => {
           />
         </Menu>
       </div>
-      <div style={styles.container}>{renderColumn(data, activeItem)}</div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          minHeight: `${windowHeight -
+            (navbarHeight + secondMenuHeight + footerHeight)}px`
+        }}
+      >
+        {renderColumn(data, activeItem)}
+      </div>
     </div>
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    navbarHeight: state.navbar.height,
+    footerHeight: state.footer.height
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { changeProjectFilterTerm }
 )(Projects);
