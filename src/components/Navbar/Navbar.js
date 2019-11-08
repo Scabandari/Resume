@@ -3,7 +3,7 @@ import { Icon, Menu } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-import { screenSize } from '../hoc';
+//import { screenSize } from '../hoc';
 import './Navbar.scss';
 
 const getActiveItem = pathName => {
@@ -19,21 +19,32 @@ const getActiveItem = pathName => {
   }
 };
 
+const activeItem = {
+  '/techs': 'techs',
+  '/projects': 'projects',
+  '/skills': 'skills'
+};
+
 const MenuExampleSecondary = props => {
-  const { width } = props;
+  // const { width } = props;
   const { pathname } = props.location;
   const ref = useRef(null);
 
-  const [activeItem, setActiveItem] = useState(getActiveItem(pathname));
-  const [height, setHeight] = useState(0);
+  //   const [activeItem, setActiveItem] = useState(getActiveItem(pathname));
+  const [activeItem, setActiveItem] = useState(pathname.substring(1)); // remove leading /
+
+  //TODO FIX THIS NON ZERO, mobile or desktop, set below dynamically
+  
+  const [width, setWidth] = useState(1000); 
 
   useEffect(() => {
-    window.addEventListener('resize', updateHeight);
+    window.addEventListener('resize', updateWidth);
   }, []);
 
-  const updateHeight = () => {
-    setHeight(ref.current.clientHeight);
-    props.changeNavbarHeight(ref.current.clientHeight);
+  const updateWidth = () => {
+    if (ref) {
+      setWidth(ref.current.clientWidth);
+    }
   };
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
@@ -45,7 +56,7 @@ const MenuExampleSecondary = props => {
         <Menu.Item disabled as={NavLink} to='/' name='avsddf'>
           <Icon name='home' />
         </Menu.Item>
-        <Menu.Item content={height} />
+        {/* <Menu.Item content={height} /> */}
 
         {width > 500 && (
           <Menu.Menu position='right'>
@@ -85,4 +96,5 @@ const MenuExampleSecondary = props => {
 
 const Navbar = withRouter(props => <MenuExampleSecondary {...props} />);
 
-export default screenSize(Navbar);
+// export default screenSize(Navbar);
+export default Navbar;

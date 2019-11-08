@@ -5,22 +5,22 @@ const styles = {
   //maxHeight: 20
 };
 
-const Footer = ({ changeFooterHeight }) => {
+const Footer = () => {
   //const [height, setHeight] = useState(0);
   //console.log('changeFooterHeight', changeFooterHeight);
   //console.log('props', props);
-  const ref = useRef(null);
-  const updateHeight = () => {
-    //setHeight(ref.current.clientHeight);
-    changeFooterHeight(ref.current.clientHeight);
-  };
+//   const ref = useRef(null);
+//   const updateHeight = () => {
+//     //setHeight(ref.current.clientHeight);
+//     changeFooterHeight(ref.current.clientHeight);
+//   };
 
-  useEffect(() => {
-    window.addEventListener('resize', updateHeight);
-  }, []);
+//   useEffect(() => {
+//     window.addEventListener('resize', updateHeight);
+//   }, []);
 
   return (
-    <footer ref={ref} className='page-footer' style={styles}>
+    <footer className='page-footer' style={styles}>
       <div className='container'>
         <h5>Contact</h5>
         <a href='/contact'>ryan3nichols@gmail.com</a>

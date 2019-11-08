@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
+
 import Footer from './components/Footer';
 import Landing from './components/Landing';
 import Projects from './components/Projects';
@@ -10,6 +11,7 @@ import TechnologiesExpansionPanel from './containers/TechnologiesContainer/Techn
 import Navbar from './components/Navbar';
 import BaseCase from './components/BaseCase';
 import ProjectsContainer from './containers/ProjectsContainer';
+import './App.scss';
 
 const styles = {
   body: {
@@ -24,21 +26,6 @@ const styles = {
   }
 };
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div style={styles.body}>
-          <Switch>
-            <Route exact path='/' component={LandingContainer} />
-            <Route component={DefaultContainer} />
-          </Switch>
-        </div>
-      </BrowserRouter>
-    );
-  }
-}
-
 const LandingContainer = () => (
   <>
     <Route path='/' exact component={Landing} />
@@ -46,7 +33,7 @@ const LandingContainer = () => (
 );
 
 const DefaultContainer = () => (
-  <div>
+  <div className='site-container'>
     <Navbar />
     <div style={styles.siteContent}>
       <Route path='/projects' exact component={ProjectsContainer} />
@@ -60,5 +47,18 @@ const DefaultContainer = () => (
     <Footer />
   </div>
 );
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <div style={{}}>
+        <Switch>
+          <Route exact path='/' component={LandingContainer} />
+          <Route component={DefaultContainer} />
+        </Switch>
+      </div>
+    </BrowserRouter>
+  );
+};
 
 export default App;
