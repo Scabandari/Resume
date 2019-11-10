@@ -63,7 +63,7 @@ class ProjectCard extends Component {
           <Fragment>
             {this.state.project.github_repos.map(repo => {
               return (
-                <Button href={repo.link} size='small'>
+                <Button key={repo.link} href={repo.link} size='small'>
                   <FaGithub style={{ paddingRight: 3 }} /> {repo.name}{' '}
                 </Button>
               );

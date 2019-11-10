@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
-import { chunk } from 'lodash';
+import { cloneDeep } from 'lodash';
 
 import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from './constants';
 import ProjectCardContainer from '../../containers/ProjectCardContainer';
@@ -31,8 +31,11 @@ const renderColumn = (projects, screenWidth) => {
     columns = 1;
     columnList = [[]];
   }
-  while (projects.length > 0) {
-    columnList[incVal].push(projects.pop());
+
+  const localProjects = cloneDeep(projects);
+  // distribute projects evenly among columns
+  while (localProjects.length > 0) {
+    columnList[incVal].push(localProjects.pop());
     incVal = (incVal + 1) % columns;
   }
 
@@ -60,23 +63,19 @@ const Projects = ({
   navbarHeight
 }) => {
   const [activeItem, setActiveItem] = useState(ALL);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [secondMenuHeight, setSecondMenuHeight] = useState(41.5);
-  const ref = useRef(null);
 
-  const updateHeights = () => {
-    setWindowHeight(window.innerHeight);
+  const updateWindowWidth = () => {
     setWindowWidth(window.innerWidth);
-    setSecondMenuHeight(ref.current.clientHeight);
   };
+  
   useEffect(() => {
-    window.addEventListener('resize', updateHeights);
+    window.addEventListener('resize', updateWindowWidth);
   }, []);
 
   return (
     <div>
-      <div ref={ref} className='second-nav-container'>
+      <div className='second-nav-container'>
         <Menu inverted stackable fluid widths={4}>
           <Menu.Item
             name={ALL}
@@ -115,9 +114,7 @@ const Projects = ({
       <div
         style={{
           display: 'flex',
-          justifyContent: 'space-around',
-          minHeight: `${windowHeight -
-            (navbarHeight + secondMenuHeight + footerHeight)}px`
+          justifyContent: 'space-around'
         }}
       >
         {renderColumn(data, windowWidth)}
