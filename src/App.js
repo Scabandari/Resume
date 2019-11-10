@@ -1,16 +1,17 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import React, { Component } from 'react';
+import React from 'react';
 
-import Footer from './components/Footer';
-import Landing from './components/Landing';
-import Projects from './components/Projects';
-import PDF from './components/Projects/PDFs/Pdf';
-import EmailForm from './components/EmailForm';
-import SkillsExpansionPanel from './containers/SkillsContainer/SkillsExpansionPanel';
-import TechnologiesExpansionPanel from './containers/TechnologiesContainer/TechnologiesExpansionPanel';
-import Navbar from './components/Navbar';
-import BaseCase from './components/BaseCase';
-import ProjectsContainer from './containers/ProjectsContainer';
+import {
+    Footer,
+    Landing,
+    PDF,
+    EmailForm,
+    SkillsExpansionPanel,
+    TechnologiesExpansionPanel,
+    Navbar,
+    Projects
+
+} from './components';
 import './App.scss';
 
 const styles = {
@@ -36,13 +37,11 @@ const DefaultContainer = () => (
   <div className='site-container'>
     <Navbar />
     <div style={styles.siteContent}>
-      <Route path='/projects' exact component={ProjectsContainer} />
+      <Route path='/projects' exact component={Projects} />
       <Route path='/pdf' exact component={PDF} />
       <Route path='/skills' exact component={SkillsExpansionPanel} />
       <Route path='/techs' exact component={TechnologiesExpansionPanel} />
       <Route path='/contact' exact component={EmailForm} />
-
-      <Route path='/BaseCase' exact component={BaseCase} />
     </div>
     <Footer />
   </div>

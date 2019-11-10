@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { PROBLEM_STATEMENT, REPORT } from '../constants';
 import { Document, Page, pdfjs } from "react-pdf";
-import DocumentNavigationContainer from '../../../containers/DocumentNavigationContainer';
-import { changePage } from '../../../actions';
+
+import { PROBLEM_STATEMENT, REPORT } from '../Projects/constants';
+import DocumentNavigationContainer from '../DocumentNavigation/DocumentNavigationContainer';
+import { changePage } from '../../actions';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
