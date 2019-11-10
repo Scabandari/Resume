@@ -1,10 +1,10 @@
 import React from 'react';
 import { bindActionCreators } from "redux";
-import { changeDocument, changePage } from "../actions";
 import connect from "react-redux/es/connect/connect";
-import { PROBLEM_STATEMENT, REPORT } from '../components/Projects/constants';
-import DocumentNavigation from '../components/DocumentNavigation';
 
+import DocumentNavigation from './DocumentNavigation';
+import { changeDocument, changePage } from "../../actions";
+import { PROBLEM_STATEMENT, REPORT } from '../Projects/constants';
 
 class DocumentNavigationContainer extends React.Component {
 

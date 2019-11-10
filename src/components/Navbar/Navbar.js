@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Icon, Menu } from 'semantic-ui-react';
+import { Icon, Menu, Divider } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-//import { screenSize } from '../hoc';
+import { ResponsiveNavbar } from '../../components';
 import './Navbar.scss';
 
 const getActiveItem = pathName => {
@@ -33,9 +33,9 @@ const MenuExampleSecondary = props => {
   //   const [activeItem, setActiveItem] = useState(getActiveItem(pathname));
   const [activeItem, setActiveItem] = useState(pathname.substring(1)); // remove leading /
 
-  //TODO FIX THIS NON ZERO, mobile or desktop, set below dynamically
-  
-  const [width, setWidth] = useState(1000); 
+  //TODO this component needs to know the page width before rendering
+
+  const [width, setWidth] = useState(1000);
 
   useEffect(() => {
     window.addEventListener('resize', updateWidth);
@@ -57,7 +57,6 @@ const MenuExampleSecondary = props => {
         <Menu.Item disabled as={NavLink} to='/' name='avsddf'>
           <Icon name='home' />
         </Menu.Item>
-        {/* <Menu.Item content={height} /> */}
 
         {width > 500 && (
           <Menu.Menu position='right'>
@@ -91,11 +90,14 @@ const MenuExampleSecondary = props => {
           </Menu.Menu>
         )}
       </Menu>
+      {/* <Divider />
+      <div className='responsive-navbar'>
+        <ResponsiveNavbar />
+      </div> */}
     </div>
   );
 };
 
 const Navbar = withRouter(props => <MenuExampleSecondary {...props} />);
 
-// export default screenSize(Navbar);
 export default Navbar;

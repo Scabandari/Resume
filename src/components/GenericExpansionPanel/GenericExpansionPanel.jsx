@@ -1,30 +1,12 @@
 import React from "react";
-import ExpandIcon from './ExpandIcon';
 import {
     ExpansionPanelSummary, ExpansionPanelDetails, Divider, List,
     Typography, ListItem, Chip, ExpansionPanel
 } from '@material-ui/core';
 
+import { ExpandIcon } from '../../components';
 
-// skills = [
-//     {
-//         longform: peopleDescriptions.longForm,
-//         tldr: peopleDescriptions.tldr,
-//         headline: 'People',
-//          chips: []
-//     },
-//     {
-//         longform: leadershipDescriptions.longForm,
-//         tldr: leadershipDescriptions.tldr,
-//         headline: 'Leadership'
-//
-//     },
-//     {
-//         longform: foosballDescriptions.longForm,
-//         tldr: foosballDescriptions.tldr,
-//         headline: 'Foosball'
-//     }
-// ];
+
 
 const GenericExpansionPanel = ({ topics }) => {
 

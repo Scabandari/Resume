@@ -3,8 +3,9 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { changeProject } from '../actions';
-import ProjectCard from '../components/Projects/ProjectCard/ProjectCard';
+
+import { changeProject } from '../../../actions';
+import ProjectCard from './ProjectCard';
 
 class ProjectCardContainer extends Component {
   constructor(props) {

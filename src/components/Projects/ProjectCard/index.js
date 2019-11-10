@@ -1,3 +1,3 @@
-import ProjectCard from './ProjectCard';
+import ProjectCardContainer from './ProjectCardContainer';
 
-export default ProjectCard;
+export default ProjectCardContainer;

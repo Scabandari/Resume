@@ -4,9 +4,8 @@ import { Menu } from 'semantic-ui-react';
 import { cloneDeep } from 'lodash';
 
 import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from './constants';
-import ProjectCardContainer from '../../containers/ProjectCardContainer';
+import ProjectCardContainer from './ProjectCard/ProjectCardContainer';
 import { changeProjectFilterTerm } from '../../actions';
-import data from './project_data';
 import './Projects.scss';
 
 const styles = {
@@ -58,9 +57,7 @@ const renderColumn = (projects, screenWidth) => {
 
 const Projects = ({
   data,
-  changeProjectFilterTerm,
-  footerHeight,
-  navbarHeight
+  changeProjectFilterTerm
 }) => {
   const [activeItem, setActiveItem] = useState(ALL);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
