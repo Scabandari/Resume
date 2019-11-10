@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Projects from '../components/Projects/Projects';
-import data from '../components/Projects/project_data';
+import Projects from './Projects';
+import data from './project_data';
 
 const renderColumn = (projectList, filterTag) => {
   return projectList.filter(proj => {

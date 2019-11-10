@@ -459,17 +459,17 @@ const data = [
   }
 ];
 
-const sortedData = {
-  [ALL]: data,
-  [WEB_DEV]: data.filter(obj => {
-    return obj.tags.includes(WEB_DEV);
-  }),
-  [DATA_SCIENCE]: data.filter(obj => {
-    return obj.tags.includes(DATA_SCIENCE);
-  }),
-  [BASH]: data.filter(obj => {
-    return obj.tags.includes(BASH);
-  })
-};
+// const sortedData = {
+//   [ALL]: data,
+//   [WEB_DEV]: data.filter(obj => {
+//     return obj.tags.includes(WEB_DEV);
+//   }),
+//   [DATA_SCIENCE]: data.filter(obj => {
+//     return obj.tags.includes(DATA_SCIENCE);
+//   }),
+//   [BASH]: data.filter(obj => {
+//     return obj.tags.includes(BASH);
+//   })
+// };
 
 export default data;

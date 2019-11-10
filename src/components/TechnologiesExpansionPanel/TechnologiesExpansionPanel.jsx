@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import GenericExpansionPanel from '../../components/GenericExpansionPanel';
+import { GenericExpansionPanel } from '..';
 import techs from './descriptions';
 
 

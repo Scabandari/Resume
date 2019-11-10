@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { Component } from 'react';
-//import Image from 'react-bootstrap/es/Image';
-import { Grid, Typography, Chip } from '@material-ui/core/';
+import { Typography, Chip } from '@material-ui/core/';
 import { Link } from 'react-router-dom';
 import { Button, Image } from 'semantic-ui-react';
 
