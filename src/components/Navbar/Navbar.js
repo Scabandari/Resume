@@ -39,6 +39,7 @@ const MenuExampleSecondary = props => {
 
   useEffect(() => {
     window.addEventListener('resize', updateWidth);
+    updateWidth();
   }, []);
 
   const updateWidth = () => {
