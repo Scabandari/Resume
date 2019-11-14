@@ -36,7 +36,7 @@ a:hover {
   align-items: center;
   @include min-width-430 {
     max-width: 400px;
-    max-height: 400px;
+    //max-height: 400px;
   }
   @include min-width-800 {
     margin-left: 1rem;

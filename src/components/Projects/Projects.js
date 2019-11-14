@@ -55,17 +55,14 @@ const renderColumn = (projects, screenWidth) => {
   );
 };
 
-const Projects = ({
-  data,
-  changeProjectFilterTerm
-}) => {
+const Projects = ({ data, changeProjectFilterTerm }) => {
   const [activeItem, setActiveItem] = useState(ALL);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const updateWindowWidth = () => {
     setWindowWidth(window.innerWidth);
   };
-  
+
   useEffect(() => {
     window.addEventListener('resize', updateWindowWidth);
   }, []);
@@ -120,14 +117,8 @@ const Projects = ({
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    navbarHeight: state.navbar.height,
-    footerHeight: state.footer.height
-  };
-};
 
 export default connect(
-  mapStateToProps,
+  null, 
   { changeProjectFilterTerm }
 )(Projects);

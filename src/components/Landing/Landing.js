@@ -57,11 +57,10 @@ class Landing extends Component {
               company{' '}
               <Button size='tiny' basic color='black'>
                 <a href='http://dead-simple-apps.s3-website.us-east-2.amazonaws.com/'>
-                  Dead Simple Apps
+                  Dead Simple Appsss
                 </a>
               </Button>
             </Typography>
-
             <div className='landing-container__button'>
               <Typography variant='subtitle1'>
                 <Link to='/projects'>

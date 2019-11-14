@@ -6,35 +6,15 @@ import { withRouter } from 'react-router-dom';
 import { ResponsiveNavbar } from '../../components';
 import './Navbar.scss';
 
-const getActiveItem = pathName => {
-  switch (pathName) {
-    case '/techs':
-      return 'techs';
-    case '/projects':
-      return 'projects';
-    case '/skills':
-      return 'skills';
-    default:
-      return '';
-  }
-};
+const MenuExampleSecondary = ({
+  setSidebarShowing,
+  sidebarIsShowing,
+  location
+}) => {
+  const { pathname } = location;
+  const ref = useRef(undefined); // was null, neither work sometimes not sure why
 
-const activeItem = {
-  '/techs': 'techs',
-  '/projects': 'projects',
-  '/skills': 'skills'
-};
-
-const MenuExampleSecondary = props => {
-  // const { width } = props;
-  const { pathname } = props.location;
-  const ref = useRef(null);
-
-  //   const [activeItem, setActiveItem] = useState(getActiveItem(pathname));
   const [activeItem, setActiveItem] = useState(pathname.substring(1)); // remove leading /
-
-  //TODO this component needs to know the page width before rendering
-
   const [width, setWidth] = useState(1000);
 
   useEffect(() => {
@@ -43,7 +23,7 @@ const MenuExampleSecondary = props => {
   }, []);
 
   const updateWidth = () => {
-    if (ref) {
+    if (ref.current.clientWidth) {
       setWidth(ref.current.clientWidth);
     }
   };
@@ -58,7 +38,7 @@ const MenuExampleSecondary = props => {
           <Icon name='home' />
         </Menu.Item>
 
-        {width > 500 && (
+        {(width > 500 && (
           <Menu.Menu position='right'>
             <Menu.Item
               as={NavLink}
@@ -88,12 +68,14 @@ const MenuExampleSecondary = props => {
               <p>Skills</p>
             </Menu.Item>
           </Menu.Menu>
+        )) || (
+          <Menu.Menu position='right'>
+            <Menu.Item onClick={() => setSidebarShowing(!sidebarIsShowing)}>
+              <Icon name='sidebar' />
+            </Menu.Item>
+          </Menu.Menu>
         )}
       </Menu>
-      {/* <Divider />
-      <div className='responsive-navbar'>
-        <ResponsiveNavbar />
-      </div> */}
     </div>
   );
 };
