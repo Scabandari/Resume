@@ -25,6 +25,8 @@ export const EOS = 'EOS';
 export const AWS_S3= 'AWS S3';
 export const AWS_EC2 = 'AWS EC2';
 export const AWS_ROUTE53 = 'AWS Route 53';
+export const SCRIPTING = 'SCRIPTING';
+export const AUTOMATION = 'AUTOMATION';
 export const SASS = 'SASS';
 
 

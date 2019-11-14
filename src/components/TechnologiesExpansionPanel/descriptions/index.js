@@ -1,26 +1,28 @@
 import React from 'react';
-import jsDescriptions from './Javascript';
-import pythonDescriptions from './Python';
-import gitDescriptions from './Git';
-import CssDescriptions from './CSS';
-import javaDescriptions from './Java';
-import CppDescriptions from './CPP';
-import machineLearningDescriptions from './MachineLearning';
-import sqlDescriptions from './SQL';
-import blockchainDescriptions from './Blockchain';
-import cloudDescriptions from './Cloud';
+import js from './Javascript';
+import python from './Python';
+import git from './Git';
+import css from './CSS';
+import java from './Java';
+import cpp from './CPP';
+import machine_learning from './MachineLearning';
+import sql from './SQL';
+import block_chain from './Blockchain';
+import cloud from './Cloud';
+import bash from './Bash';
 
-const techs =  {
-    js: jsDescriptions,
-    python: pythonDescriptions,
-    git: gitDescriptions,
-    css: CssDescriptions,
-    java: javaDescriptions,
-    cpp: CppDescriptions,
-    machine_learning: machineLearningDescriptions,
-    sql: sqlDescriptions,
-    block_chain: blockchainDescriptions,
-    cloud: cloudDescriptions,
+export  {
+    js,
+    python,
+    git,
+    css,
+    java,
+    cpp,
+    machine_learning,
+    sql,
+    block_chain,
+    cloud,
+    bash,
 };
 
-export default techs;
+

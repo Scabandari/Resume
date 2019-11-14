@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Chip } from '@material-ui/core';
+
 import * as Constants from '../../constants';
 
 const tech_chips = {
@@ -37,7 +38,7 @@ const tech_chips = {
     { key: 2, label: Constants.KERAS },
     { key: 3, label: Constants.ANN },
     { key: 4, label: Constants.DEEP_LEARNING },
-    { key: 4, label: Constants.PANDAS }
+    { key: 5, label: Constants.PANDAS }
   ],
   block_chain: [
     { key: 0, label: Constants.SCALABILITY },
@@ -51,7 +52,11 @@ const tech_chips = {
     { key: 3, label: Constants.AWS_S3 },
     { key: 4, label: Constants.AWS_ROUTE53 }
   ],
-  css: [{ key: 0, label: Constants.SASS }]
+  css: [{ key: 0, label: Constants.SASS }],
+  bash: [
+  { key: 0, label: Constants.SCRIPTING},
+  { key: 1, label: Constants.AUTOMATION},
+  ]
 };
 
 export default tech_chips;

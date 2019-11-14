@@ -24,6 +24,9 @@ import ann_carr from './cars_ann_prob_desc.pdf';
 import ann_carr_r from './cars_ann_report.pdf';
 import script from './script.pdf';
 import script_r from './script_r.pdf';
+import create_component from './create-component.pdf';
+import bash_update_server from './bash_update_server.pdf';
+import bash_update_server_r from './bash-update-server-report.sh.pdf';
 
 export {
   script,
@@ -51,5 +54,8 @@ export {
   db_ass1,
   db_ass1_r,
   mp2,
-  mp2_r
+  mp2_r,
+  create_component,
+  bash_update_server,
+  bash_update_server_r
 };

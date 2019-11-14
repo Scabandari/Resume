@@ -1,11 +1,10 @@
-import Foosball from './Foosball';
-import Leadership from './Leadership';
-import People from './People';
+import foosball from './Foosball';
+import leadership from './Leadership';
+import people from './People';
 
-const skills = {
-  foosball: Foosball,
-  leadership: Leadership,
-  people: People,
+export {
+  foosball,
+  leadership,
+  people,
 };
 
-export default skills;
