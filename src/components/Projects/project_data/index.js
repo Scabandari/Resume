@@ -25,7 +25,10 @@ import {
   ai_mp3,
   ai_mp3_r,
   script,
-  script_r
+  script_r,
+  create_component,
+  bash_update_server,
+  bash_update_server_r
 } from '../PDFs/pdf_files';
 
 const data = [
@@ -208,7 +211,10 @@ const data = [
       "of the server and soon I'll be programming the gateway. We take sensor readings to determine which " +
       'parking spaces are available and relay that information to a server hosted in the cloud so that we ' +
       'can inform our users of which spaces are available through a mobile app.',
-    chips: [{ key: 0, label: 'AWS EC2' }, { key: 1, label: 'NodeJs' }],
+    chips: [
+      { key: 0, label: 'AWS EC2' },
+      { key: 1, label: 'NodeJs' }
+    ],
     github_repos: [
       {
         link: 'https://github.com/Scabandari/Capstone-server',
@@ -456,20 +462,66 @@ const data = [
         pages: 29
       }
     }
+  },
+  {
+    tags: [BASH, ALL],
+    title: 'Create Component Boilerplate',
+    course: 'Side Project',
+    courseName: 'React',
+    description:
+      "I kept doing the same thing over and over again every time I needed a new component. It was repetitive so I automated the process. It's just a start but it's still very useful.",
+    chips: [
+      { key: 0, label: 'Shell Scripting' },
+      { key: 1, label: 'Bash' }
+    ],
+    github_repos: [
+      {
+        link:
+          'https://github.com/Scabandari/Bash-Scripts/blob/master/create-component.sh',
+        name: 'repo'
+      }
+    ],
+    docs: {
+      problemStatement: {
+        file: create_component,
+        pages: 1
+      },
+      report: {
+        file: create_component,
+        pages: 1
+      }
+    }
+  },
+  {
+    tags: [BASH, ALL],
+    title: 'Automating Server Updates',
+    course: 'Side Project',
+    courseName: 'Express Server on EC2',
+    description:
+      'To access the EC2 instance, stop the server, git pull from github and start the server again would take a few minutes. Now it only takes a few seconds.',
+    chips: [
+      { key: 0, label: 'Shell Scripting' },
+      { key: 1, label: 'Bash' },
+      { key: 2, label: 'EC2' }
+    ],
+    github_repos: [
+      {
+        link:
+          'https://github.com/Scabandari/Bash-Scripts/blob/master/update-server.sh',
+        name: 'repo'
+      }
+    ],
+    docs: {
+      problemStatement: {
+        file: bash_update_server,
+        pages: 1
+      },
+      report: {
+        file: bash_update_server_r,
+        pages: 1
+      }
+    }
   }
 ];
-
-// const sortedData = {
-//   [ALL]: data,
-//   [WEB_DEV]: data.filter(obj => {
-//     return obj.tags.includes(WEB_DEV);
-//   }),
-//   [DATA_SCIENCE]: data.filter(obj => {
-//     return obj.tags.includes(DATA_SCIENCE);
-//   }),
-//   [BASH]: data.filter(obj => {
-//     return obj.tags.includes(BASH);
-//   })
-// };
 
 export default data;

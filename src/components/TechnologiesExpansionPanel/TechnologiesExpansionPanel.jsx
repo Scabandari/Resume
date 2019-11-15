@@ -1,26 +1,34 @@
-import React, {Component} from "react";
+import React from 'react';
 import { GenericExpansionPanel } from '..';
-import techs from './descriptions';
+import {
+  js,
+  python,
+  java,
+  cpp,
+  sql,
+  machine_learning,
+  cloud,
+  git,
+  block_chain,
+  css,
+  bash
+} from './descriptions';
 
-
-class TechnologiesExpansionPanel extends Component {
-    my_techs = [
-        techs.js,
-        techs.python,
-        techs.java,
-        techs.cpp,
-        techs.sql,
-        techs.machine_learning,
-        techs.cloud,
-        techs.git,
-        techs.block_chain,
-        techs.css,
-    ];
-
-
-    render() {
-        return <GenericExpansionPanel topics={this.my_techs} />
-    }
-}
+const my_techs = [
+  js,
+  python,
+  java,
+  cpp,
+  sql,
+  machine_learning,
+  cloud,
+  git,
+  block_chain,
+  css,
+  bash
+];
+const TechnologiesExpansionPanel = () => {
+  return <GenericExpansionPanel topics={my_techs} />;
+};
 
 export default TechnologiesExpansionPanel;

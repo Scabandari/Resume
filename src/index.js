@@ -35,9 +35,6 @@ const store = production ? store_production : store_dev;
 ReactDOM.render(
   <Provider store={store}>
     <App />
-    
   </Provider>,
   document.querySelector('#root')
 );
-
-// <App /> <Navbar />

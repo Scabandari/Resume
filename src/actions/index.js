@@ -5,23 +5,16 @@ import {
   CHANGE_DOCUMENT,
   CHANGE_PAGE,
   CHANGE_PROJECTS_FILTER_TERM,
-  CHANGE_NAVBAR_HEIGHT,
-  CHANGE_FOOTER_HEIGHT
+  SET_SIDEBAR_SHOWING
 } from './types';
 
-export const changeFooterHeight = height => {
+export const setSidebarShowing = showing => {
   return {
-    type: CHANGE_FOOTER_HEIGHT,
-    payload: height
+    type: SET_SIDEBAR_SHOWING,
+    payload: showing
   };
 };
 
-export const changeNavbarHeight = height => {
-  return {
-    type: CHANGE_NAVBAR_HEIGHT,
-    payload: height
-  };
-};
 
 export const changePage = page => {
   return {

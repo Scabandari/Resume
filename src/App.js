@@ -1,17 +1,28 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import React from 'react';
+import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import {
-    Footer,
-    Landing,
-    PDF,
-    EmailForm,
-    SkillsExpansionPanel,
-    TechnologiesExpansionPanel,
-    Navbar,
-    Projects
+  Container,
+  Icon,
+  Image,
+  Menu,
+  Sidebar,
+  Responsive
+} from 'semantic-ui-react';
 
+import {
+  Footer,
+  Landing,
+  PDF,
+  EmailForm,
+  SkillsExpansionPanel,
+  TechnologiesExpansionPanel,
+  Navbar,
+  Projects
 } from './components';
+import { setSidebarShowing } from './actions';
 import './App.scss';
 
 const styles = {
@@ -47,17 +58,80 @@ const DefaultContainer = () => (
   </div>
 );
 
-const App = () => {
+const App = ({ sidebarIsShowing, setSidebarShowing }) => {
+  //const [visible, setVisible] = useState(false);
   return (
     <BrowserRouter>
-      <div style={{}}>
-        <Switch>
-          <Route exact path='/' component={LandingContainer} />
-          <Route component={DefaultContainer} />
-        </Switch>
-      </div>
+      <Sidebar.Pushable>
+        <Sidebar
+          as={Menu}
+          animation='overlay'
+          icon='labeled'
+          inverted
+          direction='right'
+          //items={leftItems}
+          vertical
+          visible={sidebarIsShowing}
+        >
+          <Menu.Menu>
+            <Menu.Item
+              as='a'
+              onClick={() => setSidebarShowing(!sidebarIsShowing)}
+            >
+              <Icon name='long arrow alternate right' />
+              <p>Close</p>
+            </Menu.Item>
+
+            <Menu.Item
+              as={NavLink}
+              to='/projects'
+              name='projects'
+              //active={activeItem === 'projects'}
+              //onClick={handleItemClick}
+            >
+              <p>Projects</p>
+            </Menu.Item>
+            <Menu.Item
+              as={NavLink}
+              to='/techs'
+              name='techs'
+              // active={activeItem === 'techs'}
+              // onClick={handleItemClick}
+            >
+              <p>Tech</p>
+            </Menu.Item>
+            <Menu.Item
+              as={NavLink}
+              to='/skills'
+              // name='skills'
+              // active={activeItem === 'skills'}
+              // onClick={handleItemClick}
+            >
+              <p>Skills</p>
+            </Menu.Item>
+          </Menu.Menu>
+        </Sidebar>
+        <Sidebar.Pusher
+        //   dimmed={visible}
+        //   onClick={onPusherClick}
+        //   style={{ minHeight: "100vh" }}
+        >
+          <div>
+            <Switch>
+              <Route exact path='/' component={LandingContainer} />
+              <Route component={DefaultContainer} />
+            </Switch>
+          </div>
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
     </BrowserRouter>
   );
 };
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    sidebarIsShowing: state.navbar.sidebarIsShowing
+  };
+};
+
+export default connect(mapStateToProps, { setSidebarShowing })(App);

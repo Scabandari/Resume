@@ -1,13 +1,13 @@
-import { CHANGE_NAVBAR_HEIGHT } from '../actions/types';
+import { SET_SIDEBAR_SHOWING } from '../actions/types';
 
 const INITIAL_STATE = {
-  height: 61
+  sidebarIsShowing: false
 };
 
-export default function navbarReducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case CHANGE_NAVBAR_HEIGHT:
-      return { ...state, height: action.payload };
+export default function navbarReducer(state = INITIAL_STATE, {type, payload}) {
+  switch (type) {
+    case SET_SIDEBAR_SHOWING:
+      return { ...state, sidebarIsShowing: payload };
     default:
       return state;
   }

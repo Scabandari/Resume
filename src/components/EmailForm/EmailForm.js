@@ -46,7 +46,15 @@ class EmailForm extends Component {
     }
 
 
-    sendFeedback (templateId, senderEmail, receiverEmail, feedback, name, user_email, company) {
+    sendFeedback (
+        templateId, 
+        senderEmail, 
+        receiverEmail, 
+        feedback, 
+        name, 
+        user_email, 
+        company
+        ) {
         console.log(`feedback: ${feedback}`);
         console.log(`this.state.feedback ${this.state.feedback}`);
         window.emailjs.send(
