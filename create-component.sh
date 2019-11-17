@@ -60,7 +60,7 @@ import { connect } from 'react-redux';
 import ${COMPONENT} from './${COMPONENT}'
 //import {  } from '../../actions';
 
-const FooterContainer = (props) => {
+const ${CONTAINER} = (props) => {
     return (
         <${COMPONENT}  />
     );

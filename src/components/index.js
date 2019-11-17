@@ -10,6 +10,7 @@ import ExpandIcon from './ExpandIcon/ExpandIcon';
 import GenericExpansionPanel from './GenericExpansionPanel';
 import SkillsExpansionPanel from './SkillsExpansionPanel';
 import TechnologiesExpansionPanel from './TechnologiesExpansionPanel';
+import ContactForm from './ContactForm';
 
 export {
   Footer,
@@ -18,10 +19,10 @@ export {
   Projects,
   ResponsiveNavbar,
   DocumentNavigation,
-  EmailForm,
   ExpandIcon,
   GenericExpansionPanel,
   PDF,
   SkillsExpansionPanel,
   TechnologiesExpansionPanel,
+  ContactForm,
 };
