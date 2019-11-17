@@ -16,8 +16,7 @@ class Landing extends Component {
         { key: 1, label: 'react-redux' },
         { key: 2, label: 'AWS S3' },
         { key: 3, label: 'AWS Route 53' },
-        { key: 4, label: 'Material-UI' },
-        { key: 5, label: 'EmailJs' }
+        { key: 4, label: 'Material-UI' }
       ]
     };
   }
@@ -38,8 +37,8 @@ class Landing extends Component {
           </div>
           <div className='landing-container__text'>
             <Typography className='typography' variant='subtitle1' gutterBottom>
-              This is a React app that manages state with react-redux. It's
-              hosted on AWS S3 and here is the{' '}
+              This is a responsive React app that manages state with
+              react-redux. It's hosted on AWS S3 and here is the{' '}
               <Button size='tiny' basic color='black'>
                 <a href='https://github.com/Scabandari/Resume'>
                   Github repository

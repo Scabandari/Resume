@@ -1,16 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-
-const styles = {
-  backgroundColor: '#1b1c1d'
-};
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className='page-footer' style={styles}>
-      <div className='container'>
-        <h5>Contact</h5>
-        <a href='/contact'>ryan3nichols@gmail.com</a>
-      </div>
+    <footer className='page-footer' style={{ backgroundColor: '#1b1c1d' }}>
+      <Link to='/contact'>
+        <h5 className='container' style={{ color: 'white' }}>
+          Contact
+        </h5>
+      </Link>
+
       <div className='footer-copyright'>
         <div className='container'>© 2019 Copyright</div>
       </div>

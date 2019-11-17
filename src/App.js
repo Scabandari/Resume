@@ -16,7 +16,7 @@ import {
   Footer,
   Landing,
   PDF,
-  EmailForm,
+  ContactForm,
   SkillsExpansionPanel,
   TechnologiesExpansionPanel,
   Navbar,
@@ -52,7 +52,7 @@ const DefaultContainer = () => (
       <Route path='/pdf' exact component={PDF} />
       <Route path='/skills' exact component={SkillsExpansionPanel} />
       <Route path='/techs' exact component={TechnologiesExpansionPanel} />
-      <Route path='/contact' exact component={EmailForm} />
+      <Route path='/contact' exact component={ContactForm} />
     </div>
     <Footer />
   </div>
