@@ -3,6 +3,7 @@ import { Icon, Menu } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
+import { useScreenWidth } from '../../hooks';
 import './Navbar.scss';
 
 const MenuExampleSecondary = ({
@@ -14,19 +15,20 @@ const MenuExampleSecondary = ({
   const ref = useRef(undefined); // was null, neither work sometimes not sure why
 
   //   const [activeItem, setActiveItem] = useState(pathname.substring(1)); // remove leading /
-  const [width, setWidth] = useState(1000);
+  //const [width, setWidth] = useState(1000);
+  const width = useScreenWidth();
 
-  useEffect(() => {
-    window.addEventListener('resize', updateWidth);
-    updateWidth();
-    console.log(`location: ${JSON.stringify(location)}`);
-  }, []);
+  //   useEffect(() => {
+  //     window.addEventListener('resize', updateWidth);
+  //     updateWidth();
+  //     console.log(`location: ${JSON.stringify(location)}`);
+  //   }, []);
 
-  const updateWidth = () => {
-    if (ref.current) {
-      setWidth(ref.current.clientWidth);
-    }
-  };
+  //   const updateWidth = () => {
+  //     if (ref.current) {
+  //       setWidth(ref.current.clientWidth);
+  //     }
+  //   };
   const handleItemClick = () => console.log('nabar items click'); //(e, { name }) => setActiveItem(name);
 
   return (
