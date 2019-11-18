@@ -60,6 +60,7 @@ const DefaultContainer = () => (
 
 const App = ({ sidebarIsShowing, setSidebarShowing }) => {
   //const [visible, setVisible] = useState(false);
+
   return (
     <BrowserRouter>
       <Sidebar.Pushable>
@@ -80,12 +81,24 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
             visible={sidebarIsShowing}
           >
             <Menu.Menu>
+              <Menu.Item>
+                <p> </p>
+              </Menu.Item>
+              <Menu.Item>
+                <p> </p>
+              </Menu.Item>
+              <Menu.Item>
+                <p> </p>
+              </Menu.Item>
+              <Menu.Item>
+                <p> </p>
+              </Menu.Item>
               <Menu.Item
                 as={NavLink}
                 to='/projects'
                 name='projects'
                 //active={activeItem === 'projects'}
-                //onClick={handleItemClick}
+                onClick={() => setSidebarShowing(false)}
               >
                 <p>Projects</p>
               </Menu.Item>
@@ -94,7 +107,7 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
                 to='/techs'
                 name='techs'
                 // active={activeItem === 'techs'}
-                // onClick={handleItemClick}
+                onClick={() => setSidebarShowing(false)}
               >
                 <p>Tech</p>
               </Menu.Item>
@@ -103,18 +116,14 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
                 to='/skills'
                 // name='skills'
                 // active={activeItem === 'skills'}
-                // onClick={handleItemClick}
+                onClick={() => setSidebarShowing(false)}
               >
                 <p>Skills</p>
               </Menu.Item>
             </Menu.Menu>
           </Sidebar>
         </ClickAway>
-        <Sidebar.Pusher
-        //   dimmed={visible}
-        //   onClick={onPusherClick}
-        //   style={{ minHeight: "100vh" }}
-        >
+        <Sidebar.Pusher>
           <div>
             <Switch>
               <Route exact path='/' component={LandingContainer} />
