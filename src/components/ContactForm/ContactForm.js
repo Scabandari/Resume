@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, Header, Button, Checkbox } from 'semantic-ui-react';
 import _ from 'lodash';
 
+import { Portal } from '../../components';
 import { useServer, useScreenWidth } from '../../hooks';
 //import './ContactForm.scss';
 import Axios from 'axios';
@@ -23,6 +24,12 @@ const ContactForm = props => {
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState({});
   const [checked, setChecked] = useState(true);
+  const [portalIsOpen, setPortalIsOpen] = useState(false);
+
+  const portalRedirect = '/projects';
+  const portalHeadline = 'Success!';
+  const portalMessage = 'Thanks for reaching out and getting in touch';
+
 
   useEffect(() => {
     let margin = '5rem';
@@ -42,6 +49,7 @@ const ContactForm = props => {
   };
 
   const handleSubmit = async () => {
+    //console.log(`server: ${server}`);
     setIsWaiting(true);
     setErrors({});
     try {
@@ -52,9 +60,10 @@ const ContactForm = props => {
         message,
         checked
       });
-      
+
       setIsWaiting(false);
       clearForm();
+      setPortalIsOpen(true);
     } catch (err) {
       setErrors(_.keyBy(err.response.data.errors, 'param'));
       setIsWaiting(false);
@@ -117,6 +126,12 @@ const ContactForm = props => {
         />
         <Button loading={isWaiting} content='Submit' />
       </Form>
+      <Portal
+        headline={portalHeadline}
+        message={portalMessage}
+        redirect={portalRedirect}
+        open={portalIsOpen}
+      />
     </div>
   );
 };

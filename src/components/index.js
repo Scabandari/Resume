@@ -10,6 +10,7 @@ import GenericExpansionPanel from './GenericExpansionPanel';
 import SkillsExpansionPanel from './SkillsExpansionPanel';
 import TechnologiesExpansionPanel from './TechnologiesExpansionPanel';
 import ContactForm from './ContactForm';
+import Portal from './Portal';
 
 export {
   Footer,
@@ -23,5 +24,6 @@ export {
   PDF,
   SkillsExpansionPanel,
   TechnologiesExpansionPanel,
-  ContactForm
+  ContactForm,
+  Portal
 };
