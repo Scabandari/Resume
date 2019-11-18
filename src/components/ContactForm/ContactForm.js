@@ -8,10 +8,6 @@ import Axios from 'axios';
 
 const styles = {
   contactForm: {
-    // marginTop: '5rem',
-    // marginRight: '5rem',
-    // marginLeft: '5rem',
-    // marginBottom: '5rem'
     margin: '5rem'
   }
 };
@@ -56,7 +52,7 @@ const ContactForm = props => {
         message,
         checked
       });
-      //console.log('res.data: ', res.data);
+      
       setIsWaiting(false);
       clearForm();
     } catch (err) {

@@ -23,7 +23,7 @@ const MenuExampleSecondary = ({
   }, []);
 
   const updateWidth = () => {
-    if (ref.current.clientWidth) {
+    if (ref.current) {
       setWidth(ref.current.clientWidth);
     }
   };

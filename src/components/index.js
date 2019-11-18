@@ -5,7 +5,6 @@ import Projects from './Projects';
 import PDF from './PDF';
 import ResponsiveNavbar from './ResponsiveNavbar';
 import DocumentNavigation from './DocumentNavigation/DocumentNavigation';
-import EmailForm from './EmailForm/EmailForm';
 import ExpandIcon from './ExpandIcon/ExpandIcon';
 import GenericExpansionPanel from './GenericExpansionPanel';
 import SkillsExpansionPanel from './SkillsExpansionPanel';
@@ -24,5 +23,5 @@ export {
   PDF,
   SkillsExpansionPanel,
   TechnologiesExpansionPanel,
-  ContactForm,
+  ContactForm
 };

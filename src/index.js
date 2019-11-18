@@ -11,7 +11,7 @@ import promise from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
 import App from './App';
 import reducers from './reducers';
-import Navbar from './components/Navbar';
+
 
 const { REACT_APP_PRODUCTION } = process.env;
 const production =
@@ -24,7 +24,7 @@ if (production !== true) {
   //console.log("production must be false");
   const allStoreEnhancers = compose(
     middleware,
-    window.devToolsExtension && window.devToolsExtension()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //window.devToolsExtension && window.devToolsExtension()
   );
   store_dev = createStore(reducers, {}, allStoreEnhancers);
 }
