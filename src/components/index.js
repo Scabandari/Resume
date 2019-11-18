@@ -11,6 +11,7 @@ import SkillsExpansionPanel from './SkillsExpansionPanel';
 import TechnologiesExpansionPanel from './TechnologiesExpansionPanel';
 import ContactForm from './ContactForm';
 import Portal from './Portal';
+import ClickAway from './ClickAway';
 
 export {
   Footer,
@@ -25,5 +26,6 @@ export {
   SkillsExpansionPanel,
   TechnologiesExpansionPanel,
   ContactForm,
-  Portal
+  Portal,
+  ClickAway
 };
