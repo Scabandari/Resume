@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Icon, Menu, Divider } from 'semantic-ui-react';
+import { Icon, Menu } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-import { ResponsiveNavbar } from '../../components';
 import './Navbar.scss';
 
 const MenuExampleSecondary = ({
@@ -14,12 +13,13 @@ const MenuExampleSecondary = ({
   const { pathname } = location;
   const ref = useRef(undefined); // was null, neither work sometimes not sure why
 
-  const [activeItem, setActiveItem] = useState(pathname.substring(1)); // remove leading /
+  //   const [activeItem, setActiveItem] = useState(pathname.substring(1)); // remove leading /
   const [width, setWidth] = useState(1000);
 
   useEffect(() => {
     window.addEventListener('resize', updateWidth);
     updateWidth();
+    console.log(`location: ${JSON.stringify(location)}`);
   }, []);
 
   const updateWidth = () => {
@@ -27,7 +27,7 @@ const MenuExampleSecondary = ({
       setWidth(ref.current.clientWidth);
     }
   };
-  const handleItemClick = (e, { name }) => setActiveItem(name);
+  const handleItemClick = () => console.log('nabar items click'); //(e, { name }) => setActiveItem(name);
 
   return (
     <div ref={ref} className='navbar-container'>
@@ -44,7 +44,7 @@ const MenuExampleSecondary = ({
               as={NavLink}
               to='/projects'
               name='projects'
-              active={activeItem === 'projects'}
+              active={pathname === '/projects'}
               onClick={handleItemClick}
             >
               <p>Projects</p>
@@ -53,7 +53,7 @@ const MenuExampleSecondary = ({
               as={NavLink}
               to='/techs'
               name='techs'
-              active={activeItem === 'techs'}
+              active={pathname === '/techs'}
               onClick={handleItemClick}
             >
               <p>Tech</p>
@@ -62,7 +62,7 @@ const MenuExampleSecondary = ({
               as={NavLink}
               to='/skills'
               name='skills'
-              active={activeItem === 'skills'}
+              active={pathname === '/skills'}
               onClick={handleItemClick}
             >
               <p>Skills</p>
