@@ -6,6 +6,7 @@ import { cloneDeep } from 'lodash';
 import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from './constants';
 import ProjectCardContainer from './ProjectCard/ProjectCardContainer';
 import { changeProjectFilterTerm } from '../../actions';
+import { useScreenWidth } from '../../hooks';
 import './Projects.scss';
 
 const styles = {
@@ -57,15 +58,7 @@ const renderColumn = (projects, screenWidth) => {
 
 const Projects = ({ data, changeProjectFilterTerm }) => {
   const [activeItem, setActiveItem] = useState(ALL);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const updateWindowWidth = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', updateWindowWidth);
-  }, []);
+  const windowWidth = useScreenWidth();
 
   return (
     <div>
@@ -117,8 +110,4 @@ const Projects = ({ data, changeProjectFilterTerm }) => {
   );
 };
 
-
-export default connect(
-  null, 
-  { changeProjectFilterTerm }
-)(Projects);
+export default connect(null, { changeProjectFilterTerm })(Projects);

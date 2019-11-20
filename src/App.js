@@ -1,16 +1,8 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-
-import {
-  Container,
-  Icon,
-  Image,
-  Menu,
-  Sidebar,
-  Responsive
-} from 'semantic-ui-react';
+import { Menu, Sidebar } from 'semantic-ui-react';
 
 import {
   Footer,
@@ -20,7 +12,9 @@ import {
   SkillsExpansionPanel,
   TechnologiesExpansionPanel,
   Navbar,
-  Projects
+  Projects,
+  ClickAway,
+  UdemyCourseForm
 } from './components';
 import { setSidebarShowing } from './actions';
 import './App.scss';
@@ -53,69 +47,71 @@ const DefaultContainer = () => (
       <Route path='/skills' exact component={SkillsExpansionPanel} />
       <Route path='/techs' exact component={TechnologiesExpansionPanel} />
       <Route path='/contact' exact component={ContactForm} />
+      <Route path='/udemy-course-create' exact component={UdemyCourseForm} />
     </div>
     <Footer />
   </div>
 );
 
 const App = ({ sidebarIsShowing, setSidebarShowing }) => {
-  //const [visible, setVisible] = useState(false);
   return (
     <BrowserRouter>
       <Sidebar.Pushable>
-        <Sidebar
-          as={Menu}
-          animation='overlay'
-          icon='labeled'
-          inverted
-          direction='right'
-          //items={leftItems}
-          vertical
-          visible={sidebarIsShowing}
+        <ClickAway
+          callFunction={setSidebarShowing}
+          arg={!sidebarIsShowing}
+          condition={sidebarIsShowing}
         >
-          <Menu.Menu>
-            <Menu.Item
-              as='a'
-              onClick={() => setSidebarShowing(!sidebarIsShowing)}
-            >
-              <Icon name='long arrow alternate right' />
-              <p>Close</p>
-            </Menu.Item>
-
-            <Menu.Item
-              as={NavLink}
-              to='/projects'
-              name='projects'
-              //active={activeItem === 'projects'}
-              //onClick={handleItemClick}
-            >
-              <p>Projects</p>
-            </Menu.Item>
-            <Menu.Item
-              as={NavLink}
-              to='/techs'
-              name='techs'
-              // active={activeItem === 'techs'}
-              // onClick={handleItemClick}
-            >
-              <p>Tech</p>
-            </Menu.Item>
-            <Menu.Item
-              as={NavLink}
-              to='/skills'
-              // name='skills'
-              // active={activeItem === 'skills'}
-              // onClick={handleItemClick}
-            >
-              <p>Skills</p>
-            </Menu.Item>
-          </Menu.Menu>
-        </Sidebar>
-        <Sidebar.Pusher
-        //   dimmed={visible}
-        //   onClick={onPusherClick}
-        //   style={{ minHeight: "100vh" }}
-        >
+          {' '}
+          <Sidebar
+            as={Menu}
+            animation='overlay'
+            icon='labeled'
+            inverted
+            direction='right'
+            vertical
+            visible={sidebarIsShowing}
+          >
+            <Menu.Menu>
+              <Menu.Item>
+                <p> </p>
+              </Menu.Item>
+              <Menu.Item>
+                <p> </p>
+              </Menu.Item>
+              <Menu.Item>
+                <p> </p>
+              </Menu.Item>
+              <Menu.Item>
+                <p> </p>
+              </Menu.Item>
+              <Menu.Item
+                as={NavLink}
+                to='/projects'
+                name='projects'
+                onClick={() => setSidebarShowing(false)}
+              >
+                <p>Projects</p>
+              </Menu.Item>
+              <Menu.Item
+                as={NavLink}
+                to='/techs'
+                name='techs'
+                onClick={() => setSidebarShowing(false)}
+              >
+                <p>Tech</p>
+              </Menu.Item>
+              <Menu.Item
+                as={NavLink}
+                to='/skills'
+                onClick={() => setSidebarShowing(false)}
+              >
+                <p>Skills</p>
+              </Menu.Item>
+            </Menu.Menu>
+          </Sidebar>
+        </ClickAway>
+        <Sidebar.Pusher>
           <div>
             <Switch>
               <Route exact path='/' component={LandingContainer} />

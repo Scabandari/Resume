@@ -5,12 +5,14 @@ import Projects from './Projects';
 import PDF from './PDF';
 import ResponsiveNavbar from './ResponsiveNavbar';
 import DocumentNavigation from './DocumentNavigation/DocumentNavigation';
-import EmailForm from './EmailForm/EmailForm';
 import ExpandIcon from './ExpandIcon/ExpandIcon';
 import GenericExpansionPanel from './GenericExpansionPanel';
 import SkillsExpansionPanel from './SkillsExpansionPanel';
 import TechnologiesExpansionPanel from './TechnologiesExpansionPanel';
-import ContactForm from './ContactForm';
+import ContactForm from './forms/ContactForm';
+import UdemyCourseForm from './forms/UdemyCourseForm';
+import Portal from './Portal';
+import ClickAway from './ClickAway';
 
 export {
   Footer,
@@ -25,4 +27,7 @@ export {
   SkillsExpansionPanel,
   TechnologiesExpansionPanel,
   ContactForm,
+  UdemyCourseForm,
+  Portal,
+  ClickAway
 };

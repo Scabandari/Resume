@@ -2,16 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Form, Header, Button, Checkbox } from 'semantic-ui-react';
 import _ from 'lodash';
 
-import { useServer, useScreenWidth } from '../../hooks';
+import { Portal } from '../..';
+import { useServer, useScreenWidth } from '../../../hooks';
 //import './ContactForm.scss';
 import Axios from 'axios';
 
 const styles = {
   contactForm: {
-    // marginTop: '5rem',
-    // marginRight: '5rem',
-    // marginLeft: '5rem',
-    // marginBottom: '5rem'
     margin: '5rem'
   }
 };
@@ -27,6 +24,11 @@ const ContactForm = props => {
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState({});
   const [checked, setChecked] = useState(true);
+  const [portalIsOpen, setPortalIsOpen] = useState(false);
+
+  const portalRedirect = '/projects';
+  const portalHeadline = 'Success!';
+  const portalMessage = 'Thanks for reaching out and getting in touch';
 
   useEffect(() => {
     let margin = '5rem';
@@ -46,6 +48,7 @@ const ContactForm = props => {
   };
 
   const handleSubmit = async () => {
+    //console.log(`server: ${server}`);
     setIsWaiting(true);
     setErrors({});
     try {
@@ -56,9 +59,10 @@ const ContactForm = props => {
         message,
         checked
       });
-      //console.log('res.data: ', res.data);
+
       setIsWaiting(false);
       clearForm();
+      setPortalIsOpen(true);
     } catch (err) {
       setErrors(_.keyBy(err.response.data.errors, 'param'));
       setIsWaiting(false);
@@ -86,6 +90,7 @@ const ContactForm = props => {
         <Form.Input
           label='Name *'
           value={name}
+          name='name'
           placeholder='Your name'
           onChange={(e, { name, value }) => setName(value)}
           error={showErrors('name')}
@@ -93,6 +98,7 @@ const ContactForm = props => {
         <Form.Input
           label='Company'
           value={company}
+          name='company'
           placeholder='Your company'
           onChange={(e, { name, value }) => setCompany(value)}
           error={showErrors('company')}
@@ -100,13 +106,17 @@ const ContactForm = props => {
         <Form.Input
           label='Email *'
           value={email}
+          name='email'
           placeholder='your@email.com'
-          onChange={(e, { name, value }) => setEmail(value)}
+          onChange={(e, { name, value }) => {
+            setEmail(value);
+            console.log(`name: ${name}`);
+          }}
           error={showErrors('email')}
         />
         <Form.Field>
           <Checkbox
-            label='Send yourself a copy'
+            label='Send yourself a copy' // TODO name?
             checked={checked}
             onClick={() => setChecked(!checked)}
           />
@@ -121,6 +131,12 @@ const ContactForm = props => {
         />
         <Button loading={isWaiting} content='Submit' />
       </Form>
+      <Portal
+        headline={portalHeadline}
+        message={portalMessage}
+        redirect={portalRedirect}
+        open={portalIsOpen}
+      />
     </div>
   );
 };
