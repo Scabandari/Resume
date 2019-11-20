@@ -1,15 +1,8 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { NavLink, useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Container,
-  Icon,
-  Image,
-  Menu,
-  Sidebar,
-  Responsive
-} from 'semantic-ui-react';
+import { Menu, Sidebar } from 'semantic-ui-react';
 
 import {
   Footer,
@@ -20,7 +13,8 @@ import {
   TechnologiesExpansionPanel,
   Navbar,
   Projects,
-  ClickAway
+  ClickAway,
+  UdemyCourseForm
 } from './components';
 import { setSidebarShowing } from './actions';
 import './App.scss';
@@ -53,14 +47,13 @@ const DefaultContainer = () => (
       <Route path='/skills' exact component={SkillsExpansionPanel} />
       <Route path='/techs' exact component={TechnologiesExpansionPanel} />
       <Route path='/contact' exact component={ContactForm} />
+      <Route path='/udemy-course-create' exact component={UdemyCourseForm} />
     </div>
     <Footer />
   </div>
 );
 
 const App = ({ sidebarIsShowing, setSidebarShowing }) => {
-  //const [visible, setVisible] = useState(false);
-
   return (
     <BrowserRouter>
       <Sidebar.Pushable>
@@ -76,7 +69,6 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
             icon='labeled'
             inverted
             direction='right'
-            //items={leftItems}
             vertical
             visible={sidebarIsShowing}
           >
@@ -97,7 +89,6 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
                 as={NavLink}
                 to='/projects'
                 name='projects'
-                //active={activeItem === 'projects'}
                 onClick={() => setSidebarShowing(false)}
               >
                 <p>Projects</p>
@@ -106,7 +97,6 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
                 as={NavLink}
                 to='/techs'
                 name='techs'
-                // active={activeItem === 'techs'}
                 onClick={() => setSidebarShowing(false)}
               >
                 <p>Tech</p>
@@ -114,8 +104,6 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
               <Menu.Item
                 as={NavLink}
                 to='/skills'
-                // name='skills'
-                // active={activeItem === 'skills'}
                 onClick={() => setSidebarShowing(false)}
               >
                 <p>Skills</p>

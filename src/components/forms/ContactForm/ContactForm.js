@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Form, Header, Button, Checkbox } from 'semantic-ui-react';
 import _ from 'lodash';
 
-import { Portal } from '../../components';
-import { useServer, useScreenWidth } from '../../hooks';
+import { Portal } from '../..';
+import { useServer, useScreenWidth } from '../../../hooks';
 //import './ContactForm.scss';
 import Axios from 'axios';
 
@@ -29,7 +29,6 @@ const ContactForm = props => {
   const portalRedirect = '/projects';
   const portalHeadline = 'Success!';
   const portalMessage = 'Thanks for reaching out and getting in touch';
-
 
   useEffect(() => {
     let margin = '5rem';
@@ -91,6 +90,7 @@ const ContactForm = props => {
         <Form.Input
           label='Name *'
           value={name}
+          name='name'
           placeholder='Your name'
           onChange={(e, { name, value }) => setName(value)}
           error={showErrors('name')}
@@ -98,6 +98,7 @@ const ContactForm = props => {
         <Form.Input
           label='Company'
           value={company}
+          name='company'
           placeholder='Your company'
           onChange={(e, { name, value }) => setCompany(value)}
           error={showErrors('company')}
@@ -105,13 +106,17 @@ const ContactForm = props => {
         <Form.Input
           label='Email *'
           value={email}
+          name='email'
           placeholder='your@email.com'
-          onChange={(e, { name, value }) => setEmail(value)}
+          onChange={(e, { name, value }) => {
+            setEmail(value);
+            console.log(`name: ${name}`);
+          }}
           error={showErrors('email')}
         />
         <Form.Field>
           <Checkbox
-            label='Send yourself a copy'
+            label='Send yourself a copy' // TODO name?
             checked={checked}
             onClick={() => setChecked(!checked)}
           />

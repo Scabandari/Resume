@@ -24,7 +24,7 @@ const PortalContainer = ({
         <Header>{headline}</Header>
         <p>{message}</p>
 
-        <Button content='Done' positive onClick={handleClose} />
+        <Button content='Done' onClick={handleClose} />
       </Segment>
     </Portal>
   );
