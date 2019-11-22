@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useReducer, useRef } from "react";
 import { Form, Header, Button, Checkbox, Dropdown } from "semantic-ui-react";
 import _ from "lodash";
-//import { inspect } from 'util';
 
 import { Portal } from "../..";
 import { useServer, useScreenWidth } from "../../../hooks";
@@ -22,12 +21,23 @@ const styles = {
   }
 };
 
+//fields: {
+//     title: "myTitle",
+//     author: "myAuthor",
+//     link: "www.google.com",
+//     review: "myReview",
+//     purchased: false,
+//     started: false,
+//     completed: false,
+//     rating: 0
+//   },
+
 const initialState = {
   fields: {
-    title: "myTitle",
-    author: "myAuthor",
-    link: "www.google.com",
-    review: "myReview",
+    title: "",
+    author: "",
+    link: "",
+    review: "",
     purchased: false,
     started: false,
     completed: false,
@@ -91,17 +101,6 @@ const UdemyCourseForm = props => {
     setFormStyles({ ...formStyles, margin });
   }, [width]);
 
-  //  WATCH file
-  useEffect(() => {
-    //console.log(`file: ${JSON.stringify(file, null, 2)}`);
-    console.log(`file.name: ${file.name}`);
-    console.log(`file.name: ${file.name}`);
-  }, [file]);
-
-  //   useEffect(() => {
-  //     //console.log(`formState: ${JSON.stringify(formState, null, 2)}`);
-  //   }, [formState]);
-
   const handleSubmit = async event => {
     event.preventDefault();
     const uploadConfig = await axios.get(`${server}/upload`);
@@ -115,6 +114,7 @@ const UdemyCourseForm = props => {
         ...formState.fields,
         imgUrl: uploadConfig.data.key
       });
+      dispatch({ type: FORM_SUCCESS });
 
       console.log(`Success! res.data: ${JSON.stringify(res.data, null, 2)}`);
     } catch (err) {
@@ -246,32 +246,35 @@ const UdemyCourseForm = props => {
           options={getDropdownOptions(6, "")}
         />
         <br />
-        <br />
-        <h5>Add an Image</h5>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={event => setFile(event.target.files[0])}
-        />
+        <h6>Add an Image</h6>
+        <Form.Field>
+          {" "}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={event => setFile(event.target.files[0])}
+          />
+        </Form.Field>
+
         {/* <Button
           content="Choose File"
           labelPosition="left"
-          icon="file"
+          icon="file image"
           onClick={() => fileInputRef.current.click()}
-        /> */}
-        {/* <input
+        />
+        <input
           ref={fileInputRef}
           type="file"
           name="file"
           hidden
           onChange={event => {
-            //await axios.post(`${server}/upload`, event.target.files);
-            console.log(`event.target.files: ${event.target.files}`);
-            console.log(
-              `event.target.files[0]: ${JSON.stringify(event.target.files[0])}`
-            );
+            event.preventDefault();
+            setFile(event.target.files[0]);
           }}
         /> */}
+        {/* <br />
+        <br />
+        <br /> */}
         <Form.TextArea
           label="Review *"
           value={review}
@@ -294,7 +297,6 @@ const UdemyCourseForm = props => {
         redirect={portalRedirect}
         open={formState.portalIsOpen}
       />
-     
     </div>
   );
 };

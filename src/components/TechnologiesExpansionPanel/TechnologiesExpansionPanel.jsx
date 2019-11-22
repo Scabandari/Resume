@@ -1,5 +1,7 @@
-import React from 'react';
-import { GenericExpansionPanel } from '..';
+import React from "react";
+
+import { GenericExpansionPanel } from "..";
+import { useScreenWidth } from "../../hooks";
 import {
   js,
   python,
@@ -12,7 +14,7 @@ import {
   block_chain,
   css,
   bash
-} from './descriptions';
+} from "./descriptions";
 
 const my_techs = [
   js,
@@ -28,7 +30,15 @@ const my_techs = [
   bash
 ];
 const TechnologiesExpansionPanel = () => {
-  return <GenericExpansionPanel topics={my_techs} />;
+  const width = useScreenWidth();
+  const maxWidth = width > 1000 ? "700px" : "90vw";
+  return (
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ maxWidth }}>
+        <GenericExpansionPanel topics={my_techs} />
+      </div>
+    </div>
+  );
 };
 
 export default TechnologiesExpansionPanel;

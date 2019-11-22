@@ -16,7 +16,8 @@ import {
   Navbar,
   Projects,
   ClickAway,
-  UdemyCourseForm
+  UdemyCourseForm,
+  UdemyCourseList
 } from "./components";
 import { setSidebarShowing } from "./actions";
 import "./App.scss";
@@ -51,6 +52,7 @@ const DefaultContainer = () => (
       <Route path="/contact" exact component={ContactForm} />
       <Route path="/DisplayImage" exact component={DisplayImage} />
       <Route path="/udemy-course-create" exact component={UdemyCourseForm} />
+      <Route path="/udemy-courses" exact component={UdemyCourseList} />
     </div>
     <Footer />
   </div>
