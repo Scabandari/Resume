@@ -1,32 +1,33 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import { Form, Header, Button, Checkbox, Dropdown } from 'semantic-ui-react';
-import _ from 'lodash';
+import React, { useEffect, useState, useReducer, useRef } from "react";
+import { Form, Header, Button, Checkbox, Dropdown } from "semantic-ui-react";
+import _ from "lodash";
+//import { inspect } from 'util';
 
-import { Portal } from '../..';
-import { useServer, useScreenWidth } from '../../../hooks';
+import { Portal } from "../..";
+import { useServer, useScreenWidth } from "../../../hooks";
 //import './ContactForm.scss';
-import Axios from 'axios';
+import axios from "axios";
 
-const UPDATE_FORM_FIELD = 'UPDATE_FORM_FIELD';
-const CLEAR_FORM = 'CLEAR_FORM';
-const FORM_SUBMIT = 'FORM_SUBMIT';
-const FORM_SUCCESS = 'FORM_SUCCESS';
-const FORM_FAILURE = 'FORM_FAILURE';
+const UPDATE_FORM_FIELD = "UPDATE_FORM_FIELD";
+const CLEAR_FORM = "CLEAR_FORM";
+const FORM_SUBMIT = "FORM_SUBMIT";
+const FORM_SUCCESS = "FORM_SUCCESS";
+const FORM_FAILURE = "FORM_FAILURE";
 
-const SET_ERRORS = 'SET_ERRORS';
+const SET_ERRORS = "SET_ERRORS";
 
 const styles = {
   contactForm: {
-    margin: '5rem'
+    margin: "5rem"
   }
 };
 
 const initialState = {
   fields: {
-    title: '',
-    author: '',
-    link: '',
-    review: '',
+    title: "myTitle",
+    author: "myAuthor",
+    link: "www.google.com",
+    review: "myReview",
     purchased: false,
     started: false,
     completed: false,
@@ -38,7 +39,7 @@ const initialState = {
 };
 
 // ref: https://react.semantic-ui.com/modules/dropdown/#variations-compact
-const getDropdownOptions = (number, prefix = 'Choice ') =>
+const getDropdownOptions = (number, prefix = "Choice ") =>
   _.times(number, index => ({
     key: index,
     text: `${prefix}${index}`,
@@ -60,58 +61,64 @@ const reducer = (state, { type, payload, name }) => {
     case SET_ERRORS:
       return { ...state, errors: payload };
     default:
-      throw new Error('Undefined type in reducer for UdemyCourseForm');
+      throw new Error("Undefined type in reducer for UdemyCourseForm");
   }
 };
 
 const UdemyCourseForm = props => {
   const server = useServer();
   const width = useScreenWidth();
+  const fileInputRef = useRef();
+  const [file, setFile] = useState({});
+  //let file = useRef(null);
   const [formState, dispatch] = useReducer(reducer, initialState);
 
   const [formStyles, setFormStyles] = useState(styles.contactForm);
   const [isLoading, setIsLoading] = useState(false);
   //const [portalIsOpen, setPortalIsOpen] = useState(false);
 
-  const portalRedirect = '/udemy-courses';
-  const portalHeadline = 'Success!';
-  const portalMessage = 'View your updated list of Udemy courses.';
+  const portalRedirect = "/udemy-courses";
+  const portalHeadline = "Success!";
+  const portalMessage = "View your updated list of Udemy courses.";
 
   useEffect(() => {
-    let margin = '5rem';
+    let margin = "5rem";
     if (width < 500) {
-      margin = '1.5rem';
+      margin = "1.5rem";
     } else if (width < 750) {
-      margin = '3rem';
+      margin = "3rem";
     }
     setFormStyles({ ...formStyles, margin });
   }, [width]);
 
+  //  WATCH file
   useEffect(() => {
-    //console.log(`formState: ${JSON.stringify(formState, null, 2)}`);
-  }, [formState]);
+    //console.log(`file: ${JSON.stringify(file, null, 2)}`);
+    console.log(`file.name: ${file.name}`);
+    console.log(`file.name: ${file.name}`);
+  }, [file]);
 
-  const handleSubmit = async () => {
-    //setIsLoading(true);
-    dispatch({ type: FORM_SUBMIT });
+  //   useEffect(() => {
+  //     //console.log(`formState: ${JSON.stringify(formState, null, 2)}`);
+  //   }, [formState]);
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const uploadConfig = await axios.get(`${server}/upload`);
     try {
-      console.log(`fields: ${JSON.stringify(formState.fields, null, 2)}`);
-      const res = await Axios.post(`${server}/udemy-courses`, formState.fields);
-      dispatch({ type: FORM_SUCCESS });
-      //   setIsLoading(false);
-      //   dispatch({ type: CLEAR_FORM }); //clearForm();
-      //   setPortalIsOpen(true);
-    } catch (err) {
-      //setErrors(_.keyBy(err.response.data.errors, 'param'));
-      //   dispatch({
-      //     type: SET_ERRORS,
-      //     payload: _.keyBy(err.response.data.errors, 'param')
-      //   });
-      //   setIsLoading(false);
-      dispatch({
-        type: FORM_FAILURE,
-        payload: _.keyBy(err.response.data.errors, 'param')
+      await axios.put(uploadConfig.data.url, file, {
+        headers: {
+          "Content-Type": file.type
+        }
       });
+      const res = await axios.post(`${server}/resume/udemy-courses`, {
+        ...formState.fields,
+        imgUrl: uploadConfig.data.key
+      });
+
+      console.log(`Success! res.data: ${JSON.stringify(res.data, null, 2)}`);
+    } catch (err) {
+      console.log(`err: ${JSON.stringify(err, null, 2)}`);
     }
   };
 
@@ -119,8 +126,8 @@ const UdemyCourseForm = props => {
     const { errors } = formState;
     return (
       errors[name] && {
-        content: errors[name]['msg'],
-        pointing: 'below'
+        content: errors[name]["msg"],
+        pointing: "below"
       }
     );
   };
@@ -138,14 +145,14 @@ const UdemyCourseForm = props => {
 
   return (
     <div style={formStyles}>
-      <Header as='h2'>Create Udemy Course</Header>
+      <Header as="h2">Create Udemy Course</Header>
       <Form onSubmit={handleSubmit}>
         <Form.Input
-          label='Title *'
+          label="Title *"
           value={title}
-          name='title'
-          placeholder='Course title'
-          error={showErrors('title')}
+          name="title"
+          placeholder="Course title"
+          error={showErrors("title")}
           onChange={(e, { name, value }) =>
             dispatch({
               type: UPDATE_FORM_FIELD,
@@ -155,11 +162,11 @@ const UdemyCourseForm = props => {
           }
         />
         <Form.Input
-          label='Author *'
+          label="Author *"
           value={author}
-          name='author'
-          placeholder='Course author'
-          error={showErrors('author')}
+          name="author"
+          placeholder="Course author"
+          error={showErrors("author")}
           onChange={(e, { name, value }) =>
             dispatch({
               type: UPDATE_FORM_FIELD,
@@ -169,11 +176,11 @@ const UdemyCourseForm = props => {
           }
         />
         <Form.Input
-          label='Link *'
+          label="Link *"
           value={link}
-          name='link'
-          placeholder='URL link to course'
-          error={showErrors('link')}
+          name="link"
+          placeholder="URL link to course"
+          error={showErrors("link")}
           onChange={(e, { name, value }) =>
             dispatch({
               type: UPDATE_FORM_FIELD,
@@ -184,8 +191,8 @@ const UdemyCourseForm = props => {
         />
         <Form.Field>
           <Checkbox
-            label='Purchased'
-            name='purchased'
+            label="Purchased"
+            name="purchased"
             checked={purchased}
             onChange={(e, { name, value }) =>
               dispatch({
@@ -198,8 +205,8 @@ const UdemyCourseForm = props => {
         </Form.Field>
         <Form.Field>
           <Checkbox
-            label='Started'
-            name='started'
+            label="Started"
+            name="started"
             checked={started}
             onChange={(e, { name, value }) =>
               dispatch({
@@ -212,8 +219,8 @@ const UdemyCourseForm = props => {
         </Form.Field>
         <Form.Field>
           <Checkbox
-            label='Completed'
-            name='completed'
+            label="Completed"
+            name="completed"
             checked={completed}
             onChange={(e, { name, value }) =>
               dispatch({
@@ -225,31 +232,52 @@ const UdemyCourseForm = props => {
           />
         </Form.Field>
 
-        {/* <Form.Field> */}
         <Dropdown
           text={`Rating: ${rating}`}
           onChange={(e, { value }) =>
             dispatch({
               type: UPDATE_FORM_FIELD,
               payload: value,
-              name: 'rating'
+              name: "rating"
             })
           }
           compact
           selection
-          options={getDropdownOptions(6, '')}
+          options={getDropdownOptions(6, "")}
         />
         <br />
         <br />
-
-        {/* </Form.Field> */}
-
+        <h5>Add an Image</h5>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={event => setFile(event.target.files[0])}
+        />
+        {/* <Button
+          content="Choose File"
+          labelPosition="left"
+          icon="file"
+          onClick={() => fileInputRef.current.click()}
+        /> */}
+        {/* <input
+          ref={fileInputRef}
+          type="file"
+          name="file"
+          hidden
+          onChange={event => {
+            //await axios.post(`${server}/upload`, event.target.files);
+            console.log(`event.target.files: ${event.target.files}`);
+            console.log(
+              `event.target.files[0]: ${JSON.stringify(event.target.files[0])}`
+            );
+          }}
+        /> */}
         <Form.TextArea
-          label='Review *'
+          label="Review *"
           value={review}
-          name='review'
+          name="review"
           style={{ minHeight: 150 }}
-          error={showErrors('review')}
+          error={showErrors("review")}
           onChange={(e, { name, value }) =>
             dispatch({
               type: UPDATE_FORM_FIELD,
@@ -258,7 +286,7 @@ const UdemyCourseForm = props => {
             })
           }
         />
-        <Button loading={isLoading} content='Submit' />
+        <Button loading={isLoading} content="Submit" />
       </Form>
       <Portal
         headline={portalHeadline}
@@ -266,6 +294,7 @@ const UdemyCourseForm = props => {
         redirect={portalRedirect}
         open={formState.portalIsOpen}
       />
+     
     </div>
   );
 };
