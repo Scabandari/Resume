@@ -28,7 +28,8 @@ const ContactForm = props => {
 
   const portalRedirect = '/projects';
   const portalHeadline = 'Success!';
-  const portalMessage = 'Thanks for reaching out and getting in touch';
+  const portalMessage = 'Thanks for reaching out!';
+
 
   useEffect(() => {
     let margin = '5rem';
@@ -40,6 +41,7 @@ const ContactForm = props => {
     setFormStyles({ ...formStyles, margin });
   }, [width]);
 
+
   const clearForm = () => {
     setName('');
     setCompany('');
@@ -48,11 +50,10 @@ const ContactForm = props => {
   };
 
   const handleSubmit = async () => {
-    //console.log(`server: ${server}`);
     setIsWaiting(true);
     setErrors({});
     try {
-      const res = await Axios.post(`${server}/email`, {
+      const res = await Axios.post(`${server}/resume/email`, {
         name,
         company,
         email,

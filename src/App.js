@@ -1,9 +1,11 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-import React from 'react';
-import { connect } from 'react-redux';
-import { Menu, Sidebar } from 'semantic-ui-react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import React from "react";
+import { connect } from "react-redux";
+import { Menu, Sidebar } from "semantic-ui-react";
+import axios from "axios";
 
+import DisplayImage from "./components/DisplayImage";
 import {
   Footer,
   Landing,
@@ -15,39 +17,40 @@ import {
   Projects,
   ClickAway,
   UdemyCourseForm
-} from './components';
-import { setSidebarShowing } from './actions';
-import './App.scss';
+} from "./components";
+import { setSidebarShowing } from "./actions";
+import "./App.scss";
 
 const styles = {
   body: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh'
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh"
   },
   siteContent: {
-    flex: '1 0 auto',
-    padding: 'var(--space) var(--space) 0',
-    width: '100%'
+    flex: "1 0 auto",
+    padding: "var(--space) var(--space) 0",
+    width: "100%"
   }
 };
 
 const LandingContainer = () => (
   <>
-    <Route path='/' exact component={Landing} />
+    <Route path="/" exact component={Landing} />
   </>
 );
 
 const DefaultContainer = () => (
-  <div className='site-container'>
+  <div className="site-container">
     <Navbar />
     <div style={styles.siteContent}>
-      <Route path='/projects' exact component={Projects} />
-      <Route path='/pdf' exact component={PDF} />
-      <Route path='/skills' exact component={SkillsExpansionPanel} />
-      <Route path='/techs' exact component={TechnologiesExpansionPanel} />
-      <Route path='/contact' exact component={ContactForm} />
-      <Route path='/udemy-course-create' exact component={UdemyCourseForm} />
+      <Route path="/projects" exact component={Projects} />
+      <Route path="/pdf" exact component={PDF} />
+      <Route path="/skills" exact component={SkillsExpansionPanel} />
+      <Route path="/techs" exact component={TechnologiesExpansionPanel} />
+      <Route path="/contact" exact component={ContactForm} />
+      <Route path="/DisplayImage" exact component={DisplayImage} />
+      <Route path="/udemy-course-create" exact component={UdemyCourseForm} />
     </div>
     <Footer />
   </div>
@@ -62,13 +65,13 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
           arg={!sidebarIsShowing}
           condition={sidebarIsShowing}
         >
-          {' '}
+          {" "}
           <Sidebar
             as={Menu}
-            animation='overlay'
-            icon='labeled'
+            animation="overlay"
+            icon="labeled"
             inverted
-            direction='right'
+            direction="right"
             vertical
             visible={sidebarIsShowing}
           >
@@ -87,23 +90,23 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
               </Menu.Item>
               <Menu.Item
                 as={NavLink}
-                to='/projects'
-                name='projects'
+                to="/projects"
+                name="projects"
                 onClick={() => setSidebarShowing(false)}
               >
                 <p>Projects</p>
               </Menu.Item>
               <Menu.Item
                 as={NavLink}
-                to='/techs'
-                name='techs'
+                to="/techs"
+                name="techs"
                 onClick={() => setSidebarShowing(false)}
               >
                 <p>Tech</p>
               </Menu.Item>
               <Menu.Item
                 as={NavLink}
-                to='/skills'
+                to="/skills"
                 onClick={() => setSidebarShowing(false)}
               >
                 <p>Skills</p>
@@ -114,7 +117,7 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
         <Sidebar.Pusher>
           <div>
             <Switch>
-              <Route exact path='/' component={LandingContainer} />
+              <Route exact path="/" component={LandingContainer} />
               <Route component={DefaultContainer} />
             </Switch>
           </div>
