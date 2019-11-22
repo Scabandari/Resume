@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -8,9 +8,9 @@ import {
   ListItem,
   Chip,
   ExpansionPanel
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import { ExpandIcon } from '../../components';
+import { ExpandIcon } from "../../components";
 
 const GenericExpansionPanel = ({ topics }) => {
   const displayChips = chips => {
@@ -29,28 +29,28 @@ const GenericExpansionPanel = ({ topics }) => {
   };
 
   return (
-    <div style={{ width: '100%', padding: 15 }}>
+    <div style={{ width: "100%", padding: 15, marginTop: "3rem" }}>
       {topics.map(topic => {
         return (
           <ExpansionPanel key={topic.tldr}>
             <ExpansionPanelSummary expandIcon={<ExpandIcon />}>
-              <Typography variant='headline'>{topic.headline}</Typography>
+              <Typography variant="headline">{topic.headline}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <List>
                 {topic.chips && displayChips(topic.chips)}
                 <ListItem>
-                  <Typography variant='h6'>TLDR;</Typography>
+                  <Typography variant="h6">TLDR;</Typography>
                 </ListItem>
                 <ListItem>
-                  <Typography variant='body1'>{topic.tldr}</Typography>
+                  <Typography variant="body1">{topic.tldr}</Typography>
                 </ListItem>
                 <Divider />
                 <ListItem>
-                  <Typography variant='h6'>Long Form</Typography>
+                  <Typography variant="h6">Long Form</Typography>
                 </ListItem>
                 <ListItem>
-                  <Typography variant='body1'>{topic.longForm}</Typography>
+                  <Typography variant="body1">{topic.longForm}</Typography>
                 </ListItem>
               </List>
             </ExpansionPanelDetails>
