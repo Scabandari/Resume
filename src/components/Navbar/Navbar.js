@@ -14,7 +14,6 @@ const MenuExampleSecondary = ({
   const { pathname } = location;
   const ref = useRef(undefined); // was null, neither work sometimes not sure why
   const width = useScreenWidth();
-  const handleItemClick = () => console.log("nabar items click"); //(e, { name }) => setActiveItem(name);
 
   return (
     <div ref={ref} className="navbar-container">
@@ -25,7 +24,7 @@ const MenuExampleSecondary = ({
           <Icon name="home" />
         </Menu.Item>
 
-        {(width > 500 && (
+        {(width > 650 && (
           <Menu.Menu position="right">
             <Menu.Item
               as={NavLink}

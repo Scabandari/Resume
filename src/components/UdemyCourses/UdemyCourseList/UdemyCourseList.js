@@ -31,7 +31,6 @@ const UdemyCourseList = ({ courses, s3Bucket }) => {
         incVal = (incVal + 1) % colList.length;
       }
       setColumnList(colList);
-      console.log(`colList: ${JSON.stringify(colList, null, 2)}`);
     };
     setColumns();
   }, [width, courses]);
@@ -57,9 +56,9 @@ const UdemyCourseList = ({ courses, s3Bucket }) => {
       </div>
       <div className="UdemyCourseList_buttonCreate">
         <Button
+          style={{ marginRight: `${width < 500 ? "3rem" : "8rem"}` }}
           circular
           size="massive"
-          right
           negative
           icon="plus"
           onClick={() => history.push("/udemy-course-create")}

@@ -100,6 +100,14 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
               </Menu.Item>
               <Menu.Item
                 as={NavLink}
+                to="/udemy-courses"
+                name="udemy-courses"
+                onClick={() => setSidebarShowing(false)}
+              >
+                <p>Udemy</p>
+              </Menu.Item>
+              <Menu.Item
+                as={NavLink}
                 to="/techs"
                 name="techs"
                 onClick={() => setSidebarShowing(false)}

@@ -4,7 +4,7 @@ import { Card, Icon, Image, Rating, Checkbox } from "semantic-ui-react";
 const UdemyCourseCard = ({ cardData, s3Bucket }) => {
   const [showReview, setShowReview] = useState(false);
   return (
-    <Card raised>
+    <Card raised style={{ marginBottom: "3rem" }}>
       <Image src={`${s3Bucket}/${cardData.imgUrl}`} wrapped ui={false} />
 
       <Card.Content>
