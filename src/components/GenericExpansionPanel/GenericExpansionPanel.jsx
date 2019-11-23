@@ -12,6 +12,13 @@ import {
 
 import { ExpandIcon } from "../../components";
 
+const styles = {
+  width: "100%",
+  padding: 15,
+  marginTop: "3rem",
+  marginBottom: "3rem"
+};
+
 const GenericExpansionPanel = ({ topics }) => {
   const displayChips = chips => {
     return (
@@ -29,7 +36,7 @@ const GenericExpansionPanel = ({ topics }) => {
   };
 
   return (
-    <div style={{ width: "100%", padding: 15, marginTop: "3rem" }}>
+    <div style={styles}>
       {topics.map(topic => {
         return (
           <ExpansionPanel key={topic.tldr}>
