@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 import { useScreenWidth } from "../../hooks";
-import "./Navbar.scss";
 
 const MenuExampleSecondary = ({
   setSidebarShowing,
@@ -16,8 +15,8 @@ const MenuExampleSecondary = ({
   const width = useScreenWidth();
 
   return (
-    <div ref={ref} className="navbar-container">
-      <Menu icon inverted size="massive">
+    <div ref={ref} style={{ backgroundColor: "#000000" }}>
+      <Menu icon color="black" inverted size="massive">
         <Menu.Item header name="Ryan Nichols" />
 
         <Menu.Item disabled as={NavLink} to="/" name="avsddf">

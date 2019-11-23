@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react';
-import { cloneDeep } from 'lodash';
+import React, { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { Menu } from "semantic-ui-react";
+import { cloneDeep } from "lodash";
 
-import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from './constants';
-import ProjectCardContainer from './ProjectCard/ProjectCardContainer';
-import { changeProjectFilterTerm } from '../../actions';
-import { useScreenWidth } from '../../hooks';
-import './Projects.scss';
+import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from "./constants";
+import ProjectCardContainer from "./ProjectCard/ProjectCardContainer";
+import { changeProjectFilterTerm } from "../../actions";
+import { useScreenWidth } from "../../hooks";
+import "./Projects.scss";
 
 const styles = {
   columns: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: '11px'
+    display: "flex",
+    flexDirection: "column",
+    marginTop: "3rem",
+    marginBottom: "2rem"
   }
 };
 
@@ -62,7 +63,7 @@ const Projects = ({ data, changeProjectFilterTerm }) => {
 
   return (
     <div>
-      <div className='second-nav-container'>
+      <div className="second-nav-container">
         <Menu inverted stackable fluid widths={4}>
           <Menu.Item
             name={ALL}
@@ -100,8 +101,8 @@ const Projects = ({ data, changeProjectFilterTerm }) => {
       </div>
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'space-around'
+          display: "flex",
+          justifyContent: "space-around"
         }}
       >
         {renderColumn(data, windowWidth)}
