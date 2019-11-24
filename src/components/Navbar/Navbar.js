@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 import { useScreenWidth } from "../../hooks";
-import "./Navbar.scss";
 
 const MenuExampleSecondary = ({
   setSidebarShowing,
@@ -14,18 +13,17 @@ const MenuExampleSecondary = ({
   const { pathname } = location;
   const ref = useRef(undefined); // was null, neither work sometimes not sure why
   const width = useScreenWidth();
-  const handleItemClick = () => console.log("nabar items click"); //(e, { name }) => setActiveItem(name);
 
   return (
-    <div ref={ref} className="navbar-container">
-      <Menu icon inverted size="massive">
+    <div ref={ref} style={{ backgroundColor: "#000000" }}>
+      <Menu icon color="black" inverted size="massive">
         <Menu.Item header name="Ryan Nichols" />
 
         <Menu.Item disabled as={NavLink} to="/" name="avsddf">
           <Icon name="home" />
         </Menu.Item>
 
-        {(width > 500 && (
+        {(width > 650 && (
           <Menu.Menu position="right">
             <Menu.Item
               as={NavLink}

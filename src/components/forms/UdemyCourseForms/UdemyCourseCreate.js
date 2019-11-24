@@ -4,33 +4,20 @@ import _ from "lodash";
 
 import { Portal } from "../..";
 import { useServer, useScreenWidth } from "../../../hooks";
-//import './ContactForm.scss';
 import axios from "axios";
+
+// const styles = {
+//   contactForm: {
+//     margin: "5rem"
+//   }
+// };
 
 const UPDATE_FORM_FIELD = "UPDATE_FORM_FIELD";
 const CLEAR_FORM = "CLEAR_FORM";
 const FORM_SUBMIT = "FORM_SUBMIT";
 const FORM_SUCCESS = "FORM_SUCCESS";
 const FORM_FAILURE = "FORM_FAILURE";
-
 const SET_ERRORS = "SET_ERRORS";
-
-const styles = {
-  contactForm: {
-    margin: "5rem"
-  }
-};
-
-//fields: {
-//     title: "myTitle",
-//     author: "myAuthor",
-//     link: "www.google.com",
-//     review: "myReview",
-//     purchased: false,
-//     started: false,
-//     completed: false,
-//     rating: 0
-//   },
 
 const initialState = {
   fields: {
@@ -44,8 +31,26 @@ const initialState = {
     rating: 0
   },
   errors: {},
-  isLoading: false,
   portalIsOpen: false
+};
+
+const reducer = (state, { type, payload, name }) => {
+  switch (type) {
+    case UPDATE_FORM_FIELD:
+      return { ...state, fields: { ...state.fields, [name]: payload } };
+    case FORM_SUBMIT:
+      return { ...state, errors: {} };
+    case FORM_SUCCESS:
+      return { ...initialState, portalIsOpen: true };
+    case FORM_FAILURE:
+      return { ...state, errors: payload };
+    case CLEAR_FORM: // todo am i using this?
+      return initialState;
+    case SET_ERRORS:
+      return { ...state, errors: payload };
+    default:
+      throw new Error("Undefined type in reducer for UdemyCourseForm");
+  }
 };
 
 // ref: https://react.semantic-ui.com/modules/dropdown/#variations-compact
@@ -56,36 +61,13 @@ const getDropdownOptions = (number, prefix = "Choice ") =>
     value: index
   }));
 
-const reducer = (state, { type, payload, name }) => {
-  switch (type) {
-    case UPDATE_FORM_FIELD:
-      return { ...state, fields: { ...state.fields, [name]: payload } };
-    case FORM_SUBMIT:
-      return { ...state, errors: {}, isLoading: true };
-    case FORM_SUCCESS:
-      return { ...initialState, portalIsOpen: true };
-    case FORM_FAILURE:
-      return { ...state, errors: payload, isLoading: false };
-    case CLEAR_FORM: // todo am i using this?
-      return initialState;
-    case SET_ERRORS:
-      return { ...state, errors: payload };
-    default:
-      throw new Error("Undefined type in reducer for UdemyCourseForm");
-  }
-};
-
-const UdemyCourseForm = props => {
+const UdemyCourseCreate = props => {
   const server = useServer();
   const width = useScreenWidth();
-  const fileInputRef = useRef();
   const [file, setFile] = useState({});
-  //let file = useRef(null);
   const [formState, dispatch] = useReducer(reducer, initialState);
-
-  const [formStyles, setFormStyles] = useState(styles.contactForm);
   const [isLoading, setIsLoading] = useState(false);
-  //const [portalIsOpen, setPortalIsOpen] = useState(false);
+  const [formMargin, setFormMargin] = useState("5rem");
 
   const portalRedirect = "/udemy-courses";
   const portalHeadline = "Success!";
@@ -98,10 +80,11 @@ const UdemyCourseForm = props => {
     } else if (width < 750) {
       margin = "3rem";
     }
-    setFormStyles({ ...formStyles, margin });
+    setFormMargin(margin);
   }, [width]);
 
   const handleSubmit = async event => {
+    setIsLoading(true);
     event.preventDefault();
     const uploadConfig = await axios.get(`${server}/upload`);
     try {
@@ -117,7 +100,14 @@ const UdemyCourseForm = props => {
       dispatch({ type: FORM_SUCCESS });
 
       console.log(`Success! res.data: ${JSON.stringify(res.data, null, 2)}`);
+      setIsLoading(false);
     } catch (err) {
+      const errors = _.keyBy(err.response.data.errors, "param");
+      dispatch({
+        type: FORM_FAILURE,
+        payload: errors
+      });
+      setIsLoading(false);
       console.log(`err: ${JSON.stringify(err, null, 2)}`);
     }
   };
@@ -144,8 +134,8 @@ const UdemyCourseForm = props => {
   } = formState.fields;
 
   return (
-    <div style={formStyles}>
-      <Header as="h2">Create Udemy Course</Header>
+    <div style={{ margin: formMargin }}>
+      <Header as="h2">Udemy Course Card Create</Header>
       <Form onSubmit={handleSubmit}>
         <Form.Input
           label="Title *"
@@ -256,25 +246,6 @@ const UdemyCourseForm = props => {
           />
         </Form.Field>
 
-        {/* <Button
-          content="Choose File"
-          labelPosition="left"
-          icon="file image"
-          onClick={() => fileInputRef.current.click()}
-        />
-        <input
-          ref={fileInputRef}
-          type="file"
-          name="file"
-          hidden
-          onChange={event => {
-            event.preventDefault();
-            setFile(event.target.files[0]);
-          }}
-        /> */}
-        {/* <br />
-        <br />
-        <br /> */}
         <Form.TextArea
           label="Review *"
           value={review}
@@ -301,4 +272,4 @@ const UdemyCourseForm = props => {
   );
 };
 
-export default UdemyCourseForm;
+export default UdemyCourseCreate;

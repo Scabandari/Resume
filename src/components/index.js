@@ -9,7 +9,7 @@ import GenericExpansionPanel from "./GenericExpansionPanel";
 import SkillsExpansionPanel from "./SkillsExpansionPanel";
 import TechnologiesExpansionPanel from "./TechnologiesExpansionPanel";
 import ContactForm from "./forms/ContactForm";
-import UdemyCourseForm from "./forms/UdemyCourseForm";
+import UdemyCourseForm from "./forms/UdemyCourseForms";
 import Portal from "./Portal";
 import ClickAway from "./ClickAway";
 import UdemyCourseList from "./UdemyCourses/UdemyCourseList";
