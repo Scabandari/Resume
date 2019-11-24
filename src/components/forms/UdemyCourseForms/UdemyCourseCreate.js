@@ -6,11 +6,11 @@ import { Portal } from "../..";
 import { useServer, useScreenWidth } from "../../../hooks";
 import axios from "axios";
 
-const styles = {
-  contactForm: {
-    margin: "5rem"
-  }
-};
+// const styles = {
+//   contactForm: {
+//     margin: "5rem"
+//   }
+// };
 
 const UPDATE_FORM_FIELD = "UPDATE_FORM_FIELD";
 const CLEAR_FORM = "CLEAR_FORM";
@@ -67,6 +67,7 @@ const UdemyCourseCreate = props => {
   const [file, setFile] = useState({});
   const [formState, dispatch] = useReducer(reducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
+  const [formMargin, setFormMargin] = useState("5rem");
 
   const portalRedirect = "/udemy-courses";
   const portalHeadline = "Success!";
@@ -79,6 +80,7 @@ const UdemyCourseCreate = props => {
     } else if (width < 750) {
       margin = "3rem";
     }
+    setFormMargin(margin);
   }, [width]);
 
   const handleSubmit = async event => {
@@ -132,8 +134,8 @@ const UdemyCourseCreate = props => {
   } = formState.fields;
 
   return (
-    <div style={styles.contactForm}>
-      <Header as="h2">Create Udemy Course</Header>
+    <div style={{ margin: formMargin }}>
+      <Header as="h2">Udemy Course Card Create</Header>
       <Form onSubmit={handleSubmit}>
         <Form.Input
           label="Title *"
