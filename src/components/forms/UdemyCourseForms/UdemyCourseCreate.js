@@ -6,12 +6,6 @@ import { Portal } from "../..";
 import { useServer, useScreenWidth } from "../../../hooks";
 import axios from "axios";
 
-// const styles = {
-//   contactForm: {
-//     margin: "5rem"
-//   }
-// };
-
 const UPDATE_FORM_FIELD = "UPDATE_FORM_FIELD";
 const CLEAR_FORM = "CLEAR_FORM";
 const FORM_SUBMIT = "FORM_SUBMIT";

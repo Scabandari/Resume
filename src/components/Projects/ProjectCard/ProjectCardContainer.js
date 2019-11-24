@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { bindActionCreators } from "redux";
 
-import { changeProject } from '../../../actions';
-import ProjectCard from './ProjectCard';
+import { changeProject } from "../../../actions";
+// import ProjectCard from './ProjectCard';
+import ProjectCard from "./ProjectCard_";
 
 class ProjectCardContainer extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class ProjectCardContainer extends Component {
 
   handleClickActionCreator(project_key) {
     this.props.dispatch(changeProject(project_key));
-    this.props.history.push('/projects');
+    this.props.history.push("/projects");
     this.setState({ toPDF: true });
   }
 
@@ -35,15 +36,15 @@ class ProjectCardContainer extends Component {
 
   render() {
     if (this.state.toPDF === true) {
-      return <Redirect to='/pdf' />;
+      return <Redirect to="/pdf" />;
     }
     const { project } = this.props;
     return (
       <div
         style={{
-          height: 'auto',
+          height: "auto",
           gridRowEnd: `span ${this.state.spans}`,
-          marginBottom: '12px'
+          marginBottom: "12px"
         }}
       >
         <div ref={this.cardRef}>
