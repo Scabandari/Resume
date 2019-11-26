@@ -1,24 +1,25 @@
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import React from "react";
 import { connect } from "react-redux";
 import { Menu, Sidebar } from "semantic-ui-react";
-import axios from "axios";
 
-import DisplayImage from "./components/DisplayImage";
 import {
   Footer,
   Landing,
   PDF,
-  ContactForm,
   SkillsExpansionPanel,
   TechnologiesExpansionPanel,
   Navbar,
-  Projects,
+  ProjectListContainer,
   ClickAway,
-  UdemyCourseForm,
   UdemyCourseList
 } from "./components";
+import {
+  UdemyCourseCreate,
+  ProjectCreate,
+  ContactForm
+} from "./components/forms";
 import { setSidebarShowing } from "./actions";
 import "./App.scss";
 
@@ -45,14 +46,14 @@ const DefaultContainer = () => (
   <div className="site-container">
     <Navbar />
     <div style={styles.siteContent}>
-      <Route path="/projects" exact component={Projects} />
+      <Route path="/project-list" exact component={ProjectListContainer} />
+      <Route path="/project-create" exact component={ProjectCreate} />
       <Route path="/pdf" exact component={PDF} />
       <Route path="/skills" exact component={SkillsExpansionPanel} />
       <Route path="/techs" exact component={TechnologiesExpansionPanel} />
       <Route path="/contact" exact component={ContactForm} />
-      <Route path="/DisplayImage" exact component={DisplayImage} />
-      <Route path="/udemy-course-create" exact component={UdemyCourseForm} />
-      <Route path="/udemy-courses" exact component={UdemyCourseList} />
+      <Route path="/udemy-course-create" exact component={UdemyCourseCreate} />
+      <Route path="/udemy-course-list" exact component={UdemyCourseList} />
     </div>
     <Footer />
   </div>
@@ -92,7 +93,7 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
               </Menu.Item>
               <Menu.Item
                 as={NavLink}
-                to="/projects"
+                to="/project-list"
                 name="projects"
                 onClick={() => setSidebarShowing(false)}
               >
@@ -100,7 +101,7 @@ const App = ({ sidebarIsShowing, setSidebarShowing }) => {
               </Menu.Item>
               <Menu.Item
                 as={NavLink}
-                to="/udemy-courses"
+                to="/udemy-course-list"
                 name="udemy-courses"
                 onClick={() => setSidebarShowing(false)}
               >

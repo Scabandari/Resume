@@ -1,76 +1,60 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Button,
-  Typography,
-  Chip
-} from '@material-ui/core';
-import { FaGithub } from 'react-icons/fa';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { Card, Button } from "semantic-ui-react";
+import { Chip } from "@material-ui/core";
 
-import './ProjectCard.scss';
+const ProjectCard = ({ projectAction, project }) => {
+  const {
+    githubRepos: repos,
+    title,
+    course,
+    courseName,
+    description,
+    chips
+  } = project;
 
-const styles = {
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)'
-  },
-  title: {
-    fontSize: 14
-  }
-};
-
-const ProjectCard = ({ classes, projectAction, project }) => {
   return (
-    <Card className='card'>
-      <CardContent>
-        <Typography variant='h6' component='h2'>
-          {project.title}
-        </Typography>
-        <Typography variant='subtitle1' component='h2'>
-          {project.courseName} ({project.course})
-        </Typography>
-        <Typography component='p'>{project.description}</Typography>
-        <CardContent>
-          {project.chips.map(data => {
-            return (
-              <Chip
-                key={data.key}
-                label={data.label}
-                style={{ margin: '4px' }}
-              />
-            );
-          })}
-        </CardContent>
-      </CardContent>
-      <CardActions>
+    <Card style={{ marginBottom: "3rem " }}>
+      <Card.Content>
+        <Card.Header>{title}</Card.Header>
+        <Card.Meta>
+          <span className="date">
+            {courseName} ({course})
+          </span>
+        </Card.Meta>
+        <Card.Description>{description}</Card.Description>
+      </Card.Content>
+      <Card.Content>
+        {chips.map(data => {
+          return (
+            <Chip key={data.key} label={data.label} style={{ margin: "4px" }} />
+          );
+        })}
+      </Card.Content>
+
+      <Card.Content extra>
         <Fragment>
-          {project.github_repos.map(repo => {
+          {repos.map(repo => {
             return (
-              <Button key={repo.link} href={repo.link} size='small'>
-                <FaGithub style={{ paddingRight: 3 }} /> {repo.name}{' '}
-              </Button>
+              <a key={repo.link} href={repo.link}>
+                <Button icon="github" content={repo.name} />
+              </a>
             );
           })}
         </Fragment>
-        <Button
-          onClick={() => {
-            projectAction(project.docs);
-          }}
-        >
-          DOCS
-        </Button>
-      </CardActions>
+
+        <Link to="/pdf">
+          {" "}
+          <Button
+            style={{ marginTop: repos.length > 1 ? "3px" : 0 }}
+            icon="file"
+            content="Docs"
+            onClick={() => projectAction(project.docs)}
+          />
+        </Link>
+      </Card.Content>
     </Card>
   );
 };
 
-ProjectCard.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(ProjectCard);
+export default ProjectCard;

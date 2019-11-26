@@ -63,7 +63,7 @@ const UdemyCourseCreate = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [formMargin, setFormMargin] = useState("5rem");
 
-  const portalRedirect = "/udemy-courses";
+  const portalRedirect = "/udemy-course-list";
   const portalHeadline = "Success!";
   const portalMessage = "View your updated list of Udemy courses.";
 
@@ -80,7 +80,9 @@ const UdemyCourseCreate = props => {
   const handleSubmit = async event => {
     setIsLoading(true);
     event.preventDefault();
-    const uploadConfig = await axios.get(`${server}/upload`);
+    const uploadConfig = await axios.get(
+      `${server}/upload/resume/udemy-course/img`
+    );
     try {
       await axios.put(uploadConfig.data.url, file, {
         headers: {

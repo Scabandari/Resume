@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { Menu } from "semantic-ui-react";
+import { Menu, Button } from "semantic-ui-react";
 import { cloneDeep } from "lodash";
+import { useHistory } from "react-router-dom";
 
 import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from "./constants";
 import ProjectCardContainer from "./ProjectCard/ProjectCardContainer";
 import { changeProjectFilterTerm } from "../../actions";
 import { useScreenWidth } from "../../hooks";
-import "./Projects.scss";
+import "./ProjectList.scss";
 
 const styles = {
   columns: {
@@ -15,6 +16,11 @@ const styles = {
     flexDirection: "column",
     marginTop: "3rem",
     marginBottom: "2rem"
+  },
+  ProjectList_button: {
+    marginBottom: "3rem",
+    display: "flex",
+    justifyContent: "flex-end"
   }
 };
 
@@ -57,9 +63,10 @@ const renderColumn = (projects, screenWidth) => {
   );
 };
 
-const Projects = ({ data, changeProjectFilterTerm }) => {
+const ProjectList = ({ data, changeProjectFilterTerm }) => {
   const [activeItem, setActiveItem] = useState(ALL);
-  const windowWidth = useScreenWidth();
+  const history = useHistory();
+  const width = useScreenWidth();
 
   return (
     <div>
@@ -105,10 +112,20 @@ const Projects = ({ data, changeProjectFilterTerm }) => {
           justifyContent: "space-around"
         }}
       >
-        {renderColumn(data, windowWidth)}
+        {renderColumn(data, width)}
+      </div>
+      <div style={styles.ProjectList_button}>
+        <Button
+          style={{ marginRight: `${width < 500 ? "3rem" : "8rem"}` }}
+          circular
+          size="massive"
+          negative
+          icon="plus"
+          onClick={() => history.push("/project-create")}
+        />
       </div>
     </div>
   );
 };
 
-export default connect(null, { changeProjectFilterTerm })(Projects);
+export default connect(null, { changeProjectFilterTerm })(ProjectList);

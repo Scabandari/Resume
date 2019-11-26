@@ -27,17 +27,17 @@ const MenuExampleSecondary = ({
           <Menu.Menu position="right">
             <Menu.Item
               as={NavLink}
-              to="/projects"
+              to="/project-list"
               name="projects"
-              active={pathname === "/projects"}
+              active={pathname === "/project-list"}
             >
               <p>Projects</p>
             </Menu.Item>
             <Menu.Item
               as={NavLink}
-              to="/udemy-courses"
+              to="/udemy-course-list"
               name="udemy-courses"
-              active={pathname === "/udemy-courses"}
+              active={pathname === "/udemy-course-list"}
             >
               <p>Udemy</p>
             </Menu.Item>

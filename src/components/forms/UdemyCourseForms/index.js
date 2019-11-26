@@ -1,3 +1,3 @@
-import UdemyCourseCreate from './UdemyCourseCreate';
+import UdemyCourseCreate from "./UdemyCourseCreate";
 
-export default UdemyCourseCreate;
+export { UdemyCourseCreate };
