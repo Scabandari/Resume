@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer, useRef } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { Form, Header, Button, Checkbox, Dropdown } from "semantic-ui-react";
 import _ from "lodash";
 

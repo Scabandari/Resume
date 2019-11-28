@@ -31,11 +31,3 @@ export default (state = INITIAL_STATE, action) => {
   }
 };
 
-// export default (state=INITIAL_STATE, action) => {
-//     switch(action.type) {
-//         case CHANGE_PROJECT:
-//             return {...state, project_key: action.payload};
-//         default:
-//             return state;
-//     }
-// }

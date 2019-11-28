@@ -1,9 +1,18 @@
 import React, { useEffect, useState, useReducer } from "react";
-import { Form, Header, Button, Checkbox, Dropdown } from "semantic-ui-react";
+import {
+  Form,
+  Header,
+  Button,
+  Checkbox,
+  Icon,
+  Label,
+  Input
+  //Dropdown
+} from "semantic-ui-react";
 import _ from "lodash";
 
 import { Portal } from "../..";
-import { useServer, useScreenWidth } from "../../../hooks";
+import { useServer, useScreenWidth, useWatcher } from "../../../hooks";
 import axios from "axios";
 
 const UPDATE_FORM_FIELD = "UPDATE_FORM_FIELD";
@@ -13,6 +22,8 @@ const FORM_SUCCESS = "FORM_SUCCESS";
 const FORM_FAILURE = "FORM_FAILURE";
 const SET_ERRORS = "SET_ERRORS";
 const UPDATE_HAS_SECOND_REPO = "UPDATE_HAS_SECOND_REPO";
+const ADD_CHIP = "ADD_CHIP";
+const REMOVE_CHIP = "REMOVE_CHIP";
 
 const initialState = {
   fields: {
@@ -28,7 +39,8 @@ const initialState = {
     // report: "",
     chips: [],
     mainRepo: "",
-    secondRepo: ""
+    secondRepo: "",
+    newChip: "" // Anything from here down not part of actual object
   },
   errors: {},
   portalIsOpen: false,
@@ -51,6 +63,23 @@ const reducer = (state, { type, payload, name }) => {
       return { ...state, errors: payload };
     case UPDATE_HAS_SECOND_REPO:
       return { ...state, hasSecondRepo: payload };
+    case ADD_CHIP:
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          newChip: "",
+          chips: [...state.fields.chips, payload]
+        }
+      };
+    case REMOVE_CHIP:
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          chips: state.fields.chips.filter(chip => chip != payload)
+        }
+      };
     default:
       throw new Error("Undefined type in reducer for UdemyCourseForm");
   }
@@ -70,6 +99,7 @@ const ProjectCreate = props => {
   const [report, setReport] = useState(null);
   const [probStatement, setStatement] = useState(null);
   const [formState, dispatch] = useReducer(reducer, initialState);
+  useWatcher(Object.keys({ formState })[0], formState);
   const [isLoading, setIsLoading] = useState(false);
   const [formMargin, setFormMargin] = useState("5rem");
 
@@ -85,6 +115,36 @@ const ProjectCreate = props => {
     });
   };
 
+  const addChip = chip => {
+    dispatch({
+      type: ADD_CHIP,
+      payload: chip
+    });
+  };
+
+  const removeChip = chip => {
+    dispatch({
+      type: REMOVE_CHIP,
+      payload: chip
+    });
+  };
+
+  const renderChips = chips => {
+    //const { chips } = formState.fields;
+    return (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {chips.map(chip => {
+          return (
+            <Label key={chip}>
+              {chip}
+              <Icon name="delete" onClick={() => removeChip(chip)} />
+            </Label>
+          );
+        })}
+      </div>
+    );
+  };
+
   useEffect(() => {
     let margin = "5rem";
     if (width < 500) {
@@ -93,7 +153,15 @@ const ProjectCreate = props => {
       margin = "3rem";
     }
     setFormMargin(margin);
+    //console.log(`${Object.keys({ width })[0]}: ${width}`);
   }, [width]);
+
+  const handleClick = event => {
+    event.preventDefault();
+    const { newChip } = formState.fields;
+    //console.log(`adding newChip: ${newChip}`);
+    addChip(newChip);
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -106,24 +174,19 @@ const ProjectCreate = props => {
       const reportConfig = await axios.get(
         `${server}/upload/resume/projects/report`
       );
-      // Upload files direct to S3
-        await axios.put(reportConfig.data.url, report, {
-          headers: {
-            "Content-Type": report.type
-          }
-        });
-        await axios.put(statementConfig.data.url, probStatement, {
-          headers: {
-            "Content-Type": probStatement.type
-          }
-        });
+      //Upload files direct to S3
+      await axios.put(reportConfig.data.url, report, {
+        headers: {
+          "Content-Type": report.type
+        }
+      });
+      await axios.put(statementConfig.data.url, probStatement, {
+        headers: {
+          "Content-Type": probStatement.type
+        }
+      });
       console.log(`formState.fields: ${JSON.stringify(formState.fields)}`);
-      const {
-        //hasSecondRepo,
-        fields
-      } = formState;
-    //   const links = hasSecondRepo ? [repo, secondRepo] : [repo];
-    //   const fields = { ...formState.fields, repoLinks: links };
+      const { fields } = formState;
       const res = await axios.post(`${server}/resume/projects`, {
         ...fields,
         probStatement: statementConfig.data.key,
@@ -153,14 +216,6 @@ const ProjectCreate = props => {
     );
   };
 
-  //   const {
-  //     title,
-  //     subTitle,
-  //     description,
-  //     secondRepo,
-  //     repoLinks,
-  //     chips
-  //   } = formState.fields;
   const {
     fields: {
       title,
@@ -170,7 +225,8 @@ const ProjectCreate = props => {
       secondRepo,
       firstRepoName,
       secondRepoName,
-      chips
+      chips,
+      newChip
     },
     hasSecondRepo
   } = formState;
@@ -185,13 +241,6 @@ const ProjectCreate = props => {
           name="title"
           placeholder="Card title"
           error={showErrors("title")}
-          //   onChange={(e, { name, value }) =>
-          //     dispatch({
-          //       type: UPDATE_FORM_FIELD,
-          //       payload: value,
-          //       name
-          //     })
-          //   }
           onChange={(e, { name, value }) => updateForm(name, value)}
         />
         <Form.Input
@@ -288,7 +337,21 @@ const ProjectCreate = props => {
             onChange={event => setReport(event.target.files[0])}
           />
         </Form.Field>
-
+        <Form.Group>
+          <Form.Input
+            label="Add Chips"
+            value={newChip}
+            name="newChip"
+            //error={showErrors("secondRepoName")}
+            placeholder="Chip"
+            width={3}
+            onChange={(e, { name, value }) => updateForm(name, value)}
+          />
+          {renderChips(chips)}
+        </Form.Group>
+        <Button onClick={handleClick} icon>
+          <Icon name="plus" />
+        </Button>
         <Form.TextArea
           label="Description *"
           value={description}
