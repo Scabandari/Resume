@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { Icon, Menu } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
@@ -11,11 +11,10 @@ const MenuExampleSecondary = ({
   location
 }) => {
   const { pathname } = location;
-  const ref = useRef(undefined); // was null, neither work sometimes not sure why
   const width = useScreenWidth();
 
   return (
-    <div ref={ref} style={{ backgroundColor: "#000000" }}>
+    <div style={{ backgroundColor: "#000000" }}>
       <Menu icon color="black" inverted size="massive">
         <Menu.Item header name="Ryan Nichols" />
 
@@ -27,17 +26,17 @@ const MenuExampleSecondary = ({
           <Menu.Menu position="right">
             <Menu.Item
               as={NavLink}
-              to="/projects"
+              to="/project-list"
               name="projects"
-              active={pathname === "/projects"}
+              active={pathname === "/project-list"}
             >
               <p>Projects</p>
             </Menu.Item>
             <Menu.Item
               as={NavLink}
-              to="/udemy-courses"
+              to="/udemy-course-list"
               name="udemy-courses"
-              active={pathname === "/udemy-courses"}
+              active={pathname === "/udemy-course-list"}
             >
               <p>Udemy</p>
             </Menu.Item>

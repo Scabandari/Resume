@@ -1,4 +1,3 @@
-import ProjectsContainer from './ProjectsContainer';
+import ProjectListContainer from "./ProjectListContainer";
 
-export default ProjectsContainer;
-
+export default ProjectListContainer;

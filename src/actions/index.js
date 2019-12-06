@@ -57,15 +57,3 @@ export const signOut = () => {
   };
 };
 
-// export const fetchUser = () => dispatch => {
-//   dispatch({ type: FETCH_USER, payload: {greeting: "Hello"}});
-// };
-
-// export const changeProject = project_key => {
-//   return {
-//     type: CHANGE_PROJECT,
-//     payload: project_key
-//   };
-// };
-
-//

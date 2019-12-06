@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 
 import { changeProject } from "../../../actions";
 // import ProjectCard from './ProjectCard';
-import ProjectCard from "./ProjectCard_";
+import ProjectCard from "./ProjectCard";
 
 class ProjectCardContainer extends Component {
   constructor(props) {

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Menu } from "semantic-ui-react";
+import { Menu, Button } from "semantic-ui-react";
 import { cloneDeep } from "lodash";
+import { useHistory } from "react-router-dom";
 
 import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from "./constants";
 import ProjectCardContainer from "./ProjectCard/ProjectCardContainer";
 import { changeProjectFilterTerm } from "../../actions";
 import { useScreenWidth } from "../../hooks";
-import "./Projects.scss";
 
 const styles = {
   columns: {
@@ -15,6 +15,11 @@ const styles = {
     flexDirection: "column",
     marginTop: "3rem",
     marginBottom: "2rem"
+  },
+  ProjectList_button: {
+    marginBottom: "3rem",
+    display: "flex",
+    justifyContent: "flex-end"
   }
 };
 
@@ -35,7 +40,7 @@ const renderColumn = (projects, screenWidth) => {
 
   const localProjects = cloneDeep(projects);
   // distribute projects evenly among columns
-  while (localProjects.length > 0) {
+  while (localProjects.length) {
     columnList[incVal].push(localProjects.pop());
     incVal = (incVal + 1) % columns;
   }
@@ -57,13 +62,14 @@ const renderColumn = (projects, screenWidth) => {
   );
 };
 
-const Projects = ({ data, changeProjectFilterTerm }) => {
+const ProjectList = ({ data, changeProjectFilterTerm }) => {
   const [activeItem, setActiveItem] = useState(ALL);
-  const windowWidth = useScreenWidth();
+  const history = useHistory();
+  const width = useScreenWidth();
 
   return (
     <div>
-      <div className="second-nav-container">
+      <div style={{ minWidth: "100vw", backgroundColor: "black" }}>
         <Menu inverted stackable fluid widths={4}>
           <Menu.Item
             name={ALL}
@@ -102,13 +108,23 @@ const Projects = ({ data, changeProjectFilterTerm }) => {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-around"
+          justifyContent: "space-evenly"
         }}
       >
-        {renderColumn(data, windowWidth)}
+        {renderColumn(data, width)}
+      </div>
+      <div style={styles.ProjectList_button}>
+        <Button
+          style={{ marginRight: `${width < 500 ? "3rem" : "8rem"}` }}
+          circular
+          size="massive"
+          negative
+          icon="plus"
+          onClick={() => history.push("/project-create")}
+        />
       </div>
     </div>
   );
 };
 
-export default connect(null, { changeProjectFilterTerm })(Projects);
+export default connect(null, { changeProjectFilterTerm })(ProjectList);
