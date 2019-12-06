@@ -83,12 +83,12 @@ const UdemyCourseCreate = props => {
     const uploadConfig = await axios.get(
       `${server}/upload/resume/udemy-course/img`
     );
+    await axios.put(uploadConfig.data.url, file, {
+      headers: {
+        "Content-Type": file.type
+      }
+    });
     try {
-      await axios.put(uploadConfig.data.url, file, {
-        headers: {
-          "Content-Type": file.type
-        }
-      });
       const res = await axios.post(`${server}/resume/udemy-courses`, {
         ...formState.fields,
         imgUrl: uploadConfig.data.key

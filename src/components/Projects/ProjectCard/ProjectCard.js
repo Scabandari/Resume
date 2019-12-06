@@ -1,66 +1,108 @@
-import React, { useState, useRef, useEffect, Fragment } from "react";
-import { Link } from "react-router-dom";
-import { Card, Button } from "semantic-ui-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Card, Button, Menu, Icon } from "semantic-ui-react";
 import { Chip } from "@material-ui/core";
-import axios from "axios";
 
 import { useS3BucketEndpoint } from "../../../hooks";
 
 const ProjectCard = ({ projectAction, project }) => {
+  const [menuItems, setMenuItems] = useState([]);
+  const [linksViewable, setLinksViewable] = useState(false);
   const s3bucket = useS3BucketEndpoint();
-  //const [projectDocs, setDocs] = useState({});
+  const [firstGitRepo, setFirstRepo] = useState(""); // A url
+  const [secondGitRepo, setSecondRepo] = useState(""); // A url
+  const firstGitRef = useRef(); // Refs for external links
+  const secondGitRef = useRef();
   const probRef = useRef();
   const reportRef = useRef();
 
-  //   useEffect(() => {
-  //     console.log(`pdf Url: ${s3bucket}/${report}`);
-  //   }, []);
   const {
-    firstRepo,
-    secondRepo,
-    firstRepoName,
-    secondRepoName,
     title,
     subTitle,
     description,
     probStatement,
     report,
+    repositories,
     chips
   } = project;
 
-  const hasSecondRepo = secondRepo !== "";
-  const singlePdf = probStatement === report;
+  // Prepare menuItems for rendering
+  useEffect(() => {
+    //console.log(`repositories: ${JSON.stringify(repositories, null, 2)}`);
+    const items = [];
+    if (repositories[0]) {
+      //   console.log(project.title);
+      //   console.log("Adding repo1");
+      const { url, name } = repositories[0];
+      setFirstRepo(url);
+      items.push({
+        icon: "github",
+        name: name || "Repo",
+        click: () => firstGitRef.current.click()
+      });
+    }
+    if (repositories[1]) {
+      //console.log("Adding repo2");
+      const { url, name } = repositories[1];
+      setSecondRepo(url);
+      items.push({
+        icon: "github",
+        name: name || "Repo",
+        click: () => secondGitRef.current.click()
+      });
+      //console.log(`probStatement: ${probStatement}`);
+    }
+    if (probStatement) {
+      //   console.log(`project: ${JSON.stringify(project)}`);
+      //   console.log("Adding probStatement");
+      items.push({
+        icon: "file",
+        name: "Problem Statement",
+        click: () => probRef.current.click()
+      });
+    }
+    setMenuItems(items);
+    //console.log(`report: ${report}`);
+    if (report) {
+      //console.log("Adding report");
+      items.push({
+        icon: "file",
+        name: "Report",
+        click: () => reportRef.current.click()
+      });
+    }
+  }, [project]);
 
-  const renderButtons = (probRef, reportRef) => {
+  const renderMenuItems = () => {
+    //const items = [];
+    console.log(`menuItems: ${JSON.stringify(menuItems, null, 2)}`);
     return (
       <>
-        {singlePdf ? (
-          <Button
-            style={{ marginTop: hasSecondRepo ? "3px" : 0 }}
-            icon="file"
-            content="Report"
-            onClick={() => reportRef.current.click()}
-          />
-        ) : (
-          <div></div>
-        )}
-        <Button.Group>
-          <Button
-            style={{ marginTop: hasSecondRepo ? "3px" : 0 }}
-            icon="file"
-            content="Prob Desc"
-            onClick={() => probRef.current.click()}
-          />
-          <Button
-            style={{ marginTop: hasSecondRepo ? "3px" : 0 }}
-            icon="file"
-            content="Report"
-            onClick={() => reportRef.current.click()}
-          />
-        </Button.Group>
+        {menuItems.map(item => {
+          return (
+            <Menu.Item
+              key={item.name}
+              icon={item.icon}
+              name={item.name}
+              onClick={item.click}
+            />
+          );
+        })}
       </>
     );
   };
+
+  const renderChevron = direction => {
+    return (
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Icon
+          circular
+          name={`chevron ${direction}`}
+          onClick={() => setLinksViewable(!linksViewable)}
+        />
+      </div>
+    );
+  };
+
   return (
     <Card style={{ marginBottom: "3rem " }}>
       <Card.Content>
@@ -68,44 +110,28 @@ const ProjectCard = ({ projectAction, project }) => {
         <Card.Meta>{subTitle}</Card.Meta>
         <Card.Description>{description}</Card.Description>
       </Card.Content>
-      <Card.Content>
+      {chips.length > 0 && (
+        <Card.Content>
           {chips.map(chip => {
             return <Chip key={chip} label={chip} style={{ margin: "4px" }} />;
           })}
-      </Card.Content>
+        </Card.Content>
+      )}
 
       <Card.Content extra>
-        {hasSecondRepo ? (
+        {(linksViewable && (
           <>
-            <a href={firstRepo}>
-              <Button icon="github" content={firstRepoName} />
-            </a>
-            <a href={secondRepo}>
-              <Button icon="github" content={secondRepoName} />
-            </a>
+            <Menu fluid vertical>
+              {renderMenuItems()}
+            </Menu>
+            {renderChevron("up")}
+            <a ref={firstGitRef} href={firstGitRepo} />
+            <a ref={secondGitRef} href={secondGitRepo} />
+            <a ref={probRef} href={`${s3bucket}/${probStatement}`} />
+            <a ref={reportRef} href={`${s3bucket}/${report}`} />
           </>
-        ) : (
-          <a href={firstRepo}>
-            <Button icon="github" content="Repo" />
-          </a>
-        )}
-        <>
-          {singlePdf ? ( // There can only be one or two pdfs
-            <a href={`${s3bucket}/${report}`}>
-              <Button
-                style={{ marginTop: hasSecondRepo ? "3px" : 0 }}
-                icon="file"
-                content="Report"
-              />
-            </a>
-          ) : (
-            <>
-              {renderButtons(probRef, reportRef)}
-              <a ref={probRef} href={`${s3bucket}/${probStatement}`} hidden></a>
-              <a ref={reportRef} href={`${s3bucket}/${report}`} hidden></a>
-            </>
-          )}
-        </>
+        )) ||
+          (menuItems.length && renderChevron("down"))}
       </Card.Content>
     </Card>
   );

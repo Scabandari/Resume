@@ -6,47 +6,46 @@ import {
   Checkbox,
   Icon,
   Label,
-  Input
-  //Dropdown
+  Dropdown
 } from "semantic-ui-react";
 import _ from "lodash";
+import axios from "axios";
 
 import { Portal } from "../..";
 import { useServer, useScreenWidth, useWatcher } from "../../../hooks";
-import axios from "axios";
-
-const UPDATE_FORM_FIELD = "UPDATE_FORM_FIELD";
-const CLEAR_FORM = "CLEAR_FORM";
-const FORM_SUBMIT = "FORM_SUBMIT";
-const FORM_SUCCESS = "FORM_SUCCESS";
-const FORM_FAILURE = "FORM_FAILURE";
-const SET_ERRORS = "SET_ERRORS";
-const UPDATE_HAS_SECOND_REPO = "UPDATE_HAS_SECOND_REPO";
-const ADD_CHIP = "ADD_CHIP";
-const REMOVE_CHIP = "REMOVE_CHIP";
+import { BASH, DATA_SCIENCE, WEB_DEV, ALL } from "../../Projects/constants";
 
 const initialState = {
   fields: {
     title: "",
     subTitle: "",
     description: "",
+    probStatement: "", // Represents the url of file stored on S3 on successful upload
+    report: "", // Represents the url of file stored on S3 on successful upload
+    repositories: [],
+    chips: [],
+    tags: [],
+    // fields below not part of actual Project document on backend
+    newChip: "",
     firstRepo: "",
     firstRepoName: "",
     secondRepo: "",
-    secondRepoName: "",
-    //repoLinks: [],
-    // problemStatement: "",
-    // report: "",
-    chips: [],
-    mainRepo: "",
-    secondRepo: "",
-    newChip: "" // Anything from here down not part of actual object
+    secondRepoName: ""
   },
   errors: {},
   portalIsOpen: false,
   hasSecondRepo: false
 };
 
+const UPDATE_FORM_FIELD = "UPDATE_FORM_FIELD";
+const CLEAR_FORM = "CLEAR_FORM";
+const FORM_SUBMIT = "FORM_SUBMIT";
+const FORM_SUCCESS = "FORM_SUCCESS";
+const SET_ERROR = "SET_ERROR";
+const SET_ALL_ERRORS = "SET_ALL_ERRORS";
+const UPDATE_HAS_SECOND_REPO = "UPDATE_HAS_SECOND_REPO";
+const ADD_CHIP = "ADD_CHIP";
+const REMOVE_CHIP = "REMOVE_CHIP";
 const reducer = (state, { type, payload, name }) => {
   switch (type) {
     case UPDATE_FORM_FIELD:
@@ -55,12 +54,18 @@ const reducer = (state, { type, payload, name }) => {
       return { ...state, errors: {} };
     case FORM_SUCCESS:
       return { ...initialState, portalIsOpen: true };
-    case FORM_FAILURE:
-      return { ...state, errors: payload };
     case CLEAR_FORM:
       return initialState;
-    case SET_ERRORS:
-      return { ...state, errors: payload };
+    case SET_ERROR:
+      return {
+        ...state,
+        errors: { ...state.errors, [name]: payload }
+      };
+    case SET_ALL_ERRORS:
+      return {
+        ...state,
+        errors: payload
+      };
     case UPDATE_HAS_SECOND_REPO:
       return { ...state, hasSecondRepo: payload };
     case ADD_CHIP:
@@ -77,35 +82,50 @@ const reducer = (state, { type, payload, name }) => {
         ...state,
         fields: {
           ...state.fields,
-          chips: state.fields.chips.filter(chip => chip != payload)
+          chips: state.fields.chips.filter(chip => chip !== payload)
         }
       };
     default:
-      throw new Error("Undefined type in reducer for UdemyCourseForm");
+      console.log(`Reducer error for type: ${type}`);
+      throw new Error("Undefined type in reducer for ProjectCreate form");
   }
 };
-
-// ref: https://react.semantic-ui.com/modules/dropdown/#variations-compact
-// const getDropdownOptions = (number, prefix = "Choice ") =>
-//   _.times(number, index => ({
-//     key: index,
-//     text: `${prefix}${index}`,
-//     value: index
-//   }));
 
 const ProjectCreate = props => {
   const server = useServer();
   const width = useScreenWidth();
-  const [report, setReport] = useState(null);
-  const [probStatement, setStatement] = useState(null);
+  const [report, setReport] = useState(null); // Holds the actual file from the form
+  const [probStatement, setStatement] = useState(null); // Holds the actual file from the form
+  //useWatcher(probStatement);
   const [formState, dispatch] = useReducer(reducer, initialState);
-  useWatcher(Object.keys({ formState })[0], formState);
+  //useWatcher(Object.keys({ formState })[0], formState);
   const [isLoading, setIsLoading] = useState(false);
   const [formMargin, setFormMargin] = useState("5rem");
 
   const portalRedirect = "/project-list";
   const portalHeadline = "Success!";
   const portalMessage = "View your updated list of projects.";
+
+  const tagOptions = [
+    { key: WEB_DEV, text: "Web Development", value: WEB_DEV },
+    { key: DATA_SCIENCE, text: "Data Science", value: DATA_SCIENCE },
+    { key: BASH, text: "Bash", value: BASH }
+  ];
+
+  useEffect(() => {
+    let margin = "5rem";
+    if (width < 500) {
+      margin = "1.5rem";
+    } else if (width < 750) {
+      margin = "3rem";
+    }
+    setFormMargin(margin);
+  }, [width]);
+
+  useEffect(() => {
+    console.log(`report: ${JSON.stringify(report)}`);
+    console.log(`prob: ${JSON.stringify(probStatement)}`);
+  }, [report, probStatement]);
 
   const updateForm = (name, value) => {
     dispatch({
@@ -114,6 +134,21 @@ const ProjectCreate = props => {
       name
     });
   };
+
+  const setErrors = errors => {
+    dispatch({
+      type: SET_ALL_ERRORS,
+      payload: errors
+    });
+  };
+
+  //   const addError = (name, error) => {
+  //     dispatch({
+  //       type: SET_ERROR,
+  //       payload: error,
+  //       name
+  //     });
+  //   };
 
   const addChip = chip => {
     dispatch({
@@ -130,7 +165,6 @@ const ProjectCreate = props => {
   };
 
   const renderChips = chips => {
-    //const { chips } = formState.fields;
     return (
       <div style={{ display: "flex", alignItems: "center" }}>
         {chips.map(chip => {
@@ -145,64 +179,126 @@ const ProjectCreate = props => {
     );
   };
 
-  useEffect(() => {
-    let margin = "5rem";
-    if (width < 500) {
-      margin = "1.5rem";
-    } else if (width < 750) {
-      margin = "3rem";
+  const getRepositories = () => {
+    const repos = [];
+    if (firstRepo) {
+      repos.push({
+        url: firstRepo,
+        name: firstRepoName
+      });
+      if (secondRepo) {
+        repos.push({
+          url: secondRepo,
+          name: secondRepoName
+        });
+      }
     }
-    setFormMargin(margin);
-    //console.log(`${Object.keys({ width })[0]}: ${width}`);
-  }, [width]);
+    return repos;
+  };
 
   const handleClick = event => {
     event.preventDefault();
     const { newChip } = formState.fields;
-    //console.log(`adding newChip: ${newChip}`);
     addChip(newChip);
   };
 
-  const handleSubmit = async event => {
-    event.preventDefault();
-    setIsLoading(true);
-    try {
-      // Get pre-signed urls
-      const statementConfig = await axios.get(
+  // Pre-signed urls have a key property to save in the document and a url for direct upload
+  // to S3.
+  const getPreSignedUrls = async () => {
+    // Get pre-signed urls
+    let statementConfig;
+    let reportConfig;
+    const preSignedUrls = {};
+    // TODO try catch blocks and error handling
+    if (probStatement) {
+      console.log(`setting problemStatement`);
+      statementConfig = await axios.get(
         `${server}/upload/resume/projects/problem-statement`
       );
-      const reportConfig = await axios.get(
-        `${server}/upload/resume/projects/report`
-      );
-      //Upload files direct to S3
-      await axios.put(reportConfig.data.url, report, {
+      preSignedUrls.probStatement = statementConfig.data;
+    }
+    if (report) {
+      console.log(`setting report`);
+      reportConfig = await axios.get(`${server}/upload/resume/projects/report`);
+      preSignedUrls.report = reportConfig.data;
+    }
+    return preSignedUrls;
+  };
+
+  const getUpdatedDocs = preSigned => {
+    let probStatement = "";
+    let report = "";
+    if (preSigned.probStatement) {
+      probStatement = preSigned.probStatement.key;
+    }
+    if (preSigned.report) {
+      report = preSigned.report.key;
+    }
+    return { probStatement, report };
+  };
+
+  const uploadToS3 = async preSigned => {
+    if (preSigned.report) {
+      console.log(`report.type: ${report.type}`);
+      await axios.put(preSigned.report.url, report, {
         headers: {
           "Content-Type": report.type
         }
       });
-      await axios.put(statementConfig.data.url, probStatement, {
+    }
+    if (preSigned.probStatement) {
+      console.log(`probStatement.type: ${probStatement.type}`);
+      await axios.put(preSigned.probStatement.url, probStatement, {
         headers: {
           "Content-Type": probStatement.type
         }
       });
-      console.log(`formState.fields: ${JSON.stringify(formState.fields)}`);
-      const { fields } = formState;
-      const res = await axios.post(`${server}/resume/projects`, {
-        ...fields,
-        probStatement: statementConfig.data.key,
-        report: reportConfig.data.key
-      });
+    }
+  };
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setErrors({});
+    setIsLoading(true);
+    // The url is for put request, the key is to save in the mongoose document
+    const preSigned = await getPreSignedUrls(probStatement, report);
+    //console.log(`urls: ${JSON.stringify(preSigned, null, 2)}`);
+    // Take preSigned object and if defined upload files to S3
+    try {
+      await uploadToS3(preSigned);
+    } catch (err) {
+      console.log(`Error while direct uploading docs to S3: ${err}`);
+    }
+    const { probStatement: ps, report: r } = getUpdatedDocs(preSigned);
+    const repos = getRepositories();
+    const { fields: formFields } = formState;
+    const fields = {
+      ...formFields,
+      tags: [...formFields.tags, ALL],
+      repositories: repos,
+      probStatement: ps,
+      report: r
+    };
+    //console.log(`fields: ${JSON.stringify(fields, null, 2)}`);
+    try {
+      const res = await axios.post(`${server}/resume/projects`, fields);
       dispatch({ type: FORM_SUCCESS });
-      console.log(`Success! res.data: ${JSON.stringify(res.data, null, 2)}`);
       setIsLoading(false);
     } catch (err) {
-      const formErrors = _.keyBy(err.response.data.errors, "param");
-      dispatch({
-        type: FORM_FAILURE,
-        payload: formErrors
-      });
+      console.log(
+        `Could not make POST request for Project, err: ${JSON.stringify(
+          err,
+          null,
+          2
+        )}`
+      );
+      try {
+        const formErrors = _.keyBy(err.response.data.errors, "param");
+        setErrors(formErrors);
+      } catch (error) {
+        console.log(`Could not set errors, error: ${error}`);
+      }
       setIsLoading(false);
-      console.log(`err: ${JSON.stringify(err, null, 2)}`);
     }
   };
 
@@ -251,60 +347,49 @@ const ProjectCreate = props => {
           error={showErrors("subTitle")}
           onChange={(e, { name, value }) => updateForm(name, value)}
         />
-        {hasSecondRepo ? (
-          <>
-            <Form.Group>
-              <Form.Input
-                label="First Repository"
-                value={firstRepo}
-                name="firstRepo"
-                error={showErrors("firstRepo")}
-                placeholder="www.github.com/firstRepo"
-                width={10}
-                onChange={(e, { name, value }) => updateForm(name, value)}
-              />
-              <Form.Input
-                label="Repo Name"
-                value={firstRepoName}
-                name="firstRepoName"
-                error={showErrors("firstRepoName")}
-                placeholder="Client"
-                width={6}
-                onChange={(e, { name, value }) => updateForm(name, value)}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Input
-                label="Second Repository"
-                value={secondRepo}
-                name="secondRepo"
-                error={showErrors("secondRepo")}
-                placeholder="www.github.com/secondRepo"
-                width={10}
-                onChange={(e, { name, value }) => updateForm(name, value)}
-              />
-              <Form.Input
-                label="Repo Name"
-                value={secondRepoName}
-                name="secondRepoName"
-                error={showErrors("secondRepoName")}
-                placeholder="Server"
-                width={6}
-                onChange={(e, { name, value }) => updateForm(name, value)}
-              />
-            </Form.Group>
-          </>
-        ) : (
+        <Form.Group>
           <Form.Input
-            label="Github Repository *"
+            label={`Github Repository ${hasSecondRepo ? "*" : ""}`}
             value={firstRepo}
             name="firstRepo"
-            placeholder="www.github.com/yourRepo"
             error={showErrors("firstRepo")}
+            placeholder="www.github.com/myRepo"
+            width={10}
             onChange={(e, { name, value }) => updateForm(name, value)}
           />
+          <Form.Input
+            label={`Repo Name ${hasSecondRepo ? "*" : ""}`}
+            value={firstRepoName}
+            name="firstRepoName"
+            error={showErrors("firstRepoName")}
+            placeholder="Ex. Client"
+            width={6}
+            onChange={(e, { name, value }) => updateForm(name, value)}
+          />
+        </Form.Group>
+        {hasSecondRepo && (
+          <Form.Group>
+            <Form.Input
+              label="Second Repository *"
+              value={secondRepo}
+              name="secondRepo"
+              error={showErrors("secondRepo")}
+              placeholder="www.github.com/myOtherRepo"
+              width={10}
+              onChange={(e, { name, value }) => updateForm(name, value)}
+            />
+            <Form.Input
+              label="Repo Name *"
+              value={secondRepoName}
+              name="secondRepoName"
+              error={showErrors("secondRepoName")}
+              placeholder="Ex. Server"
+              width={6}
+              onChange={(e, { name, value }) => updateForm(name, value)}
+            />
+          </Form.Group>
         )}
-        <Form.Field>
+        <Form.Field style={{ marginTop: "8px" }}>
           <Checkbox
             label="I have a second Repository"
             name="secondRepo"
@@ -319,18 +404,22 @@ const ProjectCreate = props => {
           />
         </Form.Field>
 
-        <h6>Add a Problem Statement</h6>
+        <b>Problem Statement</b>
         <Form.Field>
-          {" "}
           <input
             type="file"
             accept="application/*"
-            onChange={event => setStatement(event.target.files[0])}
+            name="documents"
+            error={showErrors("documents")}
+            onChange={event => {
+              setStatement(event.target.files[0]);
+              console.log("set prob statement just ran");
+            }}
           />
         </Form.Field>
-        <h6>Add a Report</h6>
+
+        <b>Report</b>
         <Form.Field>
-          {" "}
           <input
             type="file"
             accept="application/*"
@@ -338,20 +427,52 @@ const ProjectCreate = props => {
           />
         </Form.Field>
         <Form.Group>
-          <Form.Input
-            label="Add Chips"
-            value={newChip}
-            name="newChip"
-            //error={showErrors("secondRepoName")}
-            placeholder="Chip"
-            width={3}
+          <div style={{ width: "150px" }}>
+            {" "}
+            <Form.Input
+              label="Chips"
+              value={newChip}
+              name="newChip"
+              placeholder="Chip"
+              //width={3}
+              onChange={(e, { name, value }) => updateForm(name, value)}
+            />
+          </div>
+          <div
+            style={{
+              marginLeft: "35px",
+              display: "flex",
+              alignItems: "flex-end",
+              flexWrap: "wrap"
+            }}
+          >
+            {renderChips(chips)}
+          </div>
+        </Form.Group>
+        <div
+          style={{
+            maxWidth: "175px",
+            display: "flex",
+            justifyContent: "flex-end"
+          }}
+        >
+          {" "}
+          <Button onClick={handleClick} icon>
+            <Icon name="plus" />
+          </Button>
+        </div>
+        <Form.Field>
+          <b>Tags</b>
+          <Dropdown
+            placeholder="Tags"
+            fluid
+            multiple
+            selection
+            options={tagOptions}
+            name="tags"
             onChange={(e, { name, value }) => updateForm(name, value)}
           />
-          {renderChips(chips)}
-        </Form.Group>
-        <Button onClick={handleClick} icon>
-          <Icon name="plus" />
-        </Button>
+        </Form.Field>
         <Form.TextArea
           label="Description *"
           value={description}

@@ -1,25 +1,32 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 import ProjectList from "./ProjectList";
-import data from "./project_data";
+import { useServer } from "../../hooks";
 
-const renderColumn = (projectList, filterTag) => {
+const filterProjects = (projectList, filterTag) => {
   return projectList.filter(proj => {
     return proj["tags"].includes(filterTag);
   });
 };
 
-const ProjectListContainer = ({ projectsFilterTerm }) => {
-  const projectList = renderColumn(data, projectsFilterTerm);
+const ProjectListContainer = () => {
+  const projectsFilterTerm = useSelector(
+    state => state.currentProject.projectsFilterTerm
+  );
+  const server = useServer();
+  const [projects, setProjects] = useState([]);
 
-  return <ProjectList data={projectList} />;
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const response = await axios.get(`${server}/resume/projects`);
+      setProjects(response.data);
+    };
+    fetchProjects();
+  }, []);
+
+  return <ProjectList data={filterProjects(projects, projectsFilterTerm)} />;
 };
 
-const mapStateToProps = state => {
-  return {
-    projectsFilterTerm: state.currentProject.projectsFilterTerm
-  };
-};
-
-export default connect(mapStateToProps, null)(ProjectListContainer);
+export default ProjectListContainer;

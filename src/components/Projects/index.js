@@ -1,3 +1,3 @@
-import ProjectListContainer_ from "./ProjectListContainer_";
+import ProjectListContainer from "./ProjectListContainer";
 
-export default ProjectListContainer_;
+export default ProjectListContainer;

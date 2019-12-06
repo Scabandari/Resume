@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Menu, Button } from "semantic-ui-react";
 import { cloneDeep } from "lodash";
@@ -8,7 +8,6 @@ import { ALL, BASH, DATA_SCIENCE, WEB_DEV } from "./constants";
 import ProjectCardContainer from "./ProjectCard/ProjectCardContainer";
 import { changeProjectFilterTerm } from "../../actions";
 import { useScreenWidth } from "../../hooks";
-import "./ProjectList.scss";
 
 const styles = {
   columns: {
@@ -41,7 +40,7 @@ const renderColumn = (projects, screenWidth) => {
 
   const localProjects = cloneDeep(projects);
   // distribute projects evenly among columns
-  while (localProjects.length > 0) {
+  while (localProjects.length) {
     columnList[incVal].push(localProjects.pop());
     incVal = (incVal + 1) % columns;
   }
@@ -70,7 +69,7 @@ const ProjectList = ({ data, changeProjectFilterTerm }) => {
 
   return (
     <div>
-      <div className="second-nav-container">
+      <div style={{ minWidth: "100vw", backgroundColor: "black" }}>
         <Menu inverted stackable fluid widths={4}>
           <Menu.Item
             name={ALL}
@@ -109,7 +108,7 @@ const ProjectList = ({ data, changeProjectFilterTerm }) => {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-around"
+          justifyContent: "space-evenly"
         }}
       >
         {renderColumn(data, width)}

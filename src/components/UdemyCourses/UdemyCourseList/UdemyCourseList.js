@@ -26,7 +26,8 @@ const UdemyCourseList = ({ courses, s3Bucket }) => {
 
       const localCourses = cloneDeep(courses);
       // distribute projects evenly among columns
-      while (localCourses.length > 0) {
+ 
+      while (localCourses.length) {
         colList[incVal].push(localCourses.pop());
         incVal = (incVal + 1) % colList.length;
       }
